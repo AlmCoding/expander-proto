@@ -7,10 +7,7 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/extension_set.h"
 #include "google/protobuf/wire_format_lite.h"
-#include "google/protobuf/descriptor.h"
-#include "google/protobuf/generated_message_reflection.h"
-#include "google/protobuf/reflection_ops.h"
-#include "google/protobuf/wire_format.h"
+#include "google/protobuf/io/zero_copy_stream_impl_lite.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -22,7 +19,7 @@ namespace uart_proto {
 template <typename>
 PROTOBUF_CONSTEXPR UartConfig::UartConfig(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.peripheral_)*/ 0
+    /*decltype(_impl_.uart_id_)*/ 0
 
   , /*decltype(_impl_.baud_rate_)*/ 0u
 
@@ -38,137 +35,30 @@ struct UartConfigDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UartConfigDefaultTypeInternal _UartConfig_default_instance_;
 template <typename>
-PROTOBUF_CONSTEXPR UartTransmit::UartTransmit(
+PROTOBUF_CONSTEXPR UartData::UartData(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.peripheral_)*/ 0
+    /*decltype(_impl_.data_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
+  , /*decltype(_impl_.uart_id_)*/ 0
+
+  , /*decltype(_impl_.size_)*/ 0u
 
   , /*decltype(_impl_._cached_size_)*/{}} {}
-struct UartTransmitDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR UartTransmitDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~UartTransmitDefaultTypeInternal() {}
+struct UartDataDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR UartDataDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~UartDataDefaultTypeInternal() {}
   union {
-    UartTransmit _instance;
+    UartData _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UartTransmitDefaultTypeInternal _UartTransmit_default_instance_;
-template <typename>
-PROTOBUF_CONSTEXPR UartReceive::UartReceive(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.peripheral_)*/ 0
-
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct UartReceiveDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR UartReceiveDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~UartReceiveDefaultTypeInternal() {}
-  union {
-    UartReceive _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UartReceiveDefaultTypeInternal _UartReceive_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UartDataDefaultTypeInternal _UartData_default_instance_;
 }  // namespace uart_proto
-static ::_pb::Metadata file_level_metadata_uart_2eproto[3];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_uart_2eproto[1];
-static constexpr const ::_pb::ServiceDescriptor**
-    file_level_service_descriptors_uart_2eproto = nullptr;
-const ::uint32_t TableStruct_uart_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
-    protodesc_cold) = {
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartConfig, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _split_
-    ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartConfig, _impl_.peripheral_),
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartConfig, _impl_.baud_rate_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartTransmit, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _split_
-    ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartTransmit, _impl_.peripheral_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartReceive, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _split_
-    ~0u,  // no sizeof(Split)
-    PROTOBUF_FIELD_OFFSET(::uart_proto::UartReceive, _impl_.peripheral_),
-};
-
-static const ::_pbi::MigrationSchema
-    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-        { 0, -1, -1, sizeof(::uart_proto::UartConfig)},
-        { 10, -1, -1, sizeof(::uart_proto::UartTransmit)},
-        { 19, -1, -1, sizeof(::uart_proto::UartReceive)},
-};
-
-static const ::_pb::Message* const file_default_instances[] = {
-    &::uart_proto::_UartConfig_default_instance_._instance,
-    &::uart_proto::_UartTransmit_default_instance_._instance,
-    &::uart_proto::_UartReceive_default_instance_._instance,
-};
-const char descriptor_table_protodef_uart_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-    "\n\nuart.proto\022\nuart_proto\"K\n\nUartConfig\022*"
-    "\n\nperipheral\030\001 \001(\0162\026.uart_proto.Peripher"
-    "al\022\021\n\tbaud_rate\030\002 \001(\r\":\n\014UartTransmit\022*\n"
-    "\nperipheral\030\001 \001(\0162\026.uart_proto.Periphera"
-    "l\"9\n\013UartReceive\022*\n\nperipheral\030\001 \001(\0162\026.u"
-    "art_proto.Peripheral*\"\n\nPeripheral\022\t\n\005UA"
-    "RT1\020\000\022\t\n\005UART2\020\001b\006proto3"
-};
-static ::absl::once_flag descriptor_table_uart_2eproto_once;
-const ::_pbi::DescriptorTable descriptor_table_uart_2eproto = {
-    false,
-    false,
-    264,
-    descriptor_table_protodef_uart_2eproto,
-    "uart.proto",
-    &descriptor_table_uart_2eproto_once,
-    nullptr,
-    0,
-    3,
-    schemas,
-    file_default_instances,
-    TableStruct_uart_2eproto::offsets,
-    file_level_metadata_uart_2eproto,
-    file_level_enum_descriptors_uart_2eproto,
-    file_level_service_descriptors_uart_2eproto,
-};
-
-// This function exists to be marked as weak.
-// It can significantly speed up compilation by breaking up LLVM's SCC
-// in the .pb.cc translation units. Large translation units see a
-// reduction of more than 35% of walltime for optimized builds. Without
-// the weak attribute all the messages in the file, including all the
-// vtables and everything they use become part of the same SCC through
-// a cycle like:
-// GetMetadata -> descriptor table -> default instances ->
-//   vtables -> GetMetadata
-// By adding a weak function here we break the connection from the
-// individual vtables back into the descriptor table.
-PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_uart_2eproto_getter() {
-  return &descriptor_table_uart_2eproto;
-}
-// Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
-static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_uart_2eproto(&descriptor_table_uart_2eproto);
 namespace uart_proto {
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Peripheral_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_uart_2eproto);
-  return file_level_enum_descriptors_uart_2eproto[0];
-}
-bool Peripheral_IsValid(int value) {
+bool UartId_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:
@@ -177,6 +67,48 @@ bool Peripheral_IsValid(int value) {
       return false;
   }
 }
+static ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<std::string>
+    UartId_strings[2] = {};
+
+static const char UartId_names[] = {
+    "UART1"
+    "UART2"
+};
+
+static const ::PROTOBUF_NAMESPACE_ID::internal::EnumEntry UartId_entries[] =
+    {
+        {{&UartId_names[0], 5}, 0},
+        {{&UartId_names[5], 5}, 1},
+};
+
+static const int UartId_entries_by_number[] = {
+    0,  // 0 -> UART1
+    1,  // 1 -> UART2
+};
+
+const std::string& UartId_Name(UartId value) {
+  static const bool kDummy =
+      ::PROTOBUF_NAMESPACE_ID::internal::InitializeEnumStrings(
+          UartId_entries, UartId_entries_by_number,
+          2, UartId_strings);
+  (void)kDummy;
+
+  int idx = ::PROTOBUF_NAMESPACE_ID::internal::LookUpEnumName(
+      UartId_entries, UartId_entries_by_number, 2,
+      value);
+  return idx == -1 ? ::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString()
+                   : UartId_strings[idx].get();
+}
+
+bool UartId_Parse(absl::string_view name, UartId* value) {
+  int int_value;
+  bool success = ::PROTOBUF_NAMESPACE_ID::internal::LookUpEnumValue(
+      UartId_entries, 2, name, &int_value);
+  if (success) {
+    *value = static_cast<UartId>(int_value);
+  }
+  return success;
+}
 // ===================================================================
 
 class UartConfig::_Internal {
@@ -184,13 +116,13 @@ class UartConfig::_Internal {
 };
 
 UartConfig::UartConfig(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::MessageLite(arena) {
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:uart_proto.UartConfig)
 }
 UartConfig::UartConfig(const UartConfig& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _impl_(from._impl_) {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
+  : ::PROTOBUF_NAMESPACE_ID::MessageLite(), _impl_(from._impl_) {
+  _internal_metadata_.MergeFrom<std::string>(
       from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:uart_proto.UartConfig)
 }
@@ -198,7 +130,7 @@ UartConfig::UartConfig(const UartConfig& from)
 inline void UartConfig::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
-      decltype(_impl_.peripheral_) { 0 }
+      decltype(_impl_.uart_id_) { 0 }
 
     , decltype(_impl_.baud_rate_) { 0u }
 
@@ -208,7 +140,7 @@ inline void UartConfig::SharedCtor(::_pb::Arena* arena) {
 
 UartConfig::~UartConfig() {
   // @@protoc_insertion_point(destructor:uart_proto.UartConfig)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<std::string>()) {
   (void)arena;
     return;
   }
@@ -229,10 +161,10 @@ void UartConfig::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&_impl_.peripheral_, 0, static_cast<::size_t>(
+  ::memset(&_impl_.uart_id_, 0, static_cast<::size_t>(
       reinterpret_cast<char*>(&_impl_.baud_rate_) -
-      reinterpret_cast<char*>(&_impl_.peripheral_)) + sizeof(_impl_.baud_rate_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+      reinterpret_cast<char*>(&_impl_.uart_id_)) + sizeof(_impl_.baud_rate_));
+  _internal_metadata_.Clear<std::string>();
 }
 
 const char* UartConfig::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
@@ -241,12 +173,12 @@ const char* UartConfig::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .uart_proto.Peripheral peripheral = 1;
+      // .uart_proto.UartId uart_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
           ::int32_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
-          _internal_set_peripheral(static_cast<::uart_proto::Peripheral>(val));
+          _internal_set_uart_id(static_cast<::uart_proto::UartId>(val));
         } else {
           goto handle_unusual;
         }
@@ -271,7 +203,7 @@ const char* UartConfig::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<std::string>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -289,11 +221,11 @@ failure:
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .uart_proto.Peripheral peripheral = 1;
-  if (this->_internal_peripheral() != 0) {
+  // .uart_proto.UartId uart_id = 1;
+  if (this->_internal_uart_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        1, this->_internal_peripheral(), target);
+        1, this->_internal_uart_id(), target);
   }
 
   // uint32 baud_rate = 2;
@@ -304,8 +236,8 @@ failure:
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+    target = stream->WriteRaw(_internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).data(),
+        static_cast<int>(_internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).size()), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:uart_proto.UartConfig)
   return target;
@@ -319,10 +251,10 @@ failure:
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .uart_proto.Peripheral peripheral = 1;
-  if (this->_internal_peripheral() != 0) {
+  // .uart_proto.UartId uart_id = 1;
+  if (this->_internal_uart_id() != 0) {
     total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_peripheral());
+                  ::_pbi::WireFormatLite::EnumSize(this->_internal_uart_id());
   }
 
   // uint32 baud_rate = 2;
@@ -331,31 +263,34 @@ failure:
         this->_internal_baud_rate());
   }
 
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    total_size += _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).size();
+  }
+  int cached_size = ::_pbi::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UartConfig::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    UartConfig::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UartConfig::GetClassData() const { return &_class_data_; }
+void UartConfig::CheckTypeAndMergeFrom(
+    const ::PROTOBUF_NAMESPACE_ID::MessageLite& from) {
+  MergeFrom(*::_pbi::DownCast<const UartConfig*>(
+      &from));
+}
 
-
-void UartConfig::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<UartConfig*>(&to_msg);
-  auto& from = static_cast<const UartConfig&>(from_msg);
+void UartConfig::MergeFrom(const UartConfig& from) {
+  UartConfig* const _this = this;
   // @@protoc_insertion_point(class_specific_merge_from_start:uart_proto.UartConfig)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_peripheral() != 0) {
-    _this->_internal_set_peripheral(from._internal_peripheral());
+  if (from._internal_uart_id() != 0) {
+    _this->_internal_set_uart_id(from._internal_uart_id());
   }
   if (from._internal_baud_rate() != 0) {
     _this->_internal_set_baud_rate(from._internal_baud_rate());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
 }
 
 void UartConfig::CopyFrom(const UartConfig& from) {
@@ -375,82 +310,131 @@ void UartConfig::InternalSwap(UartConfig* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(UartConfig, _impl_.baud_rate_)
       + sizeof(UartConfig::_impl_.baud_rate_)
-      - PROTOBUF_FIELD_OFFSET(UartConfig, _impl_.peripheral_)>(
-          reinterpret_cast<char*>(&_impl_.peripheral_),
-          reinterpret_cast<char*>(&other->_impl_.peripheral_));
+      - PROTOBUF_FIELD_OFFSET(UartConfig, _impl_.uart_id_)>(
+          reinterpret_cast<char*>(&_impl_.uart_id_),
+          reinterpret_cast<char*>(&other->_impl_.uart_id_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata UartConfig::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_uart_2eproto_getter, &descriptor_table_uart_2eproto_once,
-      file_level_metadata_uart_2eproto[0]);
+std::string UartConfig::GetTypeName() const {
+  return "uart_proto.UartConfig";
 }
+
 // ===================================================================
 
-class UartTransmit::_Internal {
+class UartData::_Internal {
  public:
 };
 
-UartTransmit::UartTransmit(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+UartData::UartData(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::MessageLite(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:uart_proto.UartTransmit)
+  // @@protoc_insertion_point(arena_constructor:uart_proto.UartData)
 }
-UartTransmit::UartTransmit(const UartTransmit& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _impl_(from._impl_) {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:uart_proto.UartTransmit)
+UartData::UartData(const UartData& from)
+  : ::PROTOBUF_NAMESPACE_ID::MessageLite() {
+  UartData* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.data_) {}
+
+    , decltype(_impl_.uart_id_) {}
+
+    , decltype(_impl_.size_) {}
+
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
+  _impl_.data_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.data_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_data().empty()) {
+    _this->_impl_.data_.Set(from._internal_data(), _this->GetArenaForAllocation());
+  }
+  ::memcpy(&_impl_.uart_id_, &from._impl_.uart_id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.size_) -
+    reinterpret_cast<char*>(&_impl_.uart_id_)) + sizeof(_impl_.size_));
+  // @@protoc_insertion_point(copy_constructor:uart_proto.UartData)
 }
 
-inline void UartTransmit::SharedCtor(::_pb::Arena* arena) {
+inline void UartData::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
   new (&_impl_) Impl_{
-      decltype(_impl_.peripheral_) { 0 }
+      decltype(_impl_.data_) {}
+
+    , decltype(_impl_.uart_id_) { 0 }
+
+    , decltype(_impl_.size_) { 0u }
 
     , /*decltype(_impl_._cached_size_)*/{}
   };
+  _impl_.data_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.data_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
-UartTransmit::~UartTransmit() {
-  // @@protoc_insertion_point(destructor:uart_proto.UartTransmit)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+UartData::~UartData() {
+  // @@protoc_insertion_point(destructor:uart_proto.UartData)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<std::string>()) {
   (void)arena;
     return;
   }
   SharedDtor();
 }
 
-inline void UartTransmit::SharedDtor() {
+inline void UartData::SharedDtor() {
   ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.data_.Destroy();
 }
 
-void UartTransmit::SetCachedSize(int size) const {
+void UartData::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void UartTransmit::Clear() {
-// @@protoc_insertion_point(message_clear_start:uart_proto.UartTransmit)
+void UartData::Clear() {
+// @@protoc_insertion_point(message_clear_start:uart_proto.UartData)
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.peripheral_ = 0;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _impl_.data_.ClearToEmpty();
+  ::memset(&_impl_.uart_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.size_) -
+      reinterpret_cast<char*>(&_impl_.uart_id_)) + sizeof(_impl_.size_));
+  _internal_metadata_.Clear<std::string>();
 }
 
-const char* UartTransmit::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* UartData::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .uart_proto.Peripheral peripheral = 1;
+      // .uart_proto.UartId uart_id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
           ::int32_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
-          _internal_set_peripheral(static_cast<::uart_proto::Peripheral>(val));
+          _internal_set_uart_id(static_cast<::uart_proto::UartId>(val));
+        } else {
+          goto handle_unusual;
+        }
+        continue;
+      // uint32 size = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 16)) {
+          _impl_.size_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else {
+          goto handle_unusual;
+        }
+        continue;
+      // bytes data = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
+          auto str = _internal_mutable_data();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
         } else {
           goto handle_unusual;
         }
@@ -466,7 +450,7 @@ const char* UartTransmit::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<std::string>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -478,261 +462,129 @@ failure:
 #undef CHK_
 }
 
-::uint8_t* UartTransmit::_InternalSerialize(
+::uint8_t* UartData::_InternalSerialize(
     ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:uart_proto.UartTransmit)
+  // @@protoc_insertion_point(serialize_to_array_start:uart_proto.UartData)
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .uart_proto.Peripheral peripheral = 1;
-  if (this->_internal_peripheral() != 0) {
+  // .uart_proto.UartId uart_id = 1;
+  if (this->_internal_uart_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        1, this->_internal_peripheral(), target);
+        1, this->_internal_uart_id(), target);
+  }
+
+  // uint32 size = 2;
+  if (this->_internal_size() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        2, this->_internal_size(), target);
+  }
+
+  // bytes data = 3;
+  if (!this->_internal_data().empty()) {
+    const std::string& _s = this->_internal_data();
+    target = stream->WriteBytesMaybeAliased(3, _s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+    target = stream->WriteRaw(_internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).data(),
+        static_cast<int>(_internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).size()), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:uart_proto.UartTransmit)
+  // @@protoc_insertion_point(serialize_to_array_end:uart_proto.UartData)
   return target;
 }
 
-::size_t UartTransmit::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:uart_proto.UartTransmit)
+::size_t UartData::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:uart_proto.UartData)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // .uart_proto.Peripheral peripheral = 1;
-  if (this->_internal_peripheral() != 0) {
+  // bytes data = 3;
+  if (!this->_internal_data().empty()) {
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+                                    this->_internal_data());
+  }
+
+  // .uart_proto.UartId uart_id = 1;
+  if (this->_internal_uart_id() != 0) {
     total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_peripheral());
+                  ::_pbi::WireFormatLite::EnumSize(this->_internal_uart_id());
   }
 
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UartTransmit::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    UartTransmit::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UartTransmit::GetClassData() const { return &_class_data_; }
-
-
-void UartTransmit::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<UartTransmit*>(&to_msg);
-  auto& from = static_cast<const UartTransmit&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:uart_proto.UartTransmit)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from._internal_peripheral() != 0) {
-    _this->_internal_set_peripheral(from._internal_peripheral());
-  }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void UartTransmit::CopyFrom(const UartTransmit& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:uart_proto.UartTransmit)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool UartTransmit::IsInitialized() const {
-  return true;
-}
-
-void UartTransmit::InternalSwap(UartTransmit* other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_.peripheral_, other->_impl_.peripheral_);
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata UartTransmit::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_uart_2eproto_getter, &descriptor_table_uart_2eproto_once,
-      file_level_metadata_uart_2eproto[1]);
-}
-// ===================================================================
-
-class UartReceive::_Internal {
- public:
-};
-
-UartReceive::UartReceive(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:uart_proto.UartReceive)
-}
-UartReceive::UartReceive(const UartReceive& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _impl_(from._impl_) {
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:uart_proto.UartReceive)
-}
-
-inline void UartReceive::SharedCtor(::_pb::Arena* arena) {
-  (void)arena;
-  new (&_impl_) Impl_{
-      decltype(_impl_.peripheral_) { 0 }
-
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
-}
-
-UartReceive::~UartReceive() {
-  // @@protoc_insertion_point(destructor:uart_proto.UartReceive)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void UartReceive::SharedDtor() {
-  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
-}
-
-void UartReceive::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void UartReceive::Clear() {
-// @@protoc_insertion_point(message_clear_start:uart_proto.UartReceive)
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.peripheral_ = 0;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* UartReceive::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // .uart_proto.Peripheral peripheral = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
-          ::int32_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-          _internal_set_peripheral(static_cast<::uart_proto::Peripheral>(val));
-        } else {
-          goto handle_unusual;
-        }
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-::uint8_t* UartReceive::_InternalSerialize(
-    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:uart_proto.UartReceive)
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .uart_proto.Peripheral peripheral = 1;
-  if (this->_internal_peripheral() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        1, this->_internal_peripheral(), target);
+  // uint32 size = 2;
+  if (this->_internal_size() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_size());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+    total_size += _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString).size();
   }
-  // @@protoc_insertion_point(serialize_to_array_end:uart_proto.UartReceive)
-  return target;
+  int cached_size = ::_pbi::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
 }
 
-::size_t UartReceive::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:uart_proto.UartReceive)
-  ::size_t total_size = 0;
-
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // .uart_proto.Peripheral peripheral = 1;
-  if (this->_internal_peripheral() != 0) {
-    total_size += 1 +
-                  ::_pbi::WireFormatLite::EnumSize(this->_internal_peripheral());
-  }
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+void UartData::CheckTypeAndMergeFrom(
+    const ::PROTOBUF_NAMESPACE_ID::MessageLite& from) {
+  MergeFrom(*::_pbi::DownCast<const UartData*>(
+      &from));
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData UartReceive::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    UartReceive::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*UartReceive::GetClassData() const { return &_class_data_; }
-
-
-void UartReceive::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<UartReceive*>(&to_msg);
-  auto& from = static_cast<const UartReceive&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:uart_proto.UartReceive)
+void UartData::MergeFrom(const UartData& from) {
+  UartData* const _this = this;
+  // @@protoc_insertion_point(class_specific_merge_from_start:uart_proto.UartData)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_peripheral() != 0) {
-    _this->_internal_set_peripheral(from._internal_peripheral());
+  if (!from._internal_data().empty()) {
+    _this->_internal_set_data(from._internal_data());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_uart_id() != 0) {
+    _this->_internal_set_uart_id(from._internal_uart_id());
+  }
+  if (from._internal_size() != 0) {
+    _this->_internal_set_size(from._internal_size());
+  }
+  _this->_internal_metadata_.MergeFrom<std::string>(from._internal_metadata_);
 }
 
-void UartReceive::CopyFrom(const UartReceive& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:uart_proto.UartReceive)
+void UartData::CopyFrom(const UartData& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:uart_proto.UartData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool UartReceive::IsInitialized() const {
+bool UartData::IsInitialized() const {
   return true;
 }
 
-void UartReceive::InternalSwap(UartReceive* other) {
+void UartData::InternalSwap(UartData* other) {
   using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_.peripheral_, other->_impl_.peripheral_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.data_, lhs_arena,
+                                       &other->_impl_.data_, rhs_arena);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(UartData, _impl_.size_)
+      + sizeof(UartData::_impl_.size_)
+      - PROTOBUF_FIELD_OFFSET(UartData, _impl_.uart_id_)>(
+          reinterpret_cast<char*>(&_impl_.uart_id_),
+          reinterpret_cast<char*>(&other->_impl_.uart_id_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata UartReceive::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_uart_2eproto_getter, &descriptor_table_uart_2eproto_once,
-      file_level_metadata_uart_2eproto[2]);
+std::string UartData::GetTypeName() const {
+  return "uart_proto.UartData";
 }
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace uart_proto
 PROTOBUF_NAMESPACE_OPEN
@@ -740,13 +592,9 @@ template<> PROTOBUF_NOINLINE ::uart_proto::UartConfig*
 Arena::CreateMaybeMessage< ::uart_proto::UartConfig >(Arena* arena) {
   return Arena::CreateMessageInternal< ::uart_proto::UartConfig >(arena);
 }
-template<> PROTOBUF_NOINLINE ::uart_proto::UartTransmit*
-Arena::CreateMaybeMessage< ::uart_proto::UartTransmit >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::uart_proto::UartTransmit >(arena);
-}
-template<> PROTOBUF_NOINLINE ::uart_proto::UartReceive*
-Arena::CreateMaybeMessage< ::uart_proto::UartReceive >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::uart_proto::UartReceive >(arena);
+template<> PROTOBUF_NOINLINE ::uart_proto::UartData*
+Arena::CreateMaybeMessage< ::uart_proto::UartData >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::uart_proto::UartData >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 // @@protoc_insertion_point(global_scope)

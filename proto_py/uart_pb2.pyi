@@ -5,29 +5,27 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class Peripheral(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class UartId(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = []
-    UART1: _ClassVar[Peripheral]
-    UART2: _ClassVar[Peripheral]
-UART1: Peripheral
-UART2: Peripheral
+    UART1: _ClassVar[UartId]
+    UART2: _ClassVar[UartId]
+UART1: UartId
+UART2: UartId
 
 class UartConfig(_message.Message):
-    __slots__ = ["peripheral", "baud_rate"]
-    PERIPHERAL_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["uart_id", "baud_rate"]
+    UART_ID_FIELD_NUMBER: _ClassVar[int]
     BAUD_RATE_FIELD_NUMBER: _ClassVar[int]
-    peripheral: Peripheral
+    uart_id: UartId
     baud_rate: int
-    def __init__(self, peripheral: _Optional[_Union[Peripheral, str]] = ..., baud_rate: _Optional[int] = ...) -> None: ...
+    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., baud_rate: _Optional[int] = ...) -> None: ...
 
-class UartTransmit(_message.Message):
-    __slots__ = ["peripheral"]
-    PERIPHERAL_FIELD_NUMBER: _ClassVar[int]
-    peripheral: Peripheral
-    def __init__(self, peripheral: _Optional[_Union[Peripheral, str]] = ...) -> None: ...
-
-class UartReceive(_message.Message):
-    __slots__ = ["peripheral"]
-    PERIPHERAL_FIELD_NUMBER: _ClassVar[int]
-    peripheral: Peripheral
-    def __init__(self, peripheral: _Optional[_Union[Peripheral, str]] = ...) -> None: ...
+class UartData(_message.Message):
+    __slots__ = ["uart_id", "size", "data"]
+    UART_ID_FIELD_NUMBER: _ClassVar[int]
+    SIZE_FIELD_NUMBER: _ClassVar[int]
+    DATA_FIELD_NUMBER: _ClassVar[int]
+    uart_id: UartId
+    size: int
+    data: bytes
+    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., size: _Optional[int] = ..., data: _Optional[bytes] = ...) -> None: ...

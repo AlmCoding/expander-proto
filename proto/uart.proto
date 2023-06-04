@@ -1,21 +1,20 @@
 syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
 
 package uart_proto;
 
-enum Peripheral {
+enum UartId {
   UART1 = 0;
   UART2 = 1;
 }
 
 message UartConfig {
-  Peripheral peripheral = 1;
+  UartId uart_id = 1;
   uint32 baud_rate = 2;
 }
 
-message UartTransmit {
-  Peripheral peripheral = 1;
-}
-
-message UartReceive {
-  Peripheral peripheral = 1;
+message UartData {
+  UartId uart_id = 1;
+  uint32 size = 2;
+  bytes data = 3;
 }

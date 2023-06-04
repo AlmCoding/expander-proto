@@ -26,12 +26,10 @@
 #include "google/protobuf/arenastring.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
-#include "google/protobuf/generated_message_reflection.h"
-#include "google/protobuf/message.h"
+#include "google/protobuf/message_lite.h"
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_reflection.h"
-#include "google/protobuf/unknown_field_set.h"
+#include "google/protobuf/generated_enum_util.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -49,61 +47,45 @@ PROTOBUF_NAMESPACE_CLOSE
 struct TableStruct_uart_2eproto {
   static const ::uint32_t offsets[];
 };
-extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
-    descriptor_table_uart_2eproto;
 namespace uart_proto {
 class UartConfig;
 struct UartConfigDefaultTypeInternal;
 extern UartConfigDefaultTypeInternal _UartConfig_default_instance_;
-class UartReceive;
-struct UartReceiveDefaultTypeInternal;
-extern UartReceiveDefaultTypeInternal _UartReceive_default_instance_;
-class UartTransmit;
-struct UartTransmitDefaultTypeInternal;
-extern UartTransmitDefaultTypeInternal _UartTransmit_default_instance_;
+class UartData;
+struct UartDataDefaultTypeInternal;
+extern UartDataDefaultTypeInternal _UartData_default_instance_;
 }  // namespace uart_proto
 PROTOBUF_NAMESPACE_OPEN
 template <>
 ::uart_proto::UartConfig* Arena::CreateMaybeMessage<::uart_proto::UartConfig>(Arena*);
 template <>
-::uart_proto::UartReceive* Arena::CreateMaybeMessage<::uart_proto::UartReceive>(Arena*);
-template <>
-::uart_proto::UartTransmit* Arena::CreateMaybeMessage<::uart_proto::UartTransmit>(Arena*);
+::uart_proto::UartData* Arena::CreateMaybeMessage<::uart_proto::UartData>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
 namespace uart_proto {
-enum Peripheral : int {
+enum UartId : int {
   UART1 = 0,
   UART2 = 1,
-  Peripheral_INT_MIN_SENTINEL_DO_NOT_USE_ =
+  UartId_INT_MIN_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::min(),
-  Peripheral_INT_MAX_SENTINEL_DO_NOT_USE_ =
+  UartId_INT_MAX_SENTINEL_DO_NOT_USE_ =
       std::numeric_limits<::int32_t>::max(),
 };
 
-bool Peripheral_IsValid(int value);
-constexpr Peripheral Peripheral_MIN = static_cast<Peripheral>(0);
-constexpr Peripheral Peripheral_MAX = static_cast<Peripheral>(1);
-constexpr int Peripheral_ARRAYSIZE = 1 + 1;
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
-Peripheral_descriptor();
+bool UartId_IsValid(int value);
+constexpr UartId UartId_MIN = static_cast<UartId>(0);
+constexpr UartId UartId_MAX = static_cast<UartId>(1);
+constexpr int UartId_ARRAYSIZE = 1 + 1;
+const std::string& UartId_Name(UartId value);
 template <typename T>
-const std::string& Peripheral_Name(T value) {
-  static_assert(std::is_same<T, Peripheral>::value ||
+const std::string& UartId_Name(T value) {
+  static_assert(std::is_same<T, UartId>::value ||
                     std::is_integral<T>::value,
-                "Incorrect type passed to Peripheral_Name().");
-  return Peripheral_Name(static_cast<Peripheral>(value));
+                "Incorrect type passed to UartId_Name().");
+  return UartId_Name(static_cast<UartId>(value));
 }
-template <>
-inline const std::string& Peripheral_Name(Peripheral value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfDenseEnum<Peripheral_descriptor,
-                                                 0, 1>(
-      static_cast<int>(value));
-}
-inline bool Peripheral_Parse(absl::string_view name, Peripheral* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<Peripheral>(
-      Peripheral_descriptor(), name, value);
-}
+const std::string& UartId_Name(UartId value);
+bool UartId_Parse(absl::string_view name, UartId* value);
 
 // ===================================================================
 
@@ -111,7 +93,7 @@ inline bool Peripheral_Parse(absl::string_view name, Peripheral* value) {
 // -------------------------------------------------------------------
 
 class UartConfig final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:uart_proto.UartConfig) */ {
+    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:uart_proto.UartConfig) */ {
  public:
   inline UartConfig() : UartConfig(nullptr) {}
   ~UartConfig() override;
@@ -142,22 +124,13 @@ class UartConfig final :
     return *this;
   }
 
-  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  inline const std::string& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
   }
-  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  inline std::string* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
   static const UartConfig& default_instance() {
     return *internal_default_instance();
   }
@@ -195,15 +168,9 @@ class UartConfig final :
   UartConfig* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
     return CreateMaybeMessage<UartConfig>(arena);
   }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)  final;
   void CopyFrom(const UartConfig& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const UartConfig& from) {
-    UartConfig::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
+  void MergeFrom(const UartConfig& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -216,7 +183,7 @@ class UartConfig final :
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   void SharedDtor();
-  void SetCachedSize(int size) const final;
+  void SetCachedSize(int size) const;
   void InternalSwap(UartConfig* other);
 
   private:
@@ -228,27 +195,24 @@ class UartConfig final :
   explicit UartConfig(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
 
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  std::string GetTypeName() const final;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPeripheralFieldNumber = 1,
+    kUartIdFieldNumber = 1,
     kBaudRateFieldNumber = 2,
   };
-  // .uart_proto.Peripheral peripheral = 1;
-  void clear_peripheral() ;
-  ::uart_proto::Peripheral peripheral() const;
-  void set_peripheral(::uart_proto::Peripheral value);
+  // .uart_proto.UartId uart_id = 1;
+  void clear_uart_id() ;
+  ::uart_proto::UartId uart_id() const;
+  void set_uart_id(::uart_proto::UartId value);
 
   private:
-  ::uart_proto::Peripheral _internal_peripheral() const;
-  void _internal_set_peripheral(::uart_proto::Peripheral value);
+  ::uart_proto::UartId _internal_uart_id() const;
+  void _internal_set_uart_id(::uart_proto::UartId value);
 
   public:
   // uint32 baud_rate = 2;
@@ -269,7 +233,7 @@ class UartConfig final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    int peripheral_;
+    int uart_id_;
     ::uint32_t baud_rate_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -277,25 +241,25 @@ class UartConfig final :
   friend struct ::TableStruct_uart_2eproto;
 };// -------------------------------------------------------------------
 
-class UartTransmit final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:uart_proto.UartTransmit) */ {
+class UartData final :
+    public ::PROTOBUF_NAMESPACE_ID::MessageLite /* @@protoc_insertion_point(class_definition:uart_proto.UartData) */ {
  public:
-  inline UartTransmit() : UartTransmit(nullptr) {}
-  ~UartTransmit() override;
+  inline UartData() : UartData(nullptr) {}
+  ~UartData() override;
   template<typename = void>
-  explicit PROTOBUF_CONSTEXPR UartTransmit(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR UartData(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  UartTransmit(const UartTransmit& from);
-  UartTransmit(UartTransmit&& from) noexcept
-    : UartTransmit() {
+  UartData(const UartData& from);
+  UartData(UartData&& from) noexcept
+    : UartData() {
     *this = ::std::move(from);
   }
 
-  inline UartTransmit& operator=(const UartTransmit& from) {
+  inline UartData& operator=(const UartData& from) {
     CopyFrom(from);
     return *this;
   }
-  inline UartTransmit& operator=(UartTransmit&& from) noexcept {
+  inline UartData& operator=(UartData&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -309,36 +273,27 @@ class UartTransmit final :
     return *this;
   }
 
-  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  inline const std::string& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<std::string>(::PROTOBUF_NAMESPACE_ID::internal::GetEmptyString);
   }
-  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  inline std::string* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<std::string>();
   }
 
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const UartTransmit& default_instance() {
+  static const UartData& default_instance() {
     return *internal_default_instance();
   }
-  static inline const UartTransmit* internal_default_instance() {
-    return reinterpret_cast<const UartTransmit*>(
-               &_UartTransmit_default_instance_);
+  static inline const UartData* internal_default_instance() {
+    return reinterpret_cast<const UartData*>(
+               &_UartData_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     1;
 
-  friend void swap(UartTransmit& a, UartTransmit& b) {
+  friend void swap(UartData& a, UartData& b) {
     a.Swap(&b);
   }
-  inline void Swap(UartTransmit* other) {
+  inline void Swap(UartData* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -351,7 +306,7 @@ class UartTransmit final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(UartTransmit* other) {
+  void UnsafeArenaSwap(UartData* other) {
     if (other == this) return;
     ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -359,18 +314,12 @@ class UartTransmit final :
 
   // implements Message ----------------------------------------------
 
-  UartTransmit* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<UartTransmit>(arena);
+  UartData* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<UartData>(arena);
   }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const UartTransmit& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const UartTransmit& from) {
-    UartTransmit::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
+  void CheckTypeAndMergeFrom(const ::PROTOBUF_NAMESPACE_ID::MessageLite& from)  final;
+  void CopyFrom(const UartData& from);
+  void MergeFrom(const UartData& from);
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
@@ -383,41 +332,70 @@ class UartTransmit final :
   private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(UartTransmit* other);
+  void SetCachedSize(int size) const;
+  void InternalSwap(UartData* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::absl::string_view FullMessageName() {
-    return "uart_proto.UartTransmit";
+    return "uart_proto.UartData";
   }
   protected:
-  explicit UartTransmit(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  explicit UartData(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   public:
 
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  std::string GetTypeName() const final;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPeripheralFieldNumber = 1,
+    kDataFieldNumber = 3,
+    kUartIdFieldNumber = 1,
+    kSizeFieldNumber = 2,
   };
-  // .uart_proto.Peripheral peripheral = 1;
-  void clear_peripheral() ;
-  ::uart_proto::Peripheral peripheral() const;
-  void set_peripheral(::uart_proto::Peripheral value);
+  // bytes data = 3;
+  void clear_data() ;
+  const std::string& data() const;
+
+
+
+
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_data(Arg_&& arg, Args_... args);
+  std::string* mutable_data();
+  PROTOBUF_NODISCARD std::string* release_data();
+  void set_allocated_data(std::string* ptr);
 
   private:
-  ::uart_proto::Peripheral _internal_peripheral() const;
-  void _internal_set_peripheral(::uart_proto::Peripheral value);
+  const std::string& _internal_data() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_data(
+      const std::string& value);
+  std::string* _internal_mutable_data();
 
   public:
-  // @@protoc_insertion_point(class_scope:uart_proto.UartTransmit)
+  // .uart_proto.UartId uart_id = 1;
+  void clear_uart_id() ;
+  ::uart_proto::UartId uart_id() const;
+  void set_uart_id(::uart_proto::UartId value);
+
+  private:
+  ::uart_proto::UartId _internal_uart_id() const;
+  void _internal_set_uart_id(::uart_proto::UartId value);
+
+  public:
+  // uint32 size = 2;
+  void clear_size() ;
+  ::uint32_t size() const;
+  void set_size(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_size() const;
+  void _internal_set_size(::uint32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:uart_proto.UartData)
  private:
   class _Internal;
 
@@ -425,162 +403,9 @@ class UartTransmit final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    int peripheral_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_uart_2eproto;
-};// -------------------------------------------------------------------
-
-class UartReceive final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:uart_proto.UartReceive) */ {
- public:
-  inline UartReceive() : UartReceive(nullptr) {}
-  ~UartReceive() override;
-  template<typename = void>
-  explicit PROTOBUF_CONSTEXPR UartReceive(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  UartReceive(const UartReceive& from);
-  UartReceive(UartReceive&& from) noexcept
-    : UartReceive() {
-    *this = ::std::move(from);
-  }
-
-  inline UartReceive& operator=(const UartReceive& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline UartReceive& operator=(UartReceive&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const UartReceive& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const UartReceive* internal_default_instance() {
-    return reinterpret_cast<const UartReceive*>(
-               &_UartReceive_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
-
-  friend void swap(UartReceive& a, UartReceive& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(UartReceive* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(UartReceive* other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  UartReceive* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<UartReceive>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const UartReceive& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const UartReceive& from) {
-    UartReceive::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  ::size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  ::uint8_t* _InternalSerialize(
-      ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(UartReceive* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() {
-    return "uart_proto.UartReceive";
-  }
-  protected:
-  explicit UartReceive(::PROTOBUF_NAMESPACE_ID::Arena* arena);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kPeripheralFieldNumber = 1,
-  };
-  // .uart_proto.Peripheral peripheral = 1;
-  void clear_peripheral() ;
-  ::uart_proto::Peripheral peripheral() const;
-  void set_peripheral(::uart_proto::Peripheral value);
-
-  private:
-  ::uart_proto::Peripheral _internal_peripheral() const;
-  void _internal_set_peripheral(::uart_proto::Peripheral value);
-
-  public:
-  // @@protoc_insertion_point(class_scope:uart_proto.UartReceive)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    int peripheral_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
+    int uart_id_;
+    ::uint32_t size_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -603,24 +428,24 @@ class UartReceive final :
 
 // UartConfig
 
-// .uart_proto.Peripheral peripheral = 1;
-inline void UartConfig::clear_peripheral() {
-  _impl_.peripheral_ = 0;
+// .uart_proto.UartId uart_id = 1;
+inline void UartConfig::clear_uart_id() {
+  _impl_.uart_id_ = 0;
 }
-inline ::uart_proto::Peripheral UartConfig::peripheral() const {
-  // @@protoc_insertion_point(field_get:uart_proto.UartConfig.peripheral)
-  return _internal_peripheral();
+inline ::uart_proto::UartId UartConfig::uart_id() const {
+  // @@protoc_insertion_point(field_get:uart_proto.UartConfig.uart_id)
+  return _internal_uart_id();
 }
-inline void UartConfig::set_peripheral(::uart_proto::Peripheral value) {
-   _internal_set_peripheral(value);
-  // @@protoc_insertion_point(field_set:uart_proto.UartConfig.peripheral)
+inline void UartConfig::set_uart_id(::uart_proto::UartId value) {
+   _internal_set_uart_id(value);
+  // @@protoc_insertion_point(field_set:uart_proto.UartConfig.uart_id)
 }
-inline ::uart_proto::Peripheral UartConfig::_internal_peripheral() const {
-  return static_cast<::uart_proto::Peripheral>(_impl_.peripheral_);
+inline ::uart_proto::UartId UartConfig::_internal_uart_id() const {
+  return static_cast<::uart_proto::UartId>(_impl_.uart_id_);
 }
-inline void UartConfig::_internal_set_peripheral(::uart_proto::Peripheral value) {
+inline void UartConfig::_internal_set_uart_id(::uart_proto::UartId value) {
   ;
-  _impl_.peripheral_ = value;
+  _impl_.uart_id_ = value;
 }
 
 // uint32 baud_rate = 2;
@@ -645,50 +470,93 @@ inline void UartConfig::_internal_set_baud_rate(::uint32_t value) {
 
 // -------------------------------------------------------------------
 
-// UartTransmit
+// UartData
 
-// .uart_proto.Peripheral peripheral = 1;
-inline void UartTransmit::clear_peripheral() {
-  _impl_.peripheral_ = 0;
+// .uart_proto.UartId uart_id = 1;
+inline void UartData::clear_uart_id() {
+  _impl_.uart_id_ = 0;
 }
-inline ::uart_proto::Peripheral UartTransmit::peripheral() const {
-  // @@protoc_insertion_point(field_get:uart_proto.UartTransmit.peripheral)
-  return _internal_peripheral();
+inline ::uart_proto::UartId UartData::uart_id() const {
+  // @@protoc_insertion_point(field_get:uart_proto.UartData.uart_id)
+  return _internal_uart_id();
 }
-inline void UartTransmit::set_peripheral(::uart_proto::Peripheral value) {
-   _internal_set_peripheral(value);
-  // @@protoc_insertion_point(field_set:uart_proto.UartTransmit.peripheral)
+inline void UartData::set_uart_id(::uart_proto::UartId value) {
+   _internal_set_uart_id(value);
+  // @@protoc_insertion_point(field_set:uart_proto.UartData.uart_id)
 }
-inline ::uart_proto::Peripheral UartTransmit::_internal_peripheral() const {
-  return static_cast<::uart_proto::Peripheral>(_impl_.peripheral_);
+inline ::uart_proto::UartId UartData::_internal_uart_id() const {
+  return static_cast<::uart_proto::UartId>(_impl_.uart_id_);
 }
-inline void UartTransmit::_internal_set_peripheral(::uart_proto::Peripheral value) {
+inline void UartData::_internal_set_uart_id(::uart_proto::UartId value) {
   ;
-  _impl_.peripheral_ = value;
+  _impl_.uart_id_ = value;
 }
 
-// -------------------------------------------------------------------
-
-// UartReceive
-
-// .uart_proto.Peripheral peripheral = 1;
-inline void UartReceive::clear_peripheral() {
-  _impl_.peripheral_ = 0;
+// uint32 size = 2;
+inline void UartData::clear_size() {
+  _impl_.size_ = 0u;
 }
-inline ::uart_proto::Peripheral UartReceive::peripheral() const {
-  // @@protoc_insertion_point(field_get:uart_proto.UartReceive.peripheral)
-  return _internal_peripheral();
+inline ::uint32_t UartData::size() const {
+  // @@protoc_insertion_point(field_get:uart_proto.UartData.size)
+  return _internal_size();
 }
-inline void UartReceive::set_peripheral(::uart_proto::Peripheral value) {
-   _internal_set_peripheral(value);
-  // @@protoc_insertion_point(field_set:uart_proto.UartReceive.peripheral)
+inline void UartData::set_size(::uint32_t value) {
+  _internal_set_size(value);
+  // @@protoc_insertion_point(field_set:uart_proto.UartData.size)
 }
-inline ::uart_proto::Peripheral UartReceive::_internal_peripheral() const {
-  return static_cast<::uart_proto::Peripheral>(_impl_.peripheral_);
+inline ::uint32_t UartData::_internal_size() const {
+  return _impl_.size_;
 }
-inline void UartReceive::_internal_set_peripheral(::uart_proto::Peripheral value) {
+inline void UartData::_internal_set_size(::uint32_t value) {
   ;
-  _impl_.peripheral_ = value;
+  _impl_.size_ = value;
+}
+
+// bytes data = 3;
+inline void UartData::clear_data() {
+  _impl_.data_.ClearToEmpty();
+}
+inline const std::string& UartData::data() const {
+  // @@protoc_insertion_point(field_get:uart_proto.UartData.data)
+  return _internal_data();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void UartData::set_data(Arg_&& arg,
+                                                     Args_... args) {
+  ;
+  _impl_.data_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:uart_proto.UartData.data)
+}
+inline std::string* UartData::mutable_data() {
+  std::string* _s = _internal_mutable_data();
+  // @@protoc_insertion_point(field_mutable:uart_proto.UartData.data)
+  return _s;
+}
+inline const std::string& UartData::_internal_data() const {
+  return _impl_.data_.Get();
+}
+inline void UartData::_internal_set_data(const std::string& value) {
+  ;
+
+
+  _impl_.data_.Set(value, GetArenaForAllocation());
+}
+inline std::string* UartData::_internal_mutable_data() {
+  ;
+  return _impl_.data_.Mutable( GetArenaForAllocation());
+}
+inline std::string* UartData::release_data() {
+  // @@protoc_insertion_point(field_release:uart_proto.UartData.data)
+  return _impl_.data_.Release();
+}
+inline void UartData::set_allocated_data(std::string* value) {
+  _impl_.data_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.data_.IsDefault()) {
+          _impl_.data_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:uart_proto.UartData.data)
 }
 
 #ifdef __GNUC__
@@ -702,11 +570,7 @@ inline void UartReceive::_internal_set_peripheral(::uart_proto::Peripheral value
 PROTOBUF_NAMESPACE_OPEN
 
 template <>
-struct is_proto_enum<::uart_proto::Peripheral> : std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor<::uart_proto::Peripheral>() {
-  return ::uart_proto::Peripheral_descriptor();
-}
+struct is_proto_enum<::uart_proto::UartId> : std::true_type {};
 
 PROTOBUF_NAMESPACE_CLOSE
 
