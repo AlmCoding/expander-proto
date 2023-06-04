@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package uart_proto;
+
+enum Peripheral {
+  UART1 = 0;
+  UART2 = 1;
+}
+
+message UartConfig {
+  Peripheral peripheral = 1;
+  uint32 baud_rate = 2;
+}
+
+message UartTransmit {
+  Peripheral peripheral = 1;
+}
+
+message UartReceive {
+  Peripheral peripheral = 1;
+}
