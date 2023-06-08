@@ -21,11 +21,9 @@ class UartConfig(_message.Message):
     def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., baud_rate: _Optional[int] = ...) -> None: ...
 
 class UartData(_message.Message):
-    __slots__ = ["uart_id", "size", "data"]
+    __slots__ = ["uart_id", "data"]
     UART_ID_FIELD_NUMBER: _ClassVar[int]
-    SIZE_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
     uart_id: UartId
-    size: int
     data: bytes
-    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., size: _Optional[int] = ..., data: _Optional[bytes] = ...) -> None: ...
+    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., data: _Optional[bytes] = ...) -> None: ...

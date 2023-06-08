@@ -24,7 +24,6 @@ typedef struct _uart_proto_UartConfig {
 typedef PB_BYTES_ARRAY_T(256) uart_proto_UartData_data_t;
 typedef struct _uart_proto_UartData {
     uart_proto_UartId uart_id;
-    uint32_t size;
     uart_proto_UartData_data_t data;
 } uart_proto_UartData;
 
@@ -45,15 +44,14 @@ extern "C" {
 
 /* Initializer values for message structs */
 #define uart_proto_UartConfig_init_default       {_uart_proto_UartId_MIN, 0}
-#define uart_proto_UartData_init_default         {_uart_proto_UartId_MIN, 0, {0, {0}}}
+#define uart_proto_UartData_init_default         {_uart_proto_UartId_MIN, {0, {0}}}
 #define uart_proto_UartConfig_init_zero          {_uart_proto_UartId_MIN, 0}
-#define uart_proto_UartData_init_zero            {_uart_proto_UartId_MIN, 0, {0, {0}}}
+#define uart_proto_UartData_init_zero            {_uart_proto_UartId_MIN, {0, {0}}}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define uart_proto_UartConfig_uart_id_tag        1
 #define uart_proto_UartConfig_baud_rate_tag      2
 #define uart_proto_UartData_uart_id_tag          1
-#define uart_proto_UartData_size_tag             2
 #define uart_proto_UartData_data_tag             3
 
 /* Struct field encoding specification for nanopb */
@@ -65,7 +63,6 @@ X(a, STATIC,   SINGULAR, UINT32,   baud_rate,         2)
 
 #define uart_proto_UartData_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    uart_id,           1) \
-X(a, STATIC,   SINGULAR, UINT32,   size,              2) \
 X(a, STATIC,   SINGULAR, BYTES,    data,              3)
 #define uart_proto_UartData_CALLBACK NULL
 #define uart_proto_UartData_DEFAULT NULL
@@ -79,7 +76,7 @@ extern const pb_msgdesc_t uart_proto_UartData_msg;
 
 /* Maximum encoded size of messages (where known) */
 #define uart_proto_UartConfig_size               8
-#define uart_proto_UartData_size                 267
+#define uart_proto_UartData_size                 261
 
 #ifdef __cplusplus
 } /* extern "C" */
