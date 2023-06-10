@@ -8,12 +8,25 @@ enum UartId {
   UART2 = 1;
 }
 
+enum MsgType {
+  CONFIG = 0;
+  DATA = 1;
+}
+
 message UartConfig {
-  UartId uart_id = 1;
-  uint32 baud_rate = 2;
+  UartId id = 1;
+  uint32 baudrate = 2;
 }
 
 message UartData {
-  UartId uart_id = 1;
-  bytes data = 3;
+  UartId id = 1;
+  bytes data = 2;
+}
+
+message UartMsg {
+  MsgType type = 1;
+  oneof msg {
+    UartConfig cfg = 2;
+    UartData data = 3;
+  }
 }
