@@ -10,15 +10,16 @@
 #endif
 
 /* Enum definitions */
+typedef enum _uart_proto_MsgType {
+    uart_proto_MsgType_CONFIG = 0,
+    uart_proto_MsgType_DATA = 1,
+    uart_proto_MsgType_STATS = 2
+} uart_proto_MsgType;
+
 typedef enum _uart_proto_UartId {
     uart_proto_UartId_UART1 = 0,
     uart_proto_UartId_UART2 = 1
 } uart_proto_UartId;
-
-typedef enum _uart_proto_MsgType {
-    uart_proto_MsgType_CONFIG = 0,
-    uart_proto_MsgType_DATA = 1
-} uart_proto_MsgType;
 
 /* Struct definitions */
 typedef struct _uart_proto_UartConfig {
@@ -32,12 +33,19 @@ typedef struct _uart_proto_UartData {
     uart_proto_UartData_data_t data;
 } uart_proto_UartData;
 
+typedef struct _uart_proto_UartStats {
+    bool rx_overflow;
+    bool tx_overflow;
+    uint32_t tx_space;
+} uart_proto_UartStats;
+
 typedef struct _uart_proto_UartMsg {
     uart_proto_MsgType type;
     pb_size_t which_msg;
     union {
-        uart_proto_UartConfig cfg;
-        uart_proto_UartData data;
+        uart_proto_UartConfig cfg_msg;
+        uart_proto_UartData data_msg;
+        uart_proto_UartStats stats_msg;
     } msg;
 } uart_proto_UartMsg;
 
@@ -47,17 +55,18 @@ extern "C" {
 #endif
 
 /* Helper constants for enums */
+#define _uart_proto_MsgType_MIN uart_proto_MsgType_CONFIG
+#define _uart_proto_MsgType_MAX uart_proto_MsgType_STATS
+#define _uart_proto_MsgType_ARRAYSIZE ((uart_proto_MsgType)(uart_proto_MsgType_STATS+1))
+
 #define _uart_proto_UartId_MIN uart_proto_UartId_UART1
 #define _uart_proto_UartId_MAX uart_proto_UartId_UART2
 #define _uart_proto_UartId_ARRAYSIZE ((uart_proto_UartId)(uart_proto_UartId_UART2+1))
 
-#define _uart_proto_MsgType_MIN uart_proto_MsgType_CONFIG
-#define _uart_proto_MsgType_MAX uart_proto_MsgType_DATA
-#define _uart_proto_MsgType_ARRAYSIZE ((uart_proto_MsgType)(uart_proto_MsgType_DATA+1))
-
 #define uart_proto_UartConfig_id_ENUMTYPE uart_proto_UartId
 
 #define uart_proto_UartData_id_ENUMTYPE uart_proto_UartId
+
 
 #define uart_proto_UartMsg_type_ENUMTYPE uart_proto_MsgType
 
@@ -65,9 +74,11 @@ extern "C" {
 /* Initializer values for message structs */
 #define uart_proto_UartConfig_init_default       {_uart_proto_UartId_MIN, 0}
 #define uart_proto_UartData_init_default         {_uart_proto_UartId_MIN, {0, {0}}}
+#define uart_proto_UartStats_init_default        {0, 0, 0}
 #define uart_proto_UartMsg_init_default          {_uart_proto_MsgType_MIN, 0, {uart_proto_UartConfig_init_default}}
 #define uart_proto_UartConfig_init_zero          {_uart_proto_UartId_MIN, 0}
 #define uart_proto_UartData_init_zero            {_uart_proto_UartId_MIN, {0, {0}}}
+#define uart_proto_UartStats_init_zero           {0, 0, 0}
 #define uart_proto_UartMsg_init_zero             {_uart_proto_MsgType_MIN, 0, {uart_proto_UartConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -75,9 +86,13 @@ extern "C" {
 #define uart_proto_UartConfig_baudrate_tag       2
 #define uart_proto_UartData_id_tag               1
 #define uart_proto_UartData_data_tag             2
+#define uart_proto_UartStats_rx_overflow_tag     1
+#define uart_proto_UartStats_tx_overflow_tag     2
+#define uart_proto_UartStats_tx_space_tag        3
 #define uart_proto_UartMsg_type_tag              1
-#define uart_proto_UartMsg_cfg_tag               2
-#define uart_proto_UartMsg_data_tag              3
+#define uart_proto_UartMsg_cfg_msg_tag           2
+#define uart_proto_UartMsg_data_msg_tag          3
+#define uart_proto_UartMsg_stats_msg_tag         4
 
 /* Struct field encoding specification for nanopb */
 #define uart_proto_UartConfig_FIELDLIST(X, a) \
@@ -92,28 +107,40 @@ X(a, STATIC,   SINGULAR, BYTES,    data,              2)
 #define uart_proto_UartData_CALLBACK NULL
 #define uart_proto_UartData_DEFAULT NULL
 
+#define uart_proto_UartStats_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, BOOL,     rx_overflow,       1) \
+X(a, STATIC,   SINGULAR, BOOL,     tx_overflow,       2) \
+X(a, STATIC,   SINGULAR, UINT32,   tx_space,          3)
+#define uart_proto_UartStats_CALLBACK NULL
+#define uart_proto_UartStats_DEFAULT NULL
+
 #define uart_proto_UartMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    type,              1) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg,msg.cfg),   2) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data,msg.data),   3)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg_msg,msg.cfg_msg),   2) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_msg,msg.data_msg),   3) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,stats_msg,msg.stats_msg),   4)
 #define uart_proto_UartMsg_CALLBACK NULL
 #define uart_proto_UartMsg_DEFAULT NULL
-#define uart_proto_UartMsg_msg_cfg_MSGTYPE uart_proto_UartConfig
-#define uart_proto_UartMsg_msg_data_MSGTYPE uart_proto_UartData
+#define uart_proto_UartMsg_msg_cfg_msg_MSGTYPE uart_proto_UartConfig
+#define uart_proto_UartMsg_msg_data_msg_MSGTYPE uart_proto_UartData
+#define uart_proto_UartMsg_msg_stats_msg_MSGTYPE uart_proto_UartStats
 
 extern const pb_msgdesc_t uart_proto_UartConfig_msg;
 extern const pb_msgdesc_t uart_proto_UartData_msg;
+extern const pb_msgdesc_t uart_proto_UartStats_msg;
 extern const pb_msgdesc_t uart_proto_UartMsg_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
 #define uart_proto_UartConfig_fields &uart_proto_UartConfig_msg
 #define uart_proto_UartData_fields &uart_proto_UartData_msg
+#define uart_proto_UartStats_fields &uart_proto_UartStats_msg
 #define uart_proto_UartMsg_fields &uart_proto_UartMsg_msg
 
 /* Maximum encoded size of messages (where known) */
 #define uart_proto_UartConfig_size               8
 #define uart_proto_UartData_size                 261
 #define uart_proto_UartMsg_size                  266
+#define uart_proto_UartStats_size                10
 
 #ifdef __cplusplus
 } /* extern "C" */

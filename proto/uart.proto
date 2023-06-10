@@ -3,14 +3,15 @@ option optimize_for = LITE_RUNTIME;
 
 package uart_proto;
 
-enum UartId {
-  UART1 = 0;
-  UART2 = 1;
-}
-
 enum MsgType {
   CONFIG = 0;
   DATA = 1;
+  STATS = 2;
+}
+
+enum UartId {
+  UART1 = 0;
+  UART2 = 1;
 }
 
 message UartConfig {
@@ -23,10 +24,17 @@ message UartData {
   bytes data = 2;
 }
 
+message UartStats {
+  bool rx_overflow = 1;
+  bool tx_overflow = 2;
+  uint32 tx_space = 3;
+}
+
 message UartMsg {
   MsgType type = 1;
   oneof msg {
-    UartConfig cfg = 2;
-    UartData data = 3;
+    UartConfig cfg_msg = 2;
+    UartData data_msg = 3;
+    UartStats stats_msg = 4;
   }
 }
