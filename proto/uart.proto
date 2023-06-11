@@ -6,7 +6,7 @@ package uart_proto;
 enum MsgType {
   CONFIG = 0;
   DATA = 1;
-  STATS = 2;
+  STATUS = 2;
 }
 
 enum UartId {
@@ -24,10 +24,12 @@ message UartData {
   bytes data = 2;
 }
 
-message UartStats {
+message UartStatus {
   bool rx_overflow = 1;
   bool tx_overflow = 2;
-  uint32 tx_space = 3;
+  bool tx_complete = 3;
+  uint32 rx_space = 4;
+  uint32 tx_space = 5;
 }
 
 message UartMsg {
@@ -35,6 +37,6 @@ message UartMsg {
   oneof msg {
     UartConfig cfg_msg = 2;
     UartData data_msg = 3;
-    UartStats stats_msg = 4;
+    UartStatus stats_msg = 4;
   }
 }
