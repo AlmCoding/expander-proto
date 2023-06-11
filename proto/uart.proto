@@ -33,10 +33,9 @@ message UartStatus {
 }
 
 message UartMsg {
-  MsgType type = 1;
   oneof msg {
     UartConfig cfg_msg = 2;
     UartData data_msg = 3;
-    UartStatus stats_msg = 4;
+    UartStatus status_msg = 4;
   }
 }

@@ -52,13 +52,11 @@ class UartStatus(_message.Message):
     def __init__(self, rx_overflow: bool = ..., tx_overflow: bool = ..., tx_complete: bool = ..., rx_space: _Optional[int] = ..., tx_space: _Optional[int] = ...) -> None: ...
 
 class UartMsg(_message.Message):
-    __slots__ = ["type", "cfg_msg", "data_msg", "stats_msg"]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["cfg_msg", "data_msg", "status_msg"]
     CFG_MSG_FIELD_NUMBER: _ClassVar[int]
     DATA_MSG_FIELD_NUMBER: _ClassVar[int]
-    STATS_MSG_FIELD_NUMBER: _ClassVar[int]
-    type: MsgType
+    STATUS_MSG_FIELD_NUMBER: _ClassVar[int]
     cfg_msg: UartConfig
     data_msg: UartData
-    stats_msg: UartStatus
-    def __init__(self, type: _Optional[_Union[MsgType, str]] = ..., cfg_msg: _Optional[_Union[UartConfig, _Mapping]] = ..., data_msg: _Optional[_Union[UartData, _Mapping]] = ..., stats_msg: _Optional[_Union[UartStatus, _Mapping]] = ...) -> None: ...
+    status_msg: UartStatus
+    def __init__(self, cfg_msg: _Optional[_Union[UartConfig, _Mapping]] = ..., data_msg: _Optional[_Union[UartData, _Mapping]] = ..., status_msg: _Optional[_Union[UartStatus, _Mapping]] = ...) -> None: ...
