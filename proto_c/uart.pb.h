@@ -42,6 +42,7 @@ typedef struct _uart_proto_UartStatus {
 } uart_proto_UartStatus;
 
 typedef struct _uart_proto_UartMsg {
+    uint32_t sequence_number;
     pb_size_t which_msg;
     union {
         uart_proto_UartConfig cfg_msg;
@@ -75,11 +76,11 @@ extern "C" {
 #define uart_proto_UartConfig_init_default       {_uart_proto_UartId_MIN, 0}
 #define uart_proto_UartData_init_default         {_uart_proto_UartId_MIN, {0, {0}}}
 #define uart_proto_UartStatus_init_default       {0, 0, 0, 0, 0}
-#define uart_proto_UartMsg_init_default          {0, {uart_proto_UartConfig_init_default}}
+#define uart_proto_UartMsg_init_default          {0, 0, {uart_proto_UartConfig_init_default}}
 #define uart_proto_UartConfig_init_zero          {_uart_proto_UartId_MIN, 0}
 #define uart_proto_UartData_init_zero            {_uart_proto_UartId_MIN, {0, {0}}}
 #define uart_proto_UartStatus_init_zero          {0, 0, 0, 0, 0}
-#define uart_proto_UartMsg_init_zero             {0, {uart_proto_UartConfig_init_zero}}
+#define uart_proto_UartMsg_init_zero             {0, 0, {uart_proto_UartConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define uart_proto_UartConfig_id_tag             1
@@ -91,6 +92,7 @@ extern "C" {
 #define uart_proto_UartStatus_tx_complete_tag    3
 #define uart_proto_UartStatus_rx_space_tag       4
 #define uart_proto_UartStatus_tx_space_tag       5
+#define uart_proto_UartMsg_sequence_number_tag   1
 #define uart_proto_UartMsg_cfg_msg_tag           2
 #define uart_proto_UartMsg_data_msg_tag          3
 #define uart_proto_UartMsg_status_msg_tag        4
@@ -118,6 +120,7 @@ X(a, STATIC,   SINGULAR, UINT32,   tx_space,          5)
 #define uart_proto_UartStatus_DEFAULT NULL
 
 #define uart_proto_UartMsg_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   1) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg_msg,msg.cfg_msg),   2) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_msg,msg.data_msg),   3) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (msg,status_msg,msg.status_msg),   4)
@@ -141,7 +144,7 @@ extern const pb_msgdesc_t uart_proto_UartMsg_msg;
 /* Maximum encoded size of messages (where known) */
 #define uart_proto_UartConfig_size               8
 #define uart_proto_UartData_size                 261
-#define uart_proto_UartMsg_size                  264
+#define uart_proto_UartMsg_size                  270
 #define uart_proto_UartStatus_size               18
 
 #ifdef __cplusplus

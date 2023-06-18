@@ -33,6 +33,7 @@ message UartStatus {
 }
 
 message UartMsg {
+  uint32 sequence_number = 1;
   oneof msg {
     UartConfig cfg_msg = 2;
     UartData data_msg = 3;

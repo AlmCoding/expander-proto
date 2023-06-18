@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuart.proto\x12\nuart_proto\">\n\nUartConfig\x12\x1e\n\x02id\x18\x01 \x01(\x0e\x32\x12.uart_proto.UartId\x12\x10\n\x08\x62\x61udrate\x18\x02 \x01(\r\"8\n\x08UartData\x12\x1e\n\x02id\x18\x01 \x01(\x0e\x32\x12.uart_proto.UartId\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"o\n\nUartStatus\x12\x13\n\x0brx_overflow\x18\x01 \x01(\x08\x12\x13\n\x0btx_overflow\x18\x02 \x01(\x08\x12\x13\n\x0btx_complete\x18\x03 \x01(\x08\x12\x10\n\x08rx_space\x18\x04 \x01(\r\x12\x10\n\x08tx_space\x18\x05 \x01(\r\"\x93\x01\n\x07UartMsg\x12)\n\x07\x63\x66g_msg\x18\x02 \x01(\x0b\x32\x16.uart_proto.UartConfigH\x00\x12(\n\x08\x64\x61ta_msg\x18\x03 \x01(\x0b\x32\x14.uart_proto.UartDataH\x00\x12,\n\nstatus_msg\x18\x04 \x01(\x0b\x32\x16.uart_proto.UartStatusH\x00\x42\x05\n\x03msg*+\n\x07MsgType\x12\n\n\x06\x43ONFIG\x10\x00\x12\x08\n\x04\x44\x41TA\x10\x01\x12\n\n\x06STATUS\x10\x02*\x1e\n\x06UartId\x12\t\n\x05UART1\x10\x00\x12\t\n\x05UART2\x10\x01\x42\x02H\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nuart.proto\x12\nuart_proto\">\n\nUartConfig\x12\x1e\n\x02id\x18\x01 \x01(\x0e\x32\x12.uart_proto.UartId\x12\x10\n\x08\x62\x61udrate\x18\x02 \x01(\r\"8\n\x08UartData\x12\x1e\n\x02id\x18\x01 \x01(\x0e\x32\x12.uart_proto.UartId\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"o\n\nUartStatus\x12\x13\n\x0brx_overflow\x18\x01 \x01(\x08\x12\x13\n\x0btx_overflow\x18\x02 \x01(\x08\x12\x13\n\x0btx_complete\x18\x03 \x01(\x08\x12\x10\n\x08rx_space\x18\x04 \x01(\r\x12\x10\n\x08tx_space\x18\x05 \x01(\r\"\xac\x01\n\x07UartMsg\x12\x17\n\x0fsequence_number\x18\x01 \x01(\r\x12)\n\x07\x63\x66g_msg\x18\x02 \x01(\x0b\x32\x16.uart_proto.UartConfigH\x00\x12(\n\x08\x64\x61ta_msg\x18\x03 \x01(\x0b\x32\x14.uart_proto.UartDataH\x00\x12,\n\nstatus_msg\x18\x04 \x01(\x0b\x32\x16.uart_proto.UartStatusH\x00\x42\x05\n\x03msg*+\n\x07MsgType\x12\n\n\x06\x43ONFIG\x10\x00\x12\x08\n\x04\x44\x41TA\x10\x01\x12\n\n\x06STATUS\x10\x02*\x1e\n\x06UartId\x12\t\n\x05UART1\x10\x00\x12\t\n\x05UART2\x10\x01\x42\x02H\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,10 +22,10 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'H\003'
-  _globals['_MSGTYPE']._serialized_start=411
-  _globals['_MSGTYPE']._serialized_end=454
-  _globals['_UARTID']._serialized_start=456
-  _globals['_UARTID']._serialized_end=486
+  _globals['_MSGTYPE']._serialized_start=436
+  _globals['_MSGTYPE']._serialized_end=479
+  _globals['_UARTID']._serialized_start=481
+  _globals['_UARTID']._serialized_end=511
   _globals['_UARTCONFIG']._serialized_start=26
   _globals['_UARTCONFIG']._serialized_end=88
   _globals['_UARTDATA']._serialized_start=90
@@ -33,5 +33,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_UARTSTATUS']._serialized_start=148
   _globals['_UARTSTATUS']._serialized_end=259
   _globals['_UARTMSG']._serialized_start=262
-  _globals['_UARTMSG']._serialized_end=409
+  _globals['_UARTMSG']._serialized_end=434
 # @@protoc_insertion_point(module_scope)
