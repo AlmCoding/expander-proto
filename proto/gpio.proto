@@ -1,0 +1,39 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package gpio_proto;
+
+enum MsgType {
+  CONFIG = 0;
+  DATA = 1;
+}
+
+enum GpioMode {
+  INPUT_PULLDOWN = 0;
+  INPUT_PULLUP = 1;
+  INPUT_NOPULL = 2;
+  OUTPUT_PUSHPULL = 3;
+  OUTPUT_OPENDRAIN = 4;
+}
+
+message GpioConfig {
+  GpioMode gpio1 = 1;
+  GpioMode gpio2 = 2;
+  GpioMode gpio3 = 3;
+  GpioMode gpio4 = 4;
+}
+
+message GpioData {
+  bool gpio1 = 1;
+  bool gpio2 = 2;
+  bool gpio3 = 3;
+  bool gpio4 = 4;
+}
+
+message GpioMsg {
+  uint32 sequence_number = 1;
+  oneof msg {
+    GpioConfig cfg_msg = 2;
+    GpioData data_msg = 3;
+  }
+}
