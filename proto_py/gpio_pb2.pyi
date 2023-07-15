@@ -26,28 +26,44 @@ OUTPUT_PUSHPULL: GpioMode
 OUTPUT_OPENDRAIN: GpioMode
 
 class GpioConfig(_message.Message):
-    __slots__ = ["gpio1", "gpio2", "gpio3", "gpio4"]
+    __slots__ = ["gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7"]
+    GPIO0_FIELD_NUMBER: _ClassVar[int]
     GPIO1_FIELD_NUMBER: _ClassVar[int]
     GPIO2_FIELD_NUMBER: _ClassVar[int]
     GPIO3_FIELD_NUMBER: _ClassVar[int]
     GPIO4_FIELD_NUMBER: _ClassVar[int]
+    GPIO5_FIELD_NUMBER: _ClassVar[int]
+    GPIO6_FIELD_NUMBER: _ClassVar[int]
+    GPIO7_FIELD_NUMBER: _ClassVar[int]
+    gpio0: GpioMode
     gpio1: GpioMode
     gpio2: GpioMode
     gpio3: GpioMode
     gpio4: GpioMode
-    def __init__(self, gpio1: _Optional[_Union[GpioMode, str]] = ..., gpio2: _Optional[_Union[GpioMode, str]] = ..., gpio3: _Optional[_Union[GpioMode, str]] = ..., gpio4: _Optional[_Union[GpioMode, str]] = ...) -> None: ...
+    gpio5: GpioMode
+    gpio6: GpioMode
+    gpio7: GpioMode
+    def __init__(self, gpio0: _Optional[_Union[GpioMode, str]] = ..., gpio1: _Optional[_Union[GpioMode, str]] = ..., gpio2: _Optional[_Union[GpioMode, str]] = ..., gpio3: _Optional[_Union[GpioMode, str]] = ..., gpio4: _Optional[_Union[GpioMode, str]] = ..., gpio5: _Optional[_Union[GpioMode, str]] = ..., gpio6: _Optional[_Union[GpioMode, str]] = ..., gpio7: _Optional[_Union[GpioMode, str]] = ...) -> None: ...
 
 class GpioData(_message.Message):
-    __slots__ = ["gpio1", "gpio2", "gpio3", "gpio4"]
+    __slots__ = ["gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7"]
+    GPIO0_FIELD_NUMBER: _ClassVar[int]
     GPIO1_FIELD_NUMBER: _ClassVar[int]
     GPIO2_FIELD_NUMBER: _ClassVar[int]
     GPIO3_FIELD_NUMBER: _ClassVar[int]
     GPIO4_FIELD_NUMBER: _ClassVar[int]
+    GPIO5_FIELD_NUMBER: _ClassVar[int]
+    GPIO6_FIELD_NUMBER: _ClassVar[int]
+    GPIO7_FIELD_NUMBER: _ClassVar[int]
+    gpio0: bool
     gpio1: bool
     gpio2: bool
     gpio3: bool
     gpio4: bool
-    def __init__(self, gpio1: bool = ..., gpio2: bool = ..., gpio3: bool = ..., gpio4: bool = ...) -> None: ...
+    gpio5: bool
+    gpio6: bool
+    gpio7: bool
+    def __init__(self, gpio0: bool = ..., gpio1: bool = ..., gpio2: bool = ..., gpio3: bool = ..., gpio4: bool = ..., gpio5: bool = ..., gpio6: bool = ..., gpio7: bool = ...) -> None: ...
 
 class GpioMsg(_message.Message):
     __slots__ = ["sequence_number", "cfg_msg", "data_msg"]

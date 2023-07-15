@@ -25,17 +25,25 @@ typedef enum _gpio_proto_GpioMode {
 
 /* Struct definitions */
 typedef struct _gpio_proto_GpioConfig {
+    gpio_proto_GpioMode gpio0;
     gpio_proto_GpioMode gpio1;
     gpio_proto_GpioMode gpio2;
     gpio_proto_GpioMode gpio3;
     gpio_proto_GpioMode gpio4;
+    gpio_proto_GpioMode gpio5;
+    gpio_proto_GpioMode gpio6;
+    gpio_proto_GpioMode gpio7;
 } gpio_proto_GpioConfig;
 
 typedef struct _gpio_proto_GpioData {
+    bool gpio0;
     bool gpio1;
     bool gpio2;
     bool gpio3;
     bool gpio4;
+    bool gpio5;
+    bool gpio6;
+    bool gpio7;
 } gpio_proto_GpioData;
 
 typedef struct _gpio_proto_GpioMsg {
@@ -61,49 +69,69 @@ extern "C" {
 #define _gpio_proto_GpioMode_MAX gpio_proto_GpioMode_OUTPUT_OPENDRAIN
 #define _gpio_proto_GpioMode_ARRAYSIZE ((gpio_proto_GpioMode)(gpio_proto_GpioMode_OUTPUT_OPENDRAIN+1))
 
+#define gpio_proto_GpioConfig_gpio0_ENUMTYPE gpio_proto_GpioMode
 #define gpio_proto_GpioConfig_gpio1_ENUMTYPE gpio_proto_GpioMode
 #define gpio_proto_GpioConfig_gpio2_ENUMTYPE gpio_proto_GpioMode
 #define gpio_proto_GpioConfig_gpio3_ENUMTYPE gpio_proto_GpioMode
 #define gpio_proto_GpioConfig_gpio4_ENUMTYPE gpio_proto_GpioMode
+#define gpio_proto_GpioConfig_gpio5_ENUMTYPE gpio_proto_GpioMode
+#define gpio_proto_GpioConfig_gpio6_ENUMTYPE gpio_proto_GpioMode
+#define gpio_proto_GpioConfig_gpio7_ENUMTYPE gpio_proto_GpioMode
 
 
 
 
 /* Initializer values for message structs */
-#define gpio_proto_GpioConfig_init_default       {_gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN}
-#define gpio_proto_GpioData_init_default         {0, 0, 0, 0}
+#define gpio_proto_GpioConfig_init_default       {_gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN}
+#define gpio_proto_GpioData_init_default         {0, 0, 0, 0, 0, 0, 0, 0}
 #define gpio_proto_GpioMsg_init_default          {0, 0, {gpio_proto_GpioConfig_init_default}}
-#define gpio_proto_GpioConfig_init_zero          {_gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN}
-#define gpio_proto_GpioData_init_zero            {0, 0, 0, 0}
+#define gpio_proto_GpioConfig_init_zero          {_gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN, _gpio_proto_GpioMode_MIN}
+#define gpio_proto_GpioData_init_zero            {0, 0, 0, 0, 0, 0, 0, 0}
 #define gpio_proto_GpioMsg_init_zero             {0, 0, {gpio_proto_GpioConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define gpio_proto_GpioConfig_gpio1_tag          1
-#define gpio_proto_GpioConfig_gpio2_tag          2
-#define gpio_proto_GpioConfig_gpio3_tag          3
-#define gpio_proto_GpioConfig_gpio4_tag          4
-#define gpio_proto_GpioData_gpio1_tag            1
-#define gpio_proto_GpioData_gpio2_tag            2
-#define gpio_proto_GpioData_gpio3_tag            3
-#define gpio_proto_GpioData_gpio4_tag            4
+#define gpio_proto_GpioConfig_gpio0_tag          1
+#define gpio_proto_GpioConfig_gpio1_tag          2
+#define gpio_proto_GpioConfig_gpio2_tag          3
+#define gpio_proto_GpioConfig_gpio3_tag          4
+#define gpio_proto_GpioConfig_gpio4_tag          5
+#define gpio_proto_GpioConfig_gpio5_tag          6
+#define gpio_proto_GpioConfig_gpio6_tag          7
+#define gpio_proto_GpioConfig_gpio7_tag          8
+#define gpio_proto_GpioData_gpio0_tag            1
+#define gpio_proto_GpioData_gpio1_tag            2
+#define gpio_proto_GpioData_gpio2_tag            3
+#define gpio_proto_GpioData_gpio3_tag            4
+#define gpio_proto_GpioData_gpio4_tag            5
+#define gpio_proto_GpioData_gpio5_tag            6
+#define gpio_proto_GpioData_gpio6_tag            7
+#define gpio_proto_GpioData_gpio7_tag            8
 #define gpio_proto_GpioMsg_sequence_number_tag   1
 #define gpio_proto_GpioMsg_cfg_msg_tag           2
 #define gpio_proto_GpioMsg_data_msg_tag          3
 
 /* Struct field encoding specification for nanopb */
 #define gpio_proto_GpioConfig_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    gpio1,             1) \
-X(a, STATIC,   SINGULAR, UENUM,    gpio2,             2) \
-X(a, STATIC,   SINGULAR, UENUM,    gpio3,             3) \
-X(a, STATIC,   SINGULAR, UENUM,    gpio4,             4)
+X(a, STATIC,   SINGULAR, UENUM,    gpio0,             1) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio1,             2) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio2,             3) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio3,             4) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio4,             5) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio5,             6) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio6,             7) \
+X(a, STATIC,   SINGULAR, UENUM,    gpio7,             8)
 #define gpio_proto_GpioConfig_CALLBACK NULL
 #define gpio_proto_GpioConfig_DEFAULT NULL
 
 #define gpio_proto_GpioData_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, BOOL,     gpio1,             1) \
-X(a, STATIC,   SINGULAR, BOOL,     gpio2,             2) \
-X(a, STATIC,   SINGULAR, BOOL,     gpio3,             3) \
-X(a, STATIC,   SINGULAR, BOOL,     gpio4,             4)
+X(a, STATIC,   SINGULAR, BOOL,     gpio0,             1) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio1,             2) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio2,             3) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio3,             4) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio4,             5) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio5,             6) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio6,             7) \
+X(a, STATIC,   SINGULAR, BOOL,     gpio7,             8)
 #define gpio_proto_GpioData_CALLBACK NULL
 #define gpio_proto_GpioData_DEFAULT NULL
 
@@ -126,9 +154,9 @@ extern const pb_msgdesc_t gpio_proto_GpioMsg_msg;
 #define gpio_proto_GpioMsg_fields &gpio_proto_GpioMsg_msg
 
 /* Maximum encoded size of messages (where known) */
-#define gpio_proto_GpioConfig_size               8
-#define gpio_proto_GpioData_size                 8
-#define gpio_proto_GpioMsg_size                  16
+#define gpio_proto_GpioConfig_size               16
+#define gpio_proto_GpioData_size                 16
+#define gpio_proto_GpioMsg_size                  24
 
 #ifdef __cplusplus
 } /* extern "C" */

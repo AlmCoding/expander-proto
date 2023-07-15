@@ -17,17 +17,25 @@ enum GpioMode {
 }
 
 message GpioConfig {
-  GpioMode gpio1 = 1;
-  GpioMode gpio2 = 2;
-  GpioMode gpio3 = 3;
-  GpioMode gpio4 = 4;
+  GpioMode gpio0 = 1;
+  GpioMode gpio1 = 2;
+  GpioMode gpio2 = 3;
+  GpioMode gpio3 = 4;
+  GpioMode gpio4 = 5;
+  GpioMode gpio5 = 6;
+  GpioMode gpio6 = 7;
+  GpioMode gpio7 = 8;
 }
 
 message GpioData {
-  bool gpio1 = 1;
-  bool gpio2 = 2;
-  bool gpio3 = 3;
-  bool gpio4 = 4;
+  bool gpio0 = 1;
+  bool gpio1 = 2;
+  bool gpio2 = 3;
+  bool gpio3 = 4;
+  bool gpio4 = 5;
+  bool gpio5 = 6;
+  bool gpio6 = 7;
+  bool gpio7 = 8;
 }
 
 message GpioMsg {
