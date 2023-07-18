@@ -17,8 +17,8 @@ typedef enum _uart_proto_MsgType {
 } uart_proto_MsgType;
 
 typedef enum _uart_proto_UartId {
-    uart_proto_UartId_UART1 = 0,
-    uart_proto_UartId_UART2 = 1
+    uart_proto_UartId_UART0 = 0,
+    uart_proto_UartId_UART1 = 1
 } uart_proto_UartId;
 
 /* Struct definitions */
@@ -61,9 +61,9 @@ extern "C" {
 #define _uart_proto_MsgType_MAX uart_proto_MsgType_STATUS
 #define _uart_proto_MsgType_ARRAYSIZE ((uart_proto_MsgType)(uart_proto_MsgType_STATUS+1))
 
-#define _uart_proto_UartId_MIN uart_proto_UartId_UART1
-#define _uart_proto_UartId_MAX uart_proto_UartId_UART2
-#define _uart_proto_UartId_ARRAYSIZE ((uart_proto_UartId)(uart_proto_UartId_UART2+1))
+#define _uart_proto_UartId_MIN uart_proto_UartId_UART0
+#define _uart_proto_UartId_MAX uart_proto_UartId_UART1
+#define _uart_proto_UartId_ARRAYSIZE ((uart_proto_UartId)(uart_proto_UartId_UART1+1))
 
 #define uart_proto_UartConfig_id_ENUMTYPE uart_proto_UartId
 

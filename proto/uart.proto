@@ -10,8 +10,8 @@ enum MsgType {
 }
 
 enum UartId {
-  UART1 = 0;
-  UART2 = 1;
+  UART0 = 0;
+  UART1 = 1;
 }
 
 message UartConfig {

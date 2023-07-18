@@ -13,13 +13,13 @@ class MsgType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
 
 class UartId(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = []
+    UART0: _ClassVar[UartId]
     UART1: _ClassVar[UartId]
-    UART2: _ClassVar[UartId]
 CONFIG: MsgType
 DATA: MsgType
 STATUS: MsgType
+UART0: UartId
 UART1: UartId
-UART2: UartId
 
 class UartConfig(_message.Message):
     __slots__ = ["id", "baudrate"]
