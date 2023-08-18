@@ -5,37 +5,28 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class MsgType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = []
-    CONFIG: _ClassVar[MsgType]
-    DATA: _ClassVar[MsgType]
-    STATUS: _ClassVar[MsgType]
-
 class UartId(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = []
     UART0: _ClassVar[UartId]
     UART1: _ClassVar[UartId]
-CONFIG: MsgType
-DATA: MsgType
-STATUS: MsgType
 UART0: UartId
 UART1: UartId
 
 class UartConfig(_message.Message):
-    __slots__ = ["id", "baudrate"]
-    ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["uart_id", "baudrate"]
+    UART_ID_FIELD_NUMBER: _ClassVar[int]
     BAUDRATE_FIELD_NUMBER: _ClassVar[int]
-    id: UartId
+    uart_id: UartId
     baudrate: int
-    def __init__(self, id: _Optional[_Union[UartId, str]] = ..., baudrate: _Optional[int] = ...) -> None: ...
+    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., baudrate: _Optional[int] = ...) -> None: ...
 
 class UartData(_message.Message):
-    __slots__ = ["id", "data"]
-    ID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["uart_id", "data"]
+    UART_ID_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
-    id: UartId
+    uart_id: UartId
     data: bytes
-    def __init__(self, id: _Optional[_Union[UartId, str]] = ..., data: _Optional[bytes] = ...) -> None: ...
+    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., data: _Optional[bytes] = ...) -> None: ...
 
 class UartStatus(_message.Message):
     __slots__ = ["rx_overflow", "tx_overflow", "tx_complete", "rx_space", "tx_space"]

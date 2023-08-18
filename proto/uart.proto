@@ -3,24 +3,18 @@ option optimize_for = LITE_RUNTIME;
 
 package uart_proto;
 
-enum MsgType {
-  CONFIG = 0;
-  DATA = 1;
-  STATUS = 2;
-}
-
 enum UartId {
   UART0 = 0;
   UART1 = 1;
 }
 
 message UartConfig {
-  UartId id = 1;
+  UartId uart_id = 1;
   uint32 baudrate = 2;
 }
 
 message UartData {
-  UartId id = 1;
+  UartId uart_id = 1;
   bytes data = 2;
 }
 

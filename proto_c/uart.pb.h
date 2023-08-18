@@ -10,12 +10,6 @@
 #endif
 
 /* Enum definitions */
-typedef enum _uart_proto_MsgType {
-    uart_proto_MsgType_CONFIG = 0,
-    uart_proto_MsgType_DATA = 1,
-    uart_proto_MsgType_STATUS = 2
-} uart_proto_MsgType;
-
 typedef enum _uart_proto_UartId {
     uart_proto_UartId_UART0 = 0,
     uart_proto_UartId_UART1 = 1
@@ -23,13 +17,13 @@ typedef enum _uart_proto_UartId {
 
 /* Struct definitions */
 typedef struct _uart_proto_UartConfig {
-    uart_proto_UartId id;
+    uart_proto_UartId uart_id;
     uint32_t baudrate;
 } uart_proto_UartConfig;
 
 typedef PB_BYTES_ARRAY_T(256) uart_proto_UartData_data_t;
 typedef struct _uart_proto_UartData {
-    uart_proto_UartId id;
+    uart_proto_UartId uart_id;
     uart_proto_UartData_data_t data;
 } uart_proto_UartData;
 
@@ -57,17 +51,13 @@ extern "C" {
 #endif
 
 /* Helper constants for enums */
-#define _uart_proto_MsgType_MIN uart_proto_MsgType_CONFIG
-#define _uart_proto_MsgType_MAX uart_proto_MsgType_STATUS
-#define _uart_proto_MsgType_ARRAYSIZE ((uart_proto_MsgType)(uart_proto_MsgType_STATUS+1))
-
 #define _uart_proto_UartId_MIN uart_proto_UartId_UART0
 #define _uart_proto_UartId_MAX uart_proto_UartId_UART1
 #define _uart_proto_UartId_ARRAYSIZE ((uart_proto_UartId)(uart_proto_UartId_UART1+1))
 
-#define uart_proto_UartConfig_id_ENUMTYPE uart_proto_UartId
+#define uart_proto_UartConfig_uart_id_ENUMTYPE uart_proto_UartId
 
-#define uart_proto_UartData_id_ENUMTYPE uart_proto_UartId
+#define uart_proto_UartData_uart_id_ENUMTYPE uart_proto_UartId
 
 
 
@@ -83,9 +73,9 @@ extern "C" {
 #define uart_proto_UartMsg_init_zero             {0, 0, {uart_proto_UartConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define uart_proto_UartConfig_id_tag             1
+#define uart_proto_UartConfig_uart_id_tag        1
 #define uart_proto_UartConfig_baudrate_tag       2
-#define uart_proto_UartData_id_tag               1
+#define uart_proto_UartData_uart_id_tag          1
 #define uart_proto_UartData_data_tag             2
 #define uart_proto_UartStatus_rx_overflow_tag    1
 #define uart_proto_UartStatus_tx_overflow_tag    2
@@ -99,13 +89,13 @@ extern "C" {
 
 /* Struct field encoding specification for nanopb */
 #define uart_proto_UartConfig_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    id,                1) \
+X(a, STATIC,   SINGULAR, UENUM,    uart_id,           1) \
 X(a, STATIC,   SINGULAR, UINT32,   baudrate,          2)
 #define uart_proto_UartConfig_CALLBACK NULL
 #define uart_proto_UartConfig_DEFAULT NULL
 
 #define uart_proto_UartData_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    id,                1) \
+X(a, STATIC,   SINGULAR, UENUM,    uart_id,           1) \
 X(a, STATIC,   SINGULAR, BYTES,    data,              2)
 #define uart_proto_UartData_CALLBACK NULL
 #define uart_proto_UartData_DEFAULT NULL

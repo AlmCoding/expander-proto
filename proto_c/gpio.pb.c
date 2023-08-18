@@ -17,4 +17,3 @@ PB_BIND(gpio_proto_GpioMsg, gpio_proto_GpioMsg, AUTO)
 
 
 
-

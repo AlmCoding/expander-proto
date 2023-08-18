@@ -3,11 +3,6 @@ option optimize_for = LITE_RUNTIME;
 
 package gpio_proto;
 
-enum MsgType {
-  CONFIG = 0;
-  DATA = 1;
-}
-
 enum GpioMode {
   INPUT_PULLDOWN = 0;
   INPUT_PULLUP = 1;

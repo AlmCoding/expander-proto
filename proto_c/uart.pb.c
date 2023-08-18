@@ -20,4 +20,3 @@ PB_BIND(uart_proto_UartMsg, uart_proto_UartMsg, 2)
 
 
 
-

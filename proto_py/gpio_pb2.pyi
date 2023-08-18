@@ -5,11 +5,6 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class MsgType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = []
-    CONFIG: _ClassVar[MsgType]
-    DATA: _ClassVar[MsgType]
-
 class GpioMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = []
     INPUT_PULLDOWN: _ClassVar[GpioMode]
@@ -17,8 +12,6 @@ class GpioMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     INPUT_NOPULL: _ClassVar[GpioMode]
     OUTPUT_PUSHPULL: _ClassVar[GpioMode]
     OUTPUT_OPENDRAIN: _ClassVar[GpioMode]
-CONFIG: MsgType
-DATA: MsgType
 INPUT_PULLDOWN: GpioMode
 INPUT_PULLUP: GpioMode
 INPUT_NOPULL: GpioMode

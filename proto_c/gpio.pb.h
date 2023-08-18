@@ -10,11 +10,6 @@
 #endif
 
 /* Enum definitions */
-typedef enum _gpio_proto_MsgType {
-    gpio_proto_MsgType_CONFIG = 0,
-    gpio_proto_MsgType_DATA = 1
-} gpio_proto_MsgType;
-
 typedef enum _gpio_proto_GpioMode {
     gpio_proto_GpioMode_INPUT_PULLDOWN = 0,
     gpio_proto_GpioMode_INPUT_PULLUP = 1,
@@ -61,10 +56,6 @@ extern "C" {
 #endif
 
 /* Helper constants for enums */
-#define _gpio_proto_MsgType_MIN gpio_proto_MsgType_CONFIG
-#define _gpio_proto_MsgType_MAX gpio_proto_MsgType_DATA
-#define _gpio_proto_MsgType_ARRAYSIZE ((gpio_proto_MsgType)(gpio_proto_MsgType_DATA+1))
-
 #define _gpio_proto_GpioMode_MIN gpio_proto_GpioMode_INPUT_PULLDOWN
 #define _gpio_proto_GpioMode_MAX gpio_proto_GpioMode_OUTPUT_OPENDRAIN
 #define _gpio_proto_GpioMode_ARRAYSIZE ((gpio_proto_GpioMode)(gpio_proto_GpioMode_OUTPUT_OPENDRAIN+1))
