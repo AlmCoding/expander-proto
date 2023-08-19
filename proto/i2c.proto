@@ -9,12 +9,10 @@ enum I2cId {
 }
 
 message I2cConfig {
-  I2cId i2c_id = 1;
-  uint32 frequency = 2;
+  uint32 clock_rate = 2;
 }
 
 message I2cMasterData {
-  I2cId i2c_id = 1;
   uint32 request_id = 2;
   uint32 slave_addr = 3;
   uint32 read_size = 5;
@@ -28,10 +26,11 @@ message I2cStatus {
 }
 
 message I2cMsg {
-  uint32 sequence_number = 1;
+  I2cId i2c_id = 1;
+  uint32 sequence_number = 2;
   oneof msg {
-    I2cConfig cfg_msg = 2;
-    I2cMasterData data_msg = 3;
-    I2cStatus status_msg = 4;
+    I2cConfig cfg_msg = 3;
+    I2cMasterData data_msg = 4;
+    I2cStatus status_msg = 5;
   }
 }
