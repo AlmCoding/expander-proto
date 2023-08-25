@@ -12,6 +12,9 @@ PB_BIND(i2c_proto_I2cConfig, i2c_proto_I2cConfig, AUTO)
 PB_BIND(i2c_proto_I2cMasterData, i2c_proto_I2cMasterData, 2)
 
 
+PB_BIND(i2c_proto_I2cSlaveData, i2c_proto_I2cSlaveData, 2)
+
+
 PB_BIND(i2c_proto_I2cStatus, i2c_proto_I2cStatus, AUTO)
 
 

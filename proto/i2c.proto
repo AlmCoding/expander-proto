@@ -19,10 +19,19 @@ message I2cMasterData {
   bytes data = 4;
 }
 
+message I2cSlaveData {
+  uint32 request_id = 1;
+  bytes pattern = 2;
+  bytes data = 3;
+}
+
 message I2cStatus {
   uint32 master_queue_space = 1;
   uint32 master_buffer_space = 2;
   bool master_overflow = 3;
+  uint32 slave_dict_space = 4;
+  uint32 slave_buffer_space = 5;
+  bool slave_overflow = 6;
 }
 
 message I2cMsg {
@@ -30,7 +39,8 @@ message I2cMsg {
   uint32 sequence_number = 2;
   oneof msg {
     I2cConfig cfg_msg = 3;
-    I2cMasterData data_msg = 4;
-    I2cStatus status_msg = 5;
+    I2cMasterData master_msg = 4;
+    I2cSlaveData slave_msg = 5;
+    I2cStatus status_msg = 6;
   }
 }
