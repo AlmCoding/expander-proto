@@ -39,15 +39,15 @@ class UartStatus(_message.Message):
     def __init__(self, rx_overflow: bool = ..., tx_overflow: bool = ..., tx_complete: bool = ..., rx_space: _Optional[int] = ..., tx_space: _Optional[int] = ...) -> None: ...
 
 class UartMsg(_message.Message):
-    __slots__ = ["uart_id", "sequence_number", "cfg_msg", "data_msg", "status_msg"]
+    __slots__ = ["uart_id", "sequence_number", "cfg", "data", "status"]
     UART_ID_FIELD_NUMBER: _ClassVar[int]
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
-    CFG_MSG_FIELD_NUMBER: _ClassVar[int]
-    DATA_MSG_FIELD_NUMBER: _ClassVar[int]
-    STATUS_MSG_FIELD_NUMBER: _ClassVar[int]
+    CFG_FIELD_NUMBER: _ClassVar[int]
+    DATA_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
     uart_id: UartId
     sequence_number: int
-    cfg_msg: UartConfig
-    data_msg: UartData
-    status_msg: UartStatus
-    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., sequence_number: _Optional[int] = ..., cfg_msg: _Optional[_Union[UartConfig, _Mapping]] = ..., data_msg: _Optional[_Union[UartData, _Mapping]] = ..., status_msg: _Optional[_Union[UartStatus, _Mapping]] = ...) -> None: ...
+    cfg: UartConfig
+    data: UartData
+    status: UartStatus
+    def __init__(self, uart_id: _Optional[_Union[UartId, str]] = ..., sequence_number: _Optional[int] = ..., cfg: _Optional[_Union[UartConfig, _Mapping]] = ..., data: _Optional[_Union[UartData, _Mapping]] = ..., status: _Optional[_Union[UartStatus, _Mapping]] = ...) -> None: ...

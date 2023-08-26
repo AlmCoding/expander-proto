@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ti2c.proto\x12\ti2c_proto\"\x1f\n\tI2cConfig\x12\x12\n\nclock_rate\x18\x02 \x01(\r\"X\n\rI2cMasterData\x12\x12\n\nrequest_id\x18\x02 \x01(\r\x12\x12\n\nslave_addr\x18\x03 \x01(\r\x12\x11\n\tread_size\x18\x05 \x01(\r\x12\x0c\n\x04\x64\x61ta\x18\x04 \x01(\x0c\"A\n\x0cI2cSlaveData\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x0f\n\x07pattern\x18\x02 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\"\xab\x01\n\tI2cStatus\x12\x1a\n\x12master_queue_space\x18\x01 \x01(\r\x12\x1b\n\x13master_buffer_space\x18\x02 \x01(\r\x12\x17\n\x0fmaster_overflow\x18\x03 \x01(\x08\x12\x18\n\x10slave_dict_space\x18\x04 \x01(\r\x12\x1a\n\x12slave_buffer_space\x18\x05 \x01(\r\x12\x16\n\x0eslave_overflow\x18\x06 \x01(\x08\"\xfd\x01\n\x06I2cMsg\x12 \n\x06i2c_id\x18\x01 \x01(\x0e\x32\x10.i2c_proto.I2cId\x12\x17\n\x0fsequence_number\x18\x02 \x01(\r\x12\'\n\x07\x63\x66g_msg\x18\x03 \x01(\x0b\x32\x14.i2c_proto.I2cConfigH\x00\x12.\n\nmaster_msg\x18\x04 \x01(\x0b\x32\x18.i2c_proto.I2cMasterDataH\x00\x12,\n\tslave_msg\x18\x05 \x01(\x0b\x32\x17.i2c_proto.I2cSlaveDataH\x00\x12*\n\nstatus_msg\x18\x06 \x01(\x0b\x32\x14.i2c_proto.I2cStatusH\x00\x42\x05\n\x03msg*\x1b\n\x05I2cId\x12\x08\n\x04I2C0\x10\x00\x12\x08\n\x04I2C1\x10\x01\x42\x02H\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ti2c.proto\x12\ti2c_proto\"\x1f\n\tI2cConfig\x12\x12\n\nclock_rate\x18\x02 \x01(\r\"X\n\rI2cMasterData\x12\x12\n\nrequest_id\x18\x02 \x01(\r\x12\x12\n\nslave_addr\x18\x03 \x01(\r\x12\x11\n\tread_size\x18\x05 \x01(\r\x12\x0c\n\x04\x64\x61ta\x18\x04 \x01(\x0c\"A\n\x0cI2cSlaveData\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x0f\n\x07pattern\x18\x02 \x01(\x0c\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\"\xab\x01\n\tI2cStatus\x12\x1a\n\x12master_queue_space\x18\x01 \x01(\r\x12\x1b\n\x13master_buffer_space\x18\x02 \x01(\r\x12\x17\n\x0fmaster_overflow\x18\x03 \x01(\x08\x12\x18\n\x10slave_dict_space\x18\x04 \x01(\r\x12\x1a\n\x12slave_buffer_space\x18\x05 \x01(\r\x12\x16\n\x0eslave_overflow\x18\x06 \x01(\x08\"\xed\x01\n\x06I2cMsg\x12 \n\x06i2c_id\x18\x01 \x01(\x0e\x32\x10.i2c_proto.I2cId\x12\x17\n\x0fsequence_number\x18\x02 \x01(\r\x12#\n\x03\x63\x66g\x18\x03 \x01(\x0b\x32\x14.i2c_proto.I2cConfigH\x00\x12*\n\x06master\x18\x04 \x01(\x0b\x32\x18.i2c_proto.I2cMasterDataH\x00\x12(\n\x05slave\x18\x05 \x01(\x0b\x32\x17.i2c_proto.I2cSlaveDataH\x00\x12&\n\x06status\x18\x06 \x01(\x0b\x32\x14.i2c_proto.I2cStatusH\x00\x42\x05\n\x03msg*\x1b\n\x05I2cId\x12\x08\n\x04I2C0\x10\x00\x12\x08\n\x04I2C1\x10\x01\x42\x02H\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,8 +22,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'H\003'
-  _globals['_I2CID']._serialized_start=644
-  _globals['_I2CID']._serialized_end=671
+  _globals['_I2CID']._serialized_start=628
+  _globals['_I2CID']._serialized_end=655
   _globals['_I2CCONFIG']._serialized_start=24
   _globals['_I2CCONFIG']._serialized_end=55
   _globals['_I2CMASTERDATA']._serialized_start=57
@@ -33,5 +33,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_I2CSTATUS']._serialized_start=215
   _globals['_I2CSTATUS']._serialized_end=386
   _globals['_I2CMSG']._serialized_start=389
-  _globals['_I2CMSG']._serialized_end=642
+  _globals['_I2CMSG']._serialized_end=626
 # @@protoc_insertion_point(module_scope)

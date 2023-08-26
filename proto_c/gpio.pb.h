@@ -45,8 +45,8 @@ typedef struct _gpio_proto_GpioMsg {
     uint32_t sequence_number;
     pb_size_t which_msg;
     union {
-        gpio_proto_GpioConfig cfg_msg;
-        gpio_proto_GpioData data_msg;
+        gpio_proto_GpioConfig cfg;
+        gpio_proto_GpioData data;
     } msg;
 } gpio_proto_GpioMsg;
 
@@ -98,8 +98,8 @@ extern "C" {
 #define gpio_proto_GpioData_gpio6_tag            7
 #define gpio_proto_GpioData_gpio7_tag            8
 #define gpio_proto_GpioMsg_sequence_number_tag   1
-#define gpio_proto_GpioMsg_cfg_msg_tag           2
-#define gpio_proto_GpioMsg_data_msg_tag          3
+#define gpio_proto_GpioMsg_cfg_tag               2
+#define gpio_proto_GpioMsg_data_tag              3
 
 /* Struct field encoding specification for nanopb */
 #define gpio_proto_GpioConfig_FIELDLIST(X, a) \
@@ -128,12 +128,12 @@ X(a, STATIC,   SINGULAR, BOOL,     gpio7,             8)
 
 #define gpio_proto_GpioMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   1) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg_msg,msg.cfg_msg),   2) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_msg,msg.data_msg),   3)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg,msg.cfg),   2) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data,msg.data),   3)
 #define gpio_proto_GpioMsg_CALLBACK NULL
 #define gpio_proto_GpioMsg_DEFAULT NULL
-#define gpio_proto_GpioMsg_msg_cfg_msg_MSGTYPE gpio_proto_GpioConfig
-#define gpio_proto_GpioMsg_msg_data_msg_MSGTYPE gpio_proto_GpioData
+#define gpio_proto_GpioMsg_msg_cfg_MSGTYPE gpio_proto_GpioConfig
+#define gpio_proto_GpioMsg_msg_data_MSGTYPE gpio_proto_GpioData
 
 extern const pb_msgdesc_t gpio_proto_GpioConfig_msg;
 extern const pb_msgdesc_t gpio_proto_GpioData_msg;

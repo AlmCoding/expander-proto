@@ -38,9 +38,9 @@ message I2cMsg {
   I2cId i2c_id = 1;
   uint32 sequence_number = 2;
   oneof msg {
-    I2cConfig cfg_msg = 3;
-    I2cMasterData master_msg = 4;
-    I2cSlaveData slave_msg = 5;
-    I2cStatus status_msg = 6;
+    I2cConfig cfg = 3;
+    I2cMasterData master = 4;
+    I2cSlaveData slave = 5;
+    I2cStatus status = 6;
   }
 }

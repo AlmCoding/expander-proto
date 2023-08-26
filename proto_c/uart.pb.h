@@ -38,9 +38,9 @@ typedef struct _uart_proto_UartMsg {
     uint32_t sequence_number;
     pb_size_t which_msg;
     union {
-        uart_proto_UartConfig cfg_msg;
-        uart_proto_UartData data_msg;
-        uart_proto_UartStatus status_msg;
+        uart_proto_UartConfig cfg;
+        uart_proto_UartData data;
+        uart_proto_UartStatus status;
     } msg;
 } uart_proto_UartMsg;
 
@@ -80,9 +80,9 @@ extern "C" {
 #define uart_proto_UartStatus_tx_space_tag       5
 #define uart_proto_UartMsg_uart_id_tag           1
 #define uart_proto_UartMsg_sequence_number_tag   2
-#define uart_proto_UartMsg_cfg_msg_tag           3
-#define uart_proto_UartMsg_data_msg_tag          4
-#define uart_proto_UartMsg_status_msg_tag        5
+#define uart_proto_UartMsg_cfg_tag               3
+#define uart_proto_UartMsg_data_tag              4
+#define uart_proto_UartMsg_status_tag            5
 
 /* Struct field encoding specification for nanopb */
 #define uart_proto_UartConfig_FIELDLIST(X, a) \
@@ -107,14 +107,14 @@ X(a, STATIC,   SINGULAR, UINT32,   tx_space,          5)
 #define uart_proto_UartMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    uart_id,           1) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   2) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg_msg,msg.cfg_msg),   3) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_msg,msg.data_msg),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,status_msg,msg.status_msg),   5)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg,msg.cfg),   3) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data,msg.data),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,status,msg.status),   5)
 #define uart_proto_UartMsg_CALLBACK NULL
 #define uart_proto_UartMsg_DEFAULT NULL
-#define uart_proto_UartMsg_msg_cfg_msg_MSGTYPE uart_proto_UartConfig
-#define uart_proto_UartMsg_msg_data_msg_MSGTYPE uart_proto_UartData
-#define uart_proto_UartMsg_msg_status_msg_MSGTYPE uart_proto_UartStatus
+#define uart_proto_UartMsg_msg_cfg_MSGTYPE uart_proto_UartConfig
+#define uart_proto_UartMsg_msg_data_MSGTYPE uart_proto_UartData
+#define uart_proto_UartMsg_msg_status_MSGTYPE uart_proto_UartStatus
 
 extern const pb_msgdesc_t uart_proto_UartConfig_msg;
 extern const pb_msgdesc_t uart_proto_UartData_msg;

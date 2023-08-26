@@ -59,11 +59,11 @@ class GpioData(_message.Message):
     def __init__(self, gpio0: bool = ..., gpio1: bool = ..., gpio2: bool = ..., gpio3: bool = ..., gpio4: bool = ..., gpio5: bool = ..., gpio6: bool = ..., gpio7: bool = ...) -> None: ...
 
 class GpioMsg(_message.Message):
-    __slots__ = ["sequence_number", "cfg_msg", "data_msg"]
+    __slots__ = ["sequence_number", "cfg", "data"]
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
-    CFG_MSG_FIELD_NUMBER: _ClassVar[int]
-    DATA_MSG_FIELD_NUMBER: _ClassVar[int]
+    CFG_FIELD_NUMBER: _ClassVar[int]
+    DATA_FIELD_NUMBER: _ClassVar[int]
     sequence_number: int
-    cfg_msg: GpioConfig
-    data_msg: GpioData
-    def __init__(self, sequence_number: _Optional[int] = ..., cfg_msg: _Optional[_Union[GpioConfig, _Mapping]] = ..., data_msg: _Optional[_Union[GpioData, _Mapping]] = ...) -> None: ...
+    cfg: GpioConfig
+    data: GpioData
+    def __init__(self, sequence_number: _Optional[int] = ..., cfg: _Optional[_Union[GpioConfig, _Mapping]] = ..., data: _Optional[_Union[GpioData, _Mapping]] = ...) -> None: ...

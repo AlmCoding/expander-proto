@@ -57,17 +57,17 @@ class I2cStatus(_message.Message):
     def __init__(self, master_queue_space: _Optional[int] = ..., master_buffer_space: _Optional[int] = ..., master_overflow: bool = ..., slave_dict_space: _Optional[int] = ..., slave_buffer_space: _Optional[int] = ..., slave_overflow: bool = ...) -> None: ...
 
 class I2cMsg(_message.Message):
-    __slots__ = ["i2c_id", "sequence_number", "cfg_msg", "master_msg", "slave_msg", "status_msg"]
+    __slots__ = ["i2c_id", "sequence_number", "cfg", "master", "slave", "status"]
     I2C_ID_FIELD_NUMBER: _ClassVar[int]
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
-    CFG_MSG_FIELD_NUMBER: _ClassVar[int]
-    MASTER_MSG_FIELD_NUMBER: _ClassVar[int]
-    SLAVE_MSG_FIELD_NUMBER: _ClassVar[int]
-    STATUS_MSG_FIELD_NUMBER: _ClassVar[int]
+    CFG_FIELD_NUMBER: _ClassVar[int]
+    MASTER_FIELD_NUMBER: _ClassVar[int]
+    SLAVE_FIELD_NUMBER: _ClassVar[int]
+    STATUS_FIELD_NUMBER: _ClassVar[int]
     i2c_id: I2cId
     sequence_number: int
-    cfg_msg: I2cConfig
-    master_msg: I2cMasterData
-    slave_msg: I2cSlaveData
-    status_msg: I2cStatus
-    def __init__(self, i2c_id: _Optional[_Union[I2cId, str]] = ..., sequence_number: _Optional[int] = ..., cfg_msg: _Optional[_Union[I2cConfig, _Mapping]] = ..., master_msg: _Optional[_Union[I2cMasterData, _Mapping]] = ..., slave_msg: _Optional[_Union[I2cSlaveData, _Mapping]] = ..., status_msg: _Optional[_Union[I2cStatus, _Mapping]] = ...) -> None: ...
+    cfg: I2cConfig
+    master: I2cMasterData
+    slave: I2cSlaveData
+    status: I2cStatus
+    def __init__(self, i2c_id: _Optional[_Union[I2cId, str]] = ..., sequence_number: _Optional[int] = ..., cfg: _Optional[_Union[I2cConfig, _Mapping]] = ..., master: _Optional[_Union[I2cMasterData, _Mapping]] = ..., slave: _Optional[_Union[I2cSlaveData, _Mapping]] = ..., status: _Optional[_Union[I2cStatus, _Mapping]] = ...) -> None: ...

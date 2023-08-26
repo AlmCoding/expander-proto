@@ -50,10 +50,10 @@ typedef struct _i2c_proto_I2cMsg {
     uint32_t sequence_number;
     pb_size_t which_msg;
     union {
-        i2c_proto_I2cConfig cfg_msg;
-        i2c_proto_I2cMasterData master_msg;
-        i2c_proto_I2cSlaveData slave_msg;
-        i2c_proto_I2cStatus status_msg;
+        i2c_proto_I2cConfig cfg;
+        i2c_proto_I2cMasterData master;
+        i2c_proto_I2cSlaveData slave;
+        i2c_proto_I2cStatus status;
     } msg;
 } i2c_proto_I2cMsg;
 
@@ -103,10 +103,10 @@ extern "C" {
 #define i2c_proto_I2cStatus_slave_overflow_tag   6
 #define i2c_proto_I2cMsg_i2c_id_tag              1
 #define i2c_proto_I2cMsg_sequence_number_tag     2
-#define i2c_proto_I2cMsg_cfg_msg_tag             3
-#define i2c_proto_I2cMsg_master_msg_tag          4
-#define i2c_proto_I2cMsg_slave_msg_tag           5
-#define i2c_proto_I2cMsg_status_msg_tag          6
+#define i2c_proto_I2cMsg_cfg_tag                 3
+#define i2c_proto_I2cMsg_master_tag              4
+#define i2c_proto_I2cMsg_slave_tag               5
+#define i2c_proto_I2cMsg_status_tag              6
 
 /* Struct field encoding specification for nanopb */
 #define i2c_proto_I2cConfig_FIELDLIST(X, a) \
@@ -142,16 +142,16 @@ X(a, STATIC,   SINGULAR, BOOL,     slave_overflow,    6)
 #define i2c_proto_I2cMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    i2c_id,            1) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   2) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg_msg,msg.cfg_msg),   3) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,master_msg,msg.master_msg),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,slave_msg,msg.slave_msg),   5) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,status_msg,msg.status_msg),   6)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,cfg,msg.cfg),   3) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,master,msg.master),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,slave,msg.slave),   5) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,status,msg.status),   6)
 #define i2c_proto_I2cMsg_CALLBACK NULL
 #define i2c_proto_I2cMsg_DEFAULT NULL
-#define i2c_proto_I2cMsg_msg_cfg_msg_MSGTYPE i2c_proto_I2cConfig
-#define i2c_proto_I2cMsg_msg_master_msg_MSGTYPE i2c_proto_I2cMasterData
-#define i2c_proto_I2cMsg_msg_slave_msg_MSGTYPE i2c_proto_I2cSlaveData
-#define i2c_proto_I2cMsg_msg_status_msg_MSGTYPE i2c_proto_I2cStatus
+#define i2c_proto_I2cMsg_msg_cfg_MSGTYPE i2c_proto_I2cConfig
+#define i2c_proto_I2cMsg_msg_master_MSGTYPE i2c_proto_I2cMasterData
+#define i2c_proto_I2cMsg_msg_slave_MSGTYPE i2c_proto_I2cSlaveData
+#define i2c_proto_I2cMsg_msg_status_MSGTYPE i2c_proto_I2cStatus
 
 extern const pb_msgdesc_t i2c_proto_I2cConfig_msg;
 extern const pb_msgdesc_t i2c_proto_I2cMasterData_msg;

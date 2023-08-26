@@ -36,7 +36,7 @@ message GpioData {
 message GpioMsg {
   uint32 sequence_number = 1;
   oneof msg {
-    GpioConfig cfg_msg = 2;
-    GpioData data_msg = 3;
+    GpioConfig cfg = 2;
+    GpioData data = 3;
   }
 }
