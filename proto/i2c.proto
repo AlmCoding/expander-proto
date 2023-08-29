@@ -8,39 +8,64 @@ enum I2cId {
   I2C1 = 1;
 }
 
+enum AddrSize {
+  ZERO_BYTES = 0;
+  ONE_BYTE = 1;
+  TWO_BYTES = 2;
+}
+
 message I2cConfig {
-  uint32 clock_rate = 2;
+  uint32 clock_rate = 1;
+  uint32 device_addr = 2;
 }
 
-message I2cMasterData {
-  uint32 request_id = 2;
-  uint32 slave_addr = 3;
-  uint32 read_size = 5;
-  bytes data = 4;
-}
-
-message I2cSlaveData {
+message I2cMasterWrite {
   uint32 request_id = 1;
-  bytes pattern = 2;
-  bytes data = 3;
+  uint32 slave_addr = 2;
+  bool send_stop = 3;
+  bytes write_data = 4;
 }
 
-message I2cStatus {
-  uint32 master_queue_space = 1;
-  uint32 master_buffer_space = 2;
-  bool master_overflow = 3;
+message I2cMasterRead {
+  uint32 request_id = 1;
+  uint32 slave_addr = 2;
+  bool send_stop = 3;
+  uint32 reg_addr = 4;
+  AddrSize addr_size = 5;
+  uint32 read_size = 6;
+}
+
+message I2cMasterStatus {
+  uint32 queue_space = 1;
+  uint32 buffer_space = 2;
+  uint32 request_id = 3;
+  bool rejected = 4;
+  bool success = 5;
+  bytes read_data = 6;
+}
+
+/*
+message I2cSlaveWrite {
+  uint32 request_id = 1;
+  uint32 reg_addr = 2;
+  AddrSize addr_size = 3;
+  bytes write_data = 4;
+}
+
+message I2cSlaveStatus {
   uint32 slave_dict_space = 4;
   uint32 slave_buffer_space = 5;
   bool slave_overflow = 6;
 }
+*/
 
 message I2cMsg {
   I2cId i2c_id = 1;
   uint32 sequence_number = 2;
   oneof msg {
     I2cConfig cfg = 3;
-    I2cMasterData master = 4;
-    I2cSlaveData slave = 5;
-    I2cStatus status = 6;
+    I2cMasterWrite master_write = 4;
+    I2cMasterRead master_read = 5;
+    I2cMasterStatus master_status = 6;
   }
 }

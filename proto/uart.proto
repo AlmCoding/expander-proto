@@ -9,11 +9,11 @@ enum UartId {
 }
 
 message UartConfig {
-  uint32 baud_rate = 2;
+  uint32 baud_rate = 1;
 }
 
 message UartData {
-  bytes data = 2;
+  bytes data = 1;
 }
 
 message UartStatus {

@@ -1,6 +1,4 @@
 
 # Define max size for "bytes"
-i2c_proto.I2cMasterData.data max_size:256
-
-i2c_proto.I2cSlaveData.pattern max_size:8
-i2c_proto.I2cSlaveData.data max_size:256
+i2c_proto.I2cMasterWrite.write_data max_size:256
+i2c_proto.I2cMasterStatus.read_data max_size:256

@@ -71,8 +71,8 @@ extern "C" {
 #define uart_proto_UartMsg_init_zero             {_uart_proto_UartId_MIN, 0, 0, {uart_proto_UartConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define uart_proto_UartConfig_baud_rate_tag      2
-#define uart_proto_UartData_data_tag             2
+#define uart_proto_UartConfig_baud_rate_tag      1
+#define uart_proto_UartData_data_tag             1
 #define uart_proto_UartStatus_rx_overflow_tag    1
 #define uart_proto_UartStatus_tx_overflow_tag    2
 #define uart_proto_UartStatus_tx_complete_tag    3
@@ -86,12 +86,12 @@ extern "C" {
 
 /* Struct field encoding specification for nanopb */
 #define uart_proto_UartConfig_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   baud_rate,         2)
+X(a, STATIC,   SINGULAR, UINT32,   baud_rate,         1)
 #define uart_proto_UartConfig_CALLBACK NULL
 #define uart_proto_UartConfig_DEFAULT NULL
 
 #define uart_proto_UartData_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, BYTES,    data,              2)
+X(a, STATIC,   SINGULAR, BYTES,    data,              1)
 #define uart_proto_UartData_CALLBACK NULL
 #define uart_proto_UartData_DEFAULT NULL
 
