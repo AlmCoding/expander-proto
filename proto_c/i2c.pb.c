@@ -9,17 +9,13 @@
 PB_BIND(i2c_proto_I2cConfig, i2c_proto_I2cConfig, AUTO)
 
 
-PB_BIND(i2c_proto_I2cMasterWrite, i2c_proto_I2cMasterWrite, 2)
-
-
-PB_BIND(i2c_proto_I2cMasterRead, i2c_proto_I2cMasterRead, AUTO)
+PB_BIND(i2c_proto_I2cMasterRequest, i2c_proto_I2cMasterRequest, 2)
 
 
 PB_BIND(i2c_proto_I2cMasterStatus, i2c_proto_I2cMasterStatus, 2)
 
 
 PB_BIND(i2c_proto_I2cMsg, i2c_proto_I2cMsg, 2)
-
 
 
 
