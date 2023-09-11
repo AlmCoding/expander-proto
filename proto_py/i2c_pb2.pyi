@@ -9,8 +9,25 @@ class I2cId(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = []
     I2C0: _ClassVar[I2cId]
     I2C1: _ClassVar[I2cId]
+
+class I2cMasterStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    NOT_INIT: _ClassVar[I2cMasterStatusCode]
+    NO_SPACE: _ClassVar[I2cMasterStatusCode]
+    PENDING: _ClassVar[I2cMasterStatusCode]
+    ONGOING: _ClassVar[I2cMasterStatusCode]
+    COMPLETE: _ClassVar[I2cMasterStatusCode]
+    SLAVE_BUSY: _ClassVar[I2cMasterStatusCode]
+    INTERFACE_ERROR: _ClassVar[I2cMasterStatusCode]
 I2C0: I2cId
 I2C1: I2cId
+NOT_INIT: I2cMasterStatusCode
+NO_SPACE: I2cMasterStatusCode
+PENDING: I2cMasterStatusCode
+ONGOING: I2cMasterStatusCode
+COMPLETE: I2cMasterStatusCode
+SLAVE_BUSY: I2cMasterStatusCode
+INTERFACE_ERROR: I2cMasterStatusCode
 
 class I2cConfig(_message.Message):
     __slots__ = ["clock_rate", "device_addr"]
@@ -37,20 +54,20 @@ class I2cMasterRequest(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., slave_addr: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_size: _Optional[int] = ..., sequence_id: _Optional[int] = ..., sequence_idx: _Optional[int] = ...) -> None: ...
 
 class I2cMasterStatus(_message.Message):
-    __slots__ = ["queue_space", "buffer_space", "request_id", "rejected", "success", "read_data"]
-    QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
-    BUFFER_SPACE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["status_code", "request_id", "read_data", "queue_space", "buffer_space1", "buffer_space2"]
+    STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
-    REJECTED_FIELD_NUMBER: _ClassVar[int]
-    SUCCESS_FIELD_NUMBER: _ClassVar[int]
     READ_DATA_FIELD_NUMBER: _ClassVar[int]
-    queue_space: int
-    buffer_space: int
+    QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
+    BUFFER_SPACE1_FIELD_NUMBER: _ClassVar[int]
+    BUFFER_SPACE2_FIELD_NUMBER: _ClassVar[int]
+    status_code: I2cMasterStatusCode
     request_id: int
-    rejected: bool
-    success: bool
     read_data: bytes
-    def __init__(self, queue_space: _Optional[int] = ..., buffer_space: _Optional[int] = ..., request_id: _Optional[int] = ..., rejected: bool = ..., success: bool = ..., read_data: _Optional[bytes] = ...) -> None: ...
+    queue_space: int
+    buffer_space1: int
+    buffer_space2: int
+    def __init__(self, status_code: _Optional[_Union[I2cMasterStatusCode, str]] = ..., request_id: _Optional[int] = ..., read_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ..., buffer_space1: _Optional[int] = ..., buffer_space2: _Optional[int] = ...) -> None: ...
 
 class I2cMsg(_message.Message):
     __slots__ = ["i2c_id", "sequence_number", "cfg", "master_request", "master_status"]

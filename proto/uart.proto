@@ -13,7 +13,7 @@ message UartConfig {
 }
 
 message UartData {
-  bytes data = 1;
+  bytes data = 1; // rename to tx_data
 }
 
 message UartStatus {
@@ -22,6 +22,7 @@ message UartStatus {
   bool tx_complete = 3;
   uint32 rx_space = 4;
   uint32 tx_space = 5;
+  // bytes rx_data = 6;
 }
 
 message UartMsg {

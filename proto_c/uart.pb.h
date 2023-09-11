@@ -22,7 +22,7 @@ typedef struct _uart_proto_UartConfig {
 
 typedef PB_BYTES_ARRAY_T(256) uart_proto_UartData_data_t;
 typedef struct _uart_proto_UartData {
-    uart_proto_UartData_data_t data;
+    uart_proto_UartData_data_t data; /* rename to tx_data */
 } uart_proto_UartData;
 
 typedef struct _uart_proto_UartStatus {
@@ -30,7 +30,7 @@ typedef struct _uart_proto_UartStatus {
     bool tx_overflow;
     bool tx_complete;
     uint32_t rx_space;
-    uint32_t tx_space;
+    uint32_t tx_space; /* bytes rx_data = 6; */
 } uart_proto_UartStatus;
 
 typedef struct _uart_proto_UartMsg {

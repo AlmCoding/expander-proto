@@ -22,29 +22,24 @@ message I2cMasterRequest {
   uint32 sequence_idx = 6;
 }
 
+enum I2cMasterStatusCode {
+  NOT_INIT = 0;
+  NO_SPACE = 1;
+  PENDING = 2;
+  ONGOING = 3;
+  COMPLETE = 4;
+  SLAVE_BUSY = 5;
+  INTERFACE_ERROR = 6;
+}
+
 message I2cMasterStatus {
-  uint32 queue_space = 1;
-  uint32 buffer_space = 2;
-  uint32 request_id = 3;
-  bool rejected = 4;
-  bool success = 5;
-  bytes read_data = 6;
+  I2cMasterStatusCode status_code = 1;
+  uint32 request_id = 2;
+  bytes read_data = 3;
+  uint32 queue_space = 4;
+  uint32 buffer_space1 = 5;
+  uint32 buffer_space2 = 6;
 }
-
-/*
-message I2cSlaveWrite {
-  uint32 request_id = 1;
-  uint32 reg_addr = 2;
-  AddrSize addr_size = 3;
-  bytes write_data = 4;
-}
-
-message I2cSlaveStatus {
-  uint32 slave_dict_space = 4;
-  uint32 slave_buffer_space = 5;
-  bool slave_overflow = 6;
-}
-*/
 
 message I2cMsg {
   I2cId i2c_id = 1;

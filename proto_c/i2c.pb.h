@@ -15,6 +15,16 @@ typedef enum _i2c_proto_I2cId {
     i2c_proto_I2cId_I2C1 = 1
 } i2c_proto_I2cId;
 
+typedef enum _i2c_proto_I2cMasterStatusCode {
+    i2c_proto_I2cMasterStatusCode_NOT_INIT = 0,
+    i2c_proto_I2cMasterStatusCode_NO_SPACE = 1,
+    i2c_proto_I2cMasterStatusCode_PENDING = 2,
+    i2c_proto_I2cMasterStatusCode_ONGOING = 3,
+    i2c_proto_I2cMasterStatusCode_COMPLETE = 4,
+    i2c_proto_I2cMasterStatusCode_SLAVE_BUSY = 5,
+    i2c_proto_I2cMasterStatusCode_INTERFACE_ERROR = 6
+} i2c_proto_I2cMasterStatusCode;
+
 /* Struct definitions */
 typedef struct _i2c_proto_I2cConfig {
     uint32_t clock_rate;
@@ -33,12 +43,12 @@ typedef struct _i2c_proto_I2cMasterRequest {
 
 typedef PB_BYTES_ARRAY_T(256) i2c_proto_I2cMasterStatus_read_data_t;
 typedef struct _i2c_proto_I2cMasterStatus {
-    uint32_t queue_space;
-    uint32_t buffer_space;
+    i2c_proto_I2cMasterStatusCode status_code;
     uint32_t request_id;
-    bool rejected;
-    bool success;
     i2c_proto_I2cMasterStatus_read_data_t read_data;
+    uint32_t queue_space;
+    uint32_t buffer_space1;
+    uint32_t buffer_space2;
 } i2c_proto_I2cMasterStatus;
 
 typedef struct _i2c_proto_I2cMsg {
@@ -62,8 +72,13 @@ extern "C" {
 #define _i2c_proto_I2cId_MAX i2c_proto_I2cId_I2C1
 #define _i2c_proto_I2cId_ARRAYSIZE ((i2c_proto_I2cId)(i2c_proto_I2cId_I2C1+1))
 
+#define _i2c_proto_I2cMasterStatusCode_MIN i2c_proto_I2cMasterStatusCode_NOT_INIT
+#define _i2c_proto_I2cMasterStatusCode_MAX i2c_proto_I2cMasterStatusCode_INTERFACE_ERROR
+#define _i2c_proto_I2cMasterStatusCode_ARRAYSIZE ((i2c_proto_I2cMasterStatusCode)(i2c_proto_I2cMasterStatusCode_INTERFACE_ERROR+1))
 
 
+
+#define i2c_proto_I2cMasterStatus_status_code_ENUMTYPE i2c_proto_I2cMasterStatusCode
 
 #define i2c_proto_I2cMsg_i2c_id_ENUMTYPE i2c_proto_I2cId
 
@@ -71,11 +86,11 @@ extern "C" {
 /* Initializer values for message structs */
 #define i2c_proto_I2cConfig_init_default         {0, 0}
 #define i2c_proto_I2cMasterRequest_init_default  {0, 0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cMasterStatus_init_default   {0, 0, 0, 0, 0, {0, {0}}}
+#define i2c_proto_I2cMasterStatus_init_default   {_i2c_proto_I2cMasterStatusCode_MIN, 0, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cMsg_init_default            {_i2c_proto_I2cId_MIN, 0, 0, {i2c_proto_I2cConfig_init_default}}
 #define i2c_proto_I2cConfig_init_zero            {0, 0}
 #define i2c_proto_I2cMasterRequest_init_zero     {0, 0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cMasterStatus_init_zero      {0, 0, 0, 0, 0, {0, {0}}}
+#define i2c_proto_I2cMasterStatus_init_zero      {_i2c_proto_I2cMasterStatusCode_MIN, 0, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cMsg_init_zero               {_i2c_proto_I2cId_MIN, 0, 0, {i2c_proto_I2cConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -87,12 +102,12 @@ extern "C" {
 #define i2c_proto_I2cMasterRequest_read_size_tag 4
 #define i2c_proto_I2cMasterRequest_sequence_id_tag 5
 #define i2c_proto_I2cMasterRequest_sequence_idx_tag 6
-#define i2c_proto_I2cMasterStatus_queue_space_tag 1
-#define i2c_proto_I2cMasterStatus_buffer_space_tag 2
-#define i2c_proto_I2cMasterStatus_request_id_tag 3
-#define i2c_proto_I2cMasterStatus_rejected_tag   4
-#define i2c_proto_I2cMasterStatus_success_tag    5
-#define i2c_proto_I2cMasterStatus_read_data_tag  6
+#define i2c_proto_I2cMasterStatus_status_code_tag 1
+#define i2c_proto_I2cMasterStatus_request_id_tag 2
+#define i2c_proto_I2cMasterStatus_read_data_tag  3
+#define i2c_proto_I2cMasterStatus_queue_space_tag 4
+#define i2c_proto_I2cMasterStatus_buffer_space1_tag 5
+#define i2c_proto_I2cMasterStatus_buffer_space2_tag 6
 #define i2c_proto_I2cMsg_i2c_id_tag              1
 #define i2c_proto_I2cMsg_sequence_number_tag     2
 #define i2c_proto_I2cMsg_cfg_tag                 3
@@ -117,12 +132,12 @@ X(a, STATIC,   SINGULAR, UINT32,   sequence_idx,      6)
 #define i2c_proto_I2cMasterRequest_DEFAULT NULL
 
 #define i2c_proto_I2cMasterStatus_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UINT32,   queue_space,       1) \
-X(a, STATIC,   SINGULAR, UINT32,   buffer_space,      2) \
-X(a, STATIC,   SINGULAR, UINT32,   request_id,        3) \
-X(a, STATIC,   SINGULAR, BOOL,     rejected,          4) \
-X(a, STATIC,   SINGULAR, BOOL,     success,           5) \
-X(a, STATIC,   SINGULAR, BYTES,    read_data,         6)
+X(a, STATIC,   SINGULAR, UENUM,    status_code,       1) \
+X(a, STATIC,   SINGULAR, UINT32,   request_id,        2) \
+X(a, STATIC,   SINGULAR, BYTES,    read_data,         3) \
+X(a, STATIC,   SINGULAR, UINT32,   queue_space,       4) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space1,     5) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space2,     6)
 #define i2c_proto_I2cMasterStatus_CALLBACK NULL
 #define i2c_proto_I2cMasterStatus_DEFAULT NULL
 
@@ -152,7 +167,7 @@ extern const pb_msgdesc_t i2c_proto_I2cMsg_msg;
 /* Maximum encoded size of messages (where known) */
 #define i2c_proto_I2cConfig_size                 12
 #define i2c_proto_I2cMasterRequest_size          289
-#define i2c_proto_I2cMasterStatus_size           281
+#define i2c_proto_I2cMasterStatus_size           285
 #define i2c_proto_I2cMsg_size                    300
 
 #ifdef __cplusplus
