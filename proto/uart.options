@@ -1,3 +1,4 @@
 
 # Define max size for "bytes"
 uart_proto.UartData.data max_size:256
+uart_proto.UartStatus.rx_data max_size:256

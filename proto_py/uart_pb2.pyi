@@ -19,24 +19,26 @@ class UartConfig(_message.Message):
     def __init__(self, baud_rate: _Optional[int] = ...) -> None: ...
 
 class UartData(_message.Message):
-    __slots__ = ["data"]
-    DATA_FIELD_NUMBER: _ClassVar[int]
-    data: bytes
-    def __init__(self, data: _Optional[bytes] = ...) -> None: ...
+    __slots__ = ["tx_data"]
+    TX_DATA_FIELD_NUMBER: _ClassVar[int]
+    tx_data: bytes
+    def __init__(self, tx_data: _Optional[bytes] = ...) -> None: ...
 
 class UartStatus(_message.Message):
-    __slots__ = ["rx_overflow", "tx_overflow", "tx_complete", "rx_space", "tx_space"]
+    __slots__ = ["rx_overflow", "tx_overflow", "tx_complete", "tx_space", "rx_space", "rx_data"]
     RX_OVERFLOW_FIELD_NUMBER: _ClassVar[int]
     TX_OVERFLOW_FIELD_NUMBER: _ClassVar[int]
     TX_COMPLETE_FIELD_NUMBER: _ClassVar[int]
-    RX_SPACE_FIELD_NUMBER: _ClassVar[int]
     TX_SPACE_FIELD_NUMBER: _ClassVar[int]
+    RX_SPACE_FIELD_NUMBER: _ClassVar[int]
+    RX_DATA_FIELD_NUMBER: _ClassVar[int]
     rx_overflow: bool
     tx_overflow: bool
     tx_complete: bool
-    rx_space: int
     tx_space: int
-    def __init__(self, rx_overflow: bool = ..., tx_overflow: bool = ..., tx_complete: bool = ..., rx_space: _Optional[int] = ..., tx_space: _Optional[int] = ...) -> None: ...
+    rx_space: int
+    rx_data: bytes
+    def __init__(self, rx_overflow: bool = ..., tx_overflow: bool = ..., tx_complete: bool = ..., tx_space: _Optional[int] = ..., rx_space: _Optional[int] = ..., rx_data: _Optional[bytes] = ...) -> None: ...
 
 class UartMsg(_message.Message):
     __slots__ = ["uart_id", "sequence_number", "cfg", "data", "status"]

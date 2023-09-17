@@ -20,17 +20,18 @@ typedef struct _uart_proto_UartConfig {
     uint32_t baud_rate;
 } uart_proto_UartConfig;
 
-typedef PB_BYTES_ARRAY_T(256) uart_proto_UartData_data_t;
 typedef struct _uart_proto_UartData {
-    uart_proto_UartData_data_t data; /* rename to tx_data */
+    pb_callback_t tx_data;
 } uart_proto_UartData;
 
+typedef PB_BYTES_ARRAY_T(256) uart_proto_UartStatus_rx_data_t;
 typedef struct _uart_proto_UartStatus {
     bool rx_overflow;
     bool tx_overflow;
     bool tx_complete;
+    uint32_t tx_space;
     uint32_t rx_space;
-    uint32_t tx_space; /* bytes rx_data = 6; */
+    uart_proto_UartStatus_rx_data_t rx_data;
 } uart_proto_UartStatus;
 
 typedef struct _uart_proto_UartMsg {
@@ -62,22 +63,23 @@ extern "C" {
 
 /* Initializer values for message structs */
 #define uart_proto_UartConfig_init_default       {0}
-#define uart_proto_UartData_init_default         {{0, {0}}}
-#define uart_proto_UartStatus_init_default       {0, 0, 0, 0, 0}
+#define uart_proto_UartData_init_default         {{{NULL}, NULL}}
+#define uart_proto_UartStatus_init_default       {0, 0, 0, 0, 0, {0, {0}}}
 #define uart_proto_UartMsg_init_default          {_uart_proto_UartId_MIN, 0, 0, {uart_proto_UartConfig_init_default}}
 #define uart_proto_UartConfig_init_zero          {0}
-#define uart_proto_UartData_init_zero            {{0, {0}}}
-#define uart_proto_UartStatus_init_zero          {0, 0, 0, 0, 0}
+#define uart_proto_UartData_init_zero            {{{NULL}, NULL}}
+#define uart_proto_UartStatus_init_zero          {0, 0, 0, 0, 0, {0, {0}}}
 #define uart_proto_UartMsg_init_zero             {_uart_proto_UartId_MIN, 0, 0, {uart_proto_UartConfig_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define uart_proto_UartConfig_baud_rate_tag      1
-#define uart_proto_UartData_data_tag             1
+#define uart_proto_UartData_tx_data_tag          1
 #define uart_proto_UartStatus_rx_overflow_tag    1
 #define uart_proto_UartStatus_tx_overflow_tag    2
 #define uart_proto_UartStatus_tx_complete_tag    3
-#define uart_proto_UartStatus_rx_space_tag       4
-#define uart_proto_UartStatus_tx_space_tag       5
+#define uart_proto_UartStatus_tx_space_tag       4
+#define uart_proto_UartStatus_rx_space_tag       5
+#define uart_proto_UartStatus_rx_data_tag        6
 #define uart_proto_UartMsg_uart_id_tag           1
 #define uart_proto_UartMsg_sequence_number_tag   2
 #define uart_proto_UartMsg_cfg_tag               3
@@ -91,16 +93,17 @@ X(a, STATIC,   SINGULAR, UINT32,   baud_rate,         1)
 #define uart_proto_UartConfig_DEFAULT NULL
 
 #define uart_proto_UartData_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, BYTES,    data,              1)
-#define uart_proto_UartData_CALLBACK NULL
+X(a, CALLBACK, SINGULAR, BYTES,    tx_data,           1)
+#define uart_proto_UartData_CALLBACK pb_default_field_callback
 #define uart_proto_UartData_DEFAULT NULL
 
 #define uart_proto_UartStatus_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, BOOL,     rx_overflow,       1) \
 X(a, STATIC,   SINGULAR, BOOL,     tx_overflow,       2) \
 X(a, STATIC,   SINGULAR, BOOL,     tx_complete,       3) \
-X(a, STATIC,   SINGULAR, UINT32,   rx_space,          4) \
-X(a, STATIC,   SINGULAR, UINT32,   tx_space,          5)
+X(a, STATIC,   SINGULAR, UINT32,   tx_space,          4) \
+X(a, STATIC,   SINGULAR, UINT32,   rx_space,          5) \
+X(a, STATIC,   SINGULAR, BYTES,    rx_data,           6)
 #define uart_proto_UartStatus_CALLBACK NULL
 #define uart_proto_UartStatus_DEFAULT NULL
 
@@ -128,10 +131,10 @@ extern const pb_msgdesc_t uart_proto_UartMsg_msg;
 #define uart_proto_UartMsg_fields &uart_proto_UartMsg_msg
 
 /* Maximum encoded size of messages (where known) */
+/* uart_proto_UartData_size depends on runtime parameters */
+/* uart_proto_UartMsg_size depends on runtime parameters */
 #define uart_proto_UartConfig_size               6
-#define uart_proto_UartData_size                 259
-#define uart_proto_UartMsg_size                  270
-#define uart_proto_UartStatus_size               18
+#define uart_proto_UartStatus_size               277
 
 #ifdef __cplusplus
 } /* extern "C" */
