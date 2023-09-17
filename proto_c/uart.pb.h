@@ -20,8 +20,9 @@ typedef struct _uart_proto_UartConfig {
     uint32_t baud_rate;
 } uart_proto_UartConfig;
 
+typedef PB_BYTES_ARRAY_T(256) uart_proto_UartData_tx_data_t;
 typedef struct _uart_proto_UartData {
-    pb_callback_t tx_data;
+    uart_proto_UartData_tx_data_t tx_data;
 } uart_proto_UartData;
 
 typedef PB_BYTES_ARRAY_T(256) uart_proto_UartStatus_rx_data_t;
@@ -63,11 +64,11 @@ extern "C" {
 
 /* Initializer values for message structs */
 #define uart_proto_UartConfig_init_default       {0}
-#define uart_proto_UartData_init_default         {{{NULL}, NULL}}
+#define uart_proto_UartData_init_default         {{0, {0}}}
 #define uart_proto_UartStatus_init_default       {0, 0, 0, 0, 0, {0, {0}}}
 #define uart_proto_UartMsg_init_default          {_uart_proto_UartId_MIN, 0, 0, {uart_proto_UartConfig_init_default}}
 #define uart_proto_UartConfig_init_zero          {0}
-#define uart_proto_UartData_init_zero            {{{NULL}, NULL}}
+#define uart_proto_UartData_init_zero            {{0, {0}}}
 #define uart_proto_UartStatus_init_zero          {0, 0, 0, 0, 0, {0, {0}}}
 #define uart_proto_UartMsg_init_zero             {_uart_proto_UartId_MIN, 0, 0, {uart_proto_UartConfig_init_zero}}
 
@@ -93,8 +94,8 @@ X(a, STATIC,   SINGULAR, UINT32,   baud_rate,         1)
 #define uart_proto_UartConfig_DEFAULT NULL
 
 #define uart_proto_UartData_FIELDLIST(X, a) \
-X(a, CALLBACK, SINGULAR, BYTES,    tx_data,           1)
-#define uart_proto_UartData_CALLBACK pb_default_field_callback
+X(a, STATIC,   SINGULAR, BYTES,    tx_data,           1)
+#define uart_proto_UartData_CALLBACK NULL
 #define uart_proto_UartData_DEFAULT NULL
 
 #define uart_proto_UartStatus_FIELDLIST(X, a) \
@@ -131,9 +132,9 @@ extern const pb_msgdesc_t uart_proto_UartMsg_msg;
 #define uart_proto_UartMsg_fields &uart_proto_UartMsg_msg
 
 /* Maximum encoded size of messages (where known) */
-/* uart_proto_UartData_size depends on runtime parameters */
-/* uart_proto_UartMsg_size depends on runtime parameters */
 #define uart_proto_UartConfig_size               6
+#define uart_proto_UartData_size                 259
+#define uart_proto_UartMsg_size                  288
 #define uart_proto_UartStatus_size               277
 
 #ifdef __cplusplus
