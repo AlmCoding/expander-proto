@@ -6,7 +6,7 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class GpioMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = []
+    __slots__ = ()
     INPUT_PULLDOWN: _ClassVar[GpioMode]
     INPUT_PULLUP: _ClassVar[GpioMode]
     INPUT_NOPULL: _ClassVar[GpioMode]
@@ -19,7 +19,7 @@ OUTPUT_PUSHPULL: GpioMode
 OUTPUT_OPENDRAIN: GpioMode
 
 class GpioConfig(_message.Message):
-    __slots__ = ["gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7"]
+    __slots__ = ("gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7")
     GPIO0_FIELD_NUMBER: _ClassVar[int]
     GPIO1_FIELD_NUMBER: _ClassVar[int]
     GPIO2_FIELD_NUMBER: _ClassVar[int]
@@ -39,7 +39,7 @@ class GpioConfig(_message.Message):
     def __init__(self, gpio0: _Optional[_Union[GpioMode, str]] = ..., gpio1: _Optional[_Union[GpioMode, str]] = ..., gpio2: _Optional[_Union[GpioMode, str]] = ..., gpio3: _Optional[_Union[GpioMode, str]] = ..., gpio4: _Optional[_Union[GpioMode, str]] = ..., gpio5: _Optional[_Union[GpioMode, str]] = ..., gpio6: _Optional[_Union[GpioMode, str]] = ..., gpio7: _Optional[_Union[GpioMode, str]] = ...) -> None: ...
 
 class GpioData(_message.Message):
-    __slots__ = ["gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7"]
+    __slots__ = ("gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7")
     GPIO0_FIELD_NUMBER: _ClassVar[int]
     GPIO1_FIELD_NUMBER: _ClassVar[int]
     GPIO2_FIELD_NUMBER: _ClassVar[int]
@@ -59,7 +59,7 @@ class GpioData(_message.Message):
     def __init__(self, gpio0: bool = ..., gpio1: bool = ..., gpio2: bool = ..., gpio3: bool = ..., gpio4: bool = ..., gpio5: bool = ..., gpio6: bool = ..., gpio7: bool = ...) -> None: ...
 
 class GpioMsg(_message.Message):
-    __slots__ = ["sequence_number", "cfg", "data"]
+    __slots__ = ("sequence_number", "cfg", "data")
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
     CFG_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]

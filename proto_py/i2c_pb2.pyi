@@ -6,12 +6,12 @@ from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Opti
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class I2cId(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = []
+    __slots__ = ()
     I2C0: _ClassVar[I2cId]
     I2C1: _ClassVar[I2cId]
 
 class I2cMasterStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = []
+    __slots__ = ()
     NOT_INIT: _ClassVar[I2cMasterStatusCode]
     NO_SPACE: _ClassVar[I2cMasterStatusCode]
     PENDING: _ClassVar[I2cMasterStatusCode]
@@ -30,7 +30,7 @@ SLAVE_BUSY: I2cMasterStatusCode
 INTERFACE_ERROR: I2cMasterStatusCode
 
 class I2cConfig(_message.Message):
-    __slots__ = ["clock_rate", "device_addr"]
+    __slots__ = ("clock_rate", "device_addr")
     CLOCK_RATE_FIELD_NUMBER: _ClassVar[int]
     DEVICE_ADDR_FIELD_NUMBER: _ClassVar[int]
     clock_rate: int
@@ -38,7 +38,7 @@ class I2cConfig(_message.Message):
     def __init__(self, clock_rate: _Optional[int] = ..., device_addr: _Optional[int] = ...) -> None: ...
 
 class I2cMasterRequest(_message.Message):
-    __slots__ = ["request_id", "slave_addr", "write_data", "read_size", "sequence_id", "sequence_idx"]
+    __slots__ = ("request_id", "slave_addr", "write_data", "read_size", "sequence_id", "sequence_idx")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
     SLAVE_ADDR_FIELD_NUMBER: _ClassVar[int]
     WRITE_DATA_FIELD_NUMBER: _ClassVar[int]
@@ -54,7 +54,7 @@ class I2cMasterRequest(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., slave_addr: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_size: _Optional[int] = ..., sequence_id: _Optional[int] = ..., sequence_idx: _Optional[int] = ...) -> None: ...
 
 class I2cMasterStatus(_message.Message):
-    __slots__ = ["status_code", "request_id", "read_data", "queue_space", "buffer_space1", "buffer_space2"]
+    __slots__ = ("status_code", "request_id", "read_data", "queue_space", "buffer_space1", "buffer_space2")
     STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
     READ_DATA_FIELD_NUMBER: _ClassVar[int]
@@ -70,7 +70,7 @@ class I2cMasterStatus(_message.Message):
     def __init__(self, status_code: _Optional[_Union[I2cMasterStatusCode, str]] = ..., request_id: _Optional[int] = ..., read_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ..., buffer_space1: _Optional[int] = ..., buffer_space2: _Optional[int] = ...) -> None: ...
 
 class I2cMsg(_message.Message):
-    __slots__ = ["i2c_id", "sequence_number", "cfg", "master_request", "master_status"]
+    __slots__ = ("i2c_id", "sequence_number", "cfg", "master_request", "master_status")
     I2C_ID_FIELD_NUMBER: _ClassVar[int]
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
     CFG_FIELD_NUMBER: _ClassVar[int]
