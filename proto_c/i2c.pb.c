@@ -15,7 +15,17 @@ PB_BIND(i2c_proto_I2cMasterRequest, i2c_proto_I2cMasterRequest, 2)
 PB_BIND(i2c_proto_I2cMasterStatus, i2c_proto_I2cMasterStatus, 2)
 
 
+PB_BIND(i2c_proto_I2cSlaveRequest, i2c_proto_I2cSlaveRequest, 2)
+
+
+PB_BIND(i2c_proto_I2cSlaveStatus, i2c_proto_I2cSlaveStatus, AUTO)
+
+
+PB_BIND(i2c_proto_I2cSlaveAccess, i2c_proto_I2cSlaveAccess, 2)
+
+
 PB_BIND(i2c_proto_I2cMsg, i2c_proto_I2cMsg, 2)
+
 
 
 

@@ -23,13 +23,13 @@ message I2cMasterRequest {
 }
 
 enum I2cMasterStatusCode {
-  NOT_INIT = 0;
-  NO_SPACE = 1;
-  PENDING = 2;
-  ONGOING = 3;
-  COMPLETE = 4;
-  SLAVE_BUSY = 5;
-  INTERFACE_ERROR = 6;
+  MST_NOT_INIT = 0;
+  MST_NO_SPACE = 1;
+  MST_PENDING = 2;
+  MST_ONGOING = 3;
+  MST_COMPLETE = 4;
+  MST_SLAVE_BUSY = 5;
+  MST_INTERFACE_ERROR = 6;
 }
 
 message I2cMasterStatus {
@@ -41,6 +41,32 @@ message I2cMasterStatus {
   uint32 buffer_space2 = 6;
 }
 
+message I2cSlaveRequest {
+  uint32 request_id = 1;
+  uint32 mem_addr = 2;
+  bytes mem_data = 3;
+}
+
+enum I2cSlaveStatusCode {
+  SLV_NOT_INIT = 0;
+  SLV_INVALID_REQ = 1;
+  SLV_COMPLETE = 2;
+  SLV_INTERFACE_ERROR = 3;
+}
+
+message I2cSlaveStatus{
+  I2cSlaveStatusCode status_code = 1;
+  uint32 request_id = 2;
+}
+
+message I2cSlaveAccess{
+  uint32 access_id = 1;
+  uint32 read_addr = 2;
+  uint32 read_size = 3;
+  uint32 write_addr = 4;
+  bytes write_data = 5;
+}
+
 message I2cMsg {
   I2cId i2c_id = 1;
   uint32 sequence_number = 2;
@@ -48,5 +74,8 @@ message I2cMsg {
     I2cConfig cfg = 3;
     I2cMasterRequest master_request = 4;
     I2cMasterStatus master_status = 5;
+    I2cSlaveRequest slave_request = 6;
+    I2cSlaveStatus slave_status = 7;
+    I2cSlaveAccess slave_access = 8;
   }
 }
