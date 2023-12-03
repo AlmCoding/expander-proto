@@ -28,10 +28,11 @@ typedef enum _i2c_proto_I2cMasterStatusCode {
 typedef enum _i2c_proto_I2cSlaveStatusCode {
     i2c_proto_I2cSlaveStatusCode_SLV_NOT_INIT = 0,
     i2c_proto_I2cSlaveStatusCode_SLV_NO_SPACE = 1,
-    i2c_proto_I2cSlaveStatusCode_SLV_COMPLETE = 2,
-    i2c_proto_I2cSlaveStatusCode_SLV_SLAVE_BUSY = 3,
-    i2c_proto_I2cSlaveStatusCode_SLV_BAD_REQUEST = 4,
-    i2c_proto_I2cSlaveStatusCode_SLV_INTERFACE_ERROR = 5
+    i2c_proto_I2cSlaveStatusCode_SLV_PENDING = 2,
+    i2c_proto_I2cSlaveStatusCode_SLV_COMPLETE = 3,
+    i2c_proto_I2cSlaveStatusCode_SLV_SLAVE_BUSY = 4,
+    i2c_proto_I2cSlaveStatusCode_SLV_BAD_REQUEST = 5,
+    i2c_proto_I2cSlaveStatusCode_SLV_INTERFACE_ERROR = 6
 } i2c_proto_I2cSlaveStatusCode;
 
 /* Struct definitions */

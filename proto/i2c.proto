@@ -53,10 +53,11 @@ message I2cSlaveRequest {
 enum I2cSlaveStatusCode {
   SLV_NOT_INIT = 0;
   SLV_NO_SPACE = 1;
-  SLV_COMPLETE = 2;
-  SLV_SLAVE_BUSY = 3;
-  SLV_BAD_REQUEST = 4;
-  SLV_INTERFACE_ERROR = 5;
+  SLV_PENDING = 2;
+  SLV_COMPLETE = 3;
+  SLV_SLAVE_BUSY = 4;
+  SLV_BAD_REQUEST = 5;
+  SLV_INTERFACE_ERROR = 6;
 }
 
 message I2cSlaveStatus {

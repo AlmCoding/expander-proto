@@ -24,6 +24,7 @@ class I2cSlaveStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     SLV_NOT_INIT: _ClassVar[I2cSlaveStatusCode]
     SLV_NO_SPACE: _ClassVar[I2cSlaveStatusCode]
+    SLV_PENDING: _ClassVar[I2cSlaveStatusCode]
     SLV_COMPLETE: _ClassVar[I2cSlaveStatusCode]
     SLV_SLAVE_BUSY: _ClassVar[I2cSlaveStatusCode]
     SLV_BAD_REQUEST: _ClassVar[I2cSlaveStatusCode]
@@ -39,6 +40,7 @@ MST_SLAVE_BUSY: I2cMasterStatusCode
 MST_INTERFACE_ERROR: I2cMasterStatusCode
 SLV_NOT_INIT: I2cSlaveStatusCode
 SLV_NO_SPACE: I2cSlaveStatusCode
+SLV_PENDING: I2cSlaveStatusCode
 SLV_COMPLETE: I2cSlaveStatusCode
 SLV_SLAVE_BUSY: I2cSlaveStatusCode
 SLV_BAD_REQUEST: I2cSlaveStatusCode
