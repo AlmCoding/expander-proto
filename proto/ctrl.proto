@@ -1,0 +1,9 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package ctrl_proto;
+
+message CtrlMsg {
+  uint32 sequence_number = 1;
+  bool system_reset = 2;
+}
