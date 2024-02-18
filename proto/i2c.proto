@@ -8,10 +8,19 @@ enum I2cId {
   I2C1 = 1;
 }
 
+enum AddressWidth {
+  Bits7 = 0;
+  Bits8 = 1;
+  Bits12 = 2;
+  Bits16 = 3;
+}
+
 message I2cConfig {
-  uint32 clock_rate = 1;
-  uint32 device_addr = 2;
-  bool pullups_enabled = 3;
+  uint32 clock_freq = 1;
+  uint32 slave_addr = 2;
+  AddressWidth slave_addr_width = 3;
+  AddressWidth mem_addr_width = 4;
+  bool pullups_enabled = 5;
 }
 
 message I2cMasterRequest {

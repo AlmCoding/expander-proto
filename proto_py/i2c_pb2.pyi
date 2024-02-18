@@ -10,6 +10,13 @@ class I2cId(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     I2C0: _ClassVar[I2cId]
     I2C1: _ClassVar[I2cId]
 
+class AddressWidth(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    Bits7: _ClassVar[AddressWidth]
+    Bits8: _ClassVar[AddressWidth]
+    Bits12: _ClassVar[AddressWidth]
+    Bits16: _ClassVar[AddressWidth]
+
 class I2cMasterStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     MST_NOT_INIT: _ClassVar[I2cMasterStatusCode]
@@ -31,6 +38,10 @@ class I2cSlaveStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SLV_INTERFACE_ERROR: _ClassVar[I2cSlaveStatusCode]
 I2C0: I2cId
 I2C1: I2cId
+Bits7: AddressWidth
+Bits8: AddressWidth
+Bits12: AddressWidth
+Bits16: AddressWidth
 MST_NOT_INIT: I2cMasterStatusCode
 MST_NO_SPACE: I2cMasterStatusCode
 MST_PENDING: I2cMasterStatusCode
@@ -47,14 +58,18 @@ SLV_BAD_REQUEST: I2cSlaveStatusCode
 SLV_INTERFACE_ERROR: I2cSlaveStatusCode
 
 class I2cConfig(_message.Message):
-    __slots__ = ("clock_rate", "device_addr", "pullups_enabled")
-    CLOCK_RATE_FIELD_NUMBER: _ClassVar[int]
-    DEVICE_ADDR_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("clock_freq", "slave_addr", "slave_addr_width", "mem_addr_width", "pullups_enabled")
+    CLOCK_FREQ_FIELD_NUMBER: _ClassVar[int]
+    SLAVE_ADDR_FIELD_NUMBER: _ClassVar[int]
+    SLAVE_ADDR_WIDTH_FIELD_NUMBER: _ClassVar[int]
+    MEM_ADDR_WIDTH_FIELD_NUMBER: _ClassVar[int]
     PULLUPS_ENABLED_FIELD_NUMBER: _ClassVar[int]
-    clock_rate: int
-    device_addr: int
+    clock_freq: int
+    slave_addr: int
+    slave_addr_width: AddressWidth
+    mem_addr_width: AddressWidth
     pullups_enabled: bool
-    def __init__(self, clock_rate: _Optional[int] = ..., device_addr: _Optional[int] = ..., pullups_enabled: bool = ...) -> None: ...
+    def __init__(self, clock_freq: _Optional[int] = ..., slave_addr: _Optional[int] = ..., slave_addr_width: _Optional[_Union[AddressWidth, str]] = ..., mem_addr_width: _Optional[_Union[AddressWidth, str]] = ..., pullups_enabled: bool = ...) -> None: ...
 
 class I2cMasterRequest(_message.Message):
     __slots__ = ("request_id", "slave_addr", "write_data", "read_size", "sequence_id", "sequence_idx")
