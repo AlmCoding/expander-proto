@@ -18,7 +18,7 @@ typedef enum _i2c_proto_I2cId {
 typedef enum _i2c_proto_AddressWidth {
     i2c_proto_AddressWidth_Bits7 = 0,
     i2c_proto_AddressWidth_Bits8 = 1,
-    i2c_proto_AddressWidth_Bits12 = 2,
+    i2c_proto_AddressWidth_Bits10 = 2,
     i2c_proto_AddressWidth_Bits16 = 3
 } i2c_proto_AddressWidth;
 

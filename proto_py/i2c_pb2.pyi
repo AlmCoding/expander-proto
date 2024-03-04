@@ -14,7 +14,7 @@ class AddressWidth(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     Bits7: _ClassVar[AddressWidth]
     Bits8: _ClassVar[AddressWidth]
-    Bits12: _ClassVar[AddressWidth]
+    Bits10: _ClassVar[AddressWidth]
     Bits16: _ClassVar[AddressWidth]
 
 class I2cMasterStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -40,7 +40,7 @@ I2C0: I2cId
 I2C1: I2cId
 Bits7: AddressWidth
 Bits8: AddressWidth
-Bits12: AddressWidth
+Bits10: AddressWidth
 Bits16: AddressWidth
 MST_NOT_INIT: I2cMasterStatusCode
 MST_NO_SPACE: I2cMasterStatusCode

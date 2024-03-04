@@ -11,7 +11,7 @@ enum I2cId {
 enum AddressWidth {
   Bits7 = 0;
   Bits8 = 1;
-  Bits12 = 2;
+  Bits10 = 2;
   Bits16 = 3;
 }
 
