@@ -17,6 +17,15 @@ class AddressWidth(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     Bits10: _ClassVar[AddressWidth]
     Bits16: _ClassVar[AddressWidth]
 
+class I2cConfigStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CFG_OK: _ClassVar[I2cConfigStatusCode]
+    CFG_INV_CLOCK_FREQ: _ClassVar[I2cConfigStatusCode]
+    CFG_INV_SLAVE_ADDR: _ClassVar[I2cConfigStatusCode]
+    CFG_INV_SLAVE_ADDR_WIDTH: _ClassVar[I2cConfigStatusCode]
+    CFG_INV_MEM_ADDR_WIDTH: _ClassVar[I2cConfigStatusCode]
+    CFG_INTERFACE_ERROR: _ClassVar[I2cConfigStatusCode]
+
 class I2cMasterStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     MST_NOT_INIT: _ClassVar[I2cMasterStatusCode]
@@ -42,6 +51,12 @@ Bits7: AddressWidth
 Bits8: AddressWidth
 Bits10: AddressWidth
 Bits16: AddressWidth
+CFG_OK: I2cConfigStatusCode
+CFG_INV_CLOCK_FREQ: I2cConfigStatusCode
+CFG_INV_SLAVE_ADDR: I2cConfigStatusCode
+CFG_INV_SLAVE_ADDR_WIDTH: I2cConfigStatusCode
+CFG_INV_MEM_ADDR_WIDTH: I2cConfigStatusCode
+CFG_INTERFACE_ERROR: I2cConfigStatusCode
 MST_NOT_INIT: I2cMasterStatusCode
 MST_NO_SPACE: I2cMasterStatusCode
 MST_PENDING: I2cMasterStatusCode
@@ -57,19 +72,29 @@ SLV_SLAVE_BUSY: I2cSlaveStatusCode
 SLV_BAD_REQUEST: I2cSlaveStatusCode
 SLV_INTERFACE_ERROR: I2cSlaveStatusCode
 
-class I2cConfig(_message.Message):
-    __slots__ = ("clock_freq", "slave_addr", "slave_addr_width", "mem_addr_width", "pullups_enabled")
+class I2cConfigRequest(_message.Message):
+    __slots__ = ("request_id", "clock_freq", "slave_addr", "slave_addr_width", "mem_addr_width", "pullups_enabled")
+    REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
     CLOCK_FREQ_FIELD_NUMBER: _ClassVar[int]
     SLAVE_ADDR_FIELD_NUMBER: _ClassVar[int]
     SLAVE_ADDR_WIDTH_FIELD_NUMBER: _ClassVar[int]
     MEM_ADDR_WIDTH_FIELD_NUMBER: _ClassVar[int]
     PULLUPS_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    request_id: int
     clock_freq: int
     slave_addr: int
     slave_addr_width: AddressWidth
     mem_addr_width: AddressWidth
     pullups_enabled: bool
-    def __init__(self, clock_freq: _Optional[int] = ..., slave_addr: _Optional[int] = ..., slave_addr_width: _Optional[_Union[AddressWidth, str]] = ..., mem_addr_width: _Optional[_Union[AddressWidth, str]] = ..., pullups_enabled: bool = ...) -> None: ...
+    def __init__(self, request_id: _Optional[int] = ..., clock_freq: _Optional[int] = ..., slave_addr: _Optional[int] = ..., slave_addr_width: _Optional[_Union[AddressWidth, str]] = ..., mem_addr_width: _Optional[_Union[AddressWidth, str]] = ..., pullups_enabled: bool = ...) -> None: ...
+
+class I2cConfigStatus(_message.Message):
+    __slots__ = ("request_id", "status_code")
+    REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
+    STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
+    request_id: int
+    status_code: I2cConfigStatusCode
+    def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cConfigStatusCode, str]] = ...) -> None: ...
 
 class I2cMasterRequest(_message.Message):
     __slots__ = ("request_id", "slave_addr", "write_data", "read_size", "sequence_id", "sequence_idx")
@@ -140,19 +165,21 @@ class I2cSlaveStatus(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., access_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cSlaveStatusCode, str]] = ..., write_size: _Optional[int] = ..., read_size: _Optional[int] = ..., write_addr: _Optional[int] = ..., read_addr: _Optional[int] = ..., mem_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ...) -> None: ...
 
 class I2cMsg(_message.Message):
-    __slots__ = ("i2c_id", "sequence_number", "cfg", "master_request", "master_status", "slave_request", "slave_status")
+    __slots__ = ("i2c_id", "sequence_number", "config_request", "config_status", "master_request", "master_status", "slave_request", "slave_status")
     I2C_ID_FIELD_NUMBER: _ClassVar[int]
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
-    CFG_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_STATUS_FIELD_NUMBER: _ClassVar[int]
     MASTER_REQUEST_FIELD_NUMBER: _ClassVar[int]
     MASTER_STATUS_FIELD_NUMBER: _ClassVar[int]
     SLAVE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     SLAVE_STATUS_FIELD_NUMBER: _ClassVar[int]
     i2c_id: I2cId
     sequence_number: int
-    cfg: I2cConfig
+    config_request: I2cConfigRequest
+    config_status: I2cConfigStatus
     master_request: I2cMasterRequest
     master_status: I2cMasterStatus
     slave_request: I2cSlaveRequest
     slave_status: I2cSlaveStatus
-    def __init__(self, i2c_id: _Optional[_Union[I2cId, str]] = ..., sequence_number: _Optional[int] = ..., cfg: _Optional[_Union[I2cConfig, _Mapping]] = ..., master_request: _Optional[_Union[I2cMasterRequest, _Mapping]] = ..., master_status: _Optional[_Union[I2cMasterStatus, _Mapping]] = ..., slave_request: _Optional[_Union[I2cSlaveRequest, _Mapping]] = ..., slave_status: _Optional[_Union[I2cSlaveStatus, _Mapping]] = ...) -> None: ...
+    def __init__(self, i2c_id: _Optional[_Union[I2cId, str]] = ..., sequence_number: _Optional[int] = ..., config_request: _Optional[_Union[I2cConfigRequest, _Mapping]] = ..., config_status: _Optional[_Union[I2cConfigStatus, _Mapping]] = ..., master_request: _Optional[_Union[I2cMasterRequest, _Mapping]] = ..., master_status: _Optional[_Union[I2cMasterStatus, _Mapping]] = ..., slave_request: _Optional[_Union[I2cSlaveRequest, _Mapping]] = ..., slave_status: _Optional[_Union[I2cSlaveStatus, _Mapping]] = ...) -> None: ...

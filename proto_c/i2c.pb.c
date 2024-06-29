@@ -6,7 +6,10 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(i2c_proto_I2cConfig, i2c_proto_I2cConfig, AUTO)
+PB_BIND(i2c_proto_I2cConfigRequest, i2c_proto_I2cConfigRequest, AUTO)
+
+
+PB_BIND(i2c_proto_I2cConfigStatus, i2c_proto_I2cConfigStatus, AUTO)
 
 
 PB_BIND(i2c_proto_I2cMasterRequest, i2c_proto_I2cMasterRequest, 2)
@@ -22,6 +25,7 @@ PB_BIND(i2c_proto_I2cSlaveStatus, i2c_proto_I2cSlaveStatus, 2)
 
 
 PB_BIND(i2c_proto_I2cMsg, i2c_proto_I2cMsg, 2)
+
 
 
 

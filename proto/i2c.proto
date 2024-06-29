@@ -4,91 +4,109 @@ option optimize_for = LITE_RUNTIME;
 package i2c_proto;
 
 enum I2cId {
-  I2C0 = 0;
-  I2C1 = 1;
+    I2C0 = 0;
+    I2C1 = 1;
 }
 
 enum AddressWidth {
-  Bits7 = 0;
-  Bits8 = 1;
-  Bits10 = 2;
-  Bits16 = 3;
+    Bits7 = 0;
+    Bits8 = 1;
+    Bits10 = 2;
+    Bits16 = 3;
 }
 
-message I2cConfig {
-  uint32 clock_freq = 1;
-  uint32 slave_addr = 2;
-  AddressWidth slave_addr_width = 3;
-  AddressWidth mem_addr_width = 4;
-  bool pullups_enabled = 5;
+message I2cConfigRequest {
+    uint32 request_id = 1;
+    uint32 clock_freq = 2;
+    uint32 slave_addr = 3;
+    AddressWidth slave_addr_width = 4;
+    AddressWidth mem_addr_width = 5;
+    bool pullups_enabled = 6;
+}
+
+enum I2cConfigStatusCode {
+    CFG_OK = 0;
+    CFG_INV_CLOCK_FREQ = 1;
+    CFG_INV_SLAVE_ADDR = 2;
+    CFG_INV_SLAVE_ADDR_WIDTH = 3;
+    CFG_INV_MEM_ADDR_WIDTH = 4;
+    CFG_INTERFACE_ERROR = 5;
+}
+
+message I2cConfigStatus {
+    uint32 request_id = 1;
+    I2cConfigStatusCode status_code = 2;
 }
 
 message I2cMasterRequest {
-  uint32 request_id = 1;
-  uint32 slave_addr = 2;
-  bytes write_data = 3;
-  uint32 read_size = 4;
-  uint32 sequence_id = 5;
-  uint32 sequence_idx = 6;
+    uint32 request_id = 1;
+    uint32 slave_addr = 2;
+    bytes write_data = 3;
+    uint32 read_size = 4;
+    uint32 sequence_id = 5;
+    uint32 sequence_idx = 6;
 }
 
 enum I2cMasterStatusCode {
-  MST_NOT_INIT = 0;
-  MST_NO_SPACE = 1;
-  MST_PENDING = 2;
-  MST_ONGOING = 3;
-  MST_COMPLETE = 4;
-  MST_SLAVE_BUSY = 5;
-  MST_INTERFACE_ERROR = 6;
+    MST_NOT_INIT = 0;
+    MST_NO_SPACE = 1;
+    MST_PENDING = 2;
+    MST_ONGOING = 3;
+    MST_COMPLETE = 4;
+    MST_SLAVE_BUSY = 5;
+    MST_INTERFACE_ERROR = 6;
 }
 
 message I2cMasterStatus {
-  uint32 request_id = 1;
-  I2cMasterStatusCode status_code = 2;
-  bytes read_data = 3;
-  uint32 queue_space = 4;
-  uint32 buffer_space1 = 5;
-  uint32 buffer_space2 = 6;
+    uint32 request_id = 1;
+    I2cMasterStatusCode status_code = 2;
+    bytes read_data = 3;
+    uint32 queue_space = 4;
+    uint32 buffer_space1 = 5;
+    uint32 buffer_space2 = 6;
 }
 
 message I2cSlaveRequest {
-  uint32 request_id = 1;
-  bytes write_data = 2;
-  uint32 read_size = 3;
-  uint32 write_addr = 4;
-  uint32 read_addr = 5;
+    uint32 request_id = 1;
+    bytes write_data = 2;
+    uint32 read_size = 3;
+    uint32 write_addr = 4;
+    uint32 read_addr = 5;
 }
 
 enum I2cSlaveStatusCode {
-  SLV_NOT_INIT = 0;
-  SLV_NO_SPACE = 1;
-  SLV_PENDING = 2;
-  SLV_COMPLETE = 3;
-  SLV_SLAVE_BUSY = 4;
-  SLV_BAD_REQUEST = 5;
-  SLV_INTERFACE_ERROR = 6;
+    SLV_NOT_INIT = 0;
+    SLV_NO_SPACE = 1;
+    SLV_PENDING = 2;
+    SLV_COMPLETE = 3;
+    SLV_SLAVE_BUSY = 4;
+    SLV_BAD_REQUEST = 5;
+    SLV_INTERFACE_ERROR = 6;
 }
 
 message I2cSlaveStatus {
-  uint32 request_id = 1;
-  uint32 access_id = 2;
-  I2cSlaveStatusCode status_code = 3;
-  uint32 write_size = 4;
-  uint32 read_size = 5;
-  uint32 write_addr = 6;
-  uint32 read_addr = 7;
-  bytes mem_data = 8;
-  uint32 queue_space = 9;
+    uint32 request_id = 1;
+    uint32 access_id = 2;
+    I2cSlaveStatusCode status_code = 3;
+    uint32 write_size = 4;
+    uint32 read_size = 5;
+    uint32 write_addr = 6;
+    uint32 read_addr = 7;
+    bytes mem_data = 8;
+    uint32 queue_space = 9;
 }
 
 message I2cMsg {
-  I2cId i2c_id = 1;
-  uint32 sequence_number = 2;
-  oneof msg {
-    I2cConfig cfg = 3;
-    I2cMasterRequest master_request = 4;
-    I2cMasterStatus master_status = 5;
-    I2cSlaveRequest slave_request = 6;
-    I2cSlaveStatus slave_status = 7;
-  }
+    I2cId i2c_id = 1;
+    uint32 sequence_number = 2;
+    oneof msg {
+        I2cConfigRequest config_request = 3;
+        I2cConfigStatus config_status = 4;
+
+        I2cMasterRequest master_request = 5;
+        I2cMasterStatus master_status = 6;
+
+        I2cSlaveRequest slave_request = 7;
+        I2cSlaveStatus slave_status = 8;
+    }
 }
