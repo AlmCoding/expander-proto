@@ -130,29 +130,37 @@ class I2cSlaveRequest(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_size: _Optional[int] = ..., write_addr: _Optional[int] = ..., read_addr: _Optional[int] = ...) -> None: ...
 
 class I2cSlaveStatus(_message.Message):
-    __slots__ = ("request_id", "access_id", "status_code", "write_size", "read_size", "write_addr", "read_addr", "mem_data", "queue_space")
+    __slots__ = ("request_id", "status_code", "read_data", "queue_space")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
-    ACCESS_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
-    WRITE_SIZE_FIELD_NUMBER: _ClassVar[int]
-    READ_SIZE_FIELD_NUMBER: _ClassVar[int]
-    WRITE_ADDR_FIELD_NUMBER: _ClassVar[int]
-    READ_ADDR_FIELD_NUMBER: _ClassVar[int]
-    MEM_DATA_FIELD_NUMBER: _ClassVar[int]
+    READ_DATA_FIELD_NUMBER: _ClassVar[int]
     QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
     request_id: int
+    status_code: I2cStatusCode
+    read_data: bytes
+    queue_space: int
+    def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., read_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ...) -> None: ...
+
+class I2cSlaveNotification(_message.Message):
+    __slots__ = ("access_id", "status_code", "write_addr", "write_data", "read_addr", "read_size", "queue_space")
+    ACCESS_ID_FIELD_NUMBER: _ClassVar[int]
+    STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
+    WRITE_ADDR_FIELD_NUMBER: _ClassVar[int]
+    WRITE_DATA_FIELD_NUMBER: _ClassVar[int]
+    READ_ADDR_FIELD_NUMBER: _ClassVar[int]
+    READ_SIZE_FIELD_NUMBER: _ClassVar[int]
+    QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
     access_id: int
     status_code: I2cStatusCode
-    write_size: int
-    read_size: int
     write_addr: int
+    write_data: bytes
     read_addr: int
-    mem_data: bytes
+    read_size: int
     queue_space: int
-    def __init__(self, request_id: _Optional[int] = ..., access_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., write_size: _Optional[int] = ..., read_size: _Optional[int] = ..., write_addr: _Optional[int] = ..., read_addr: _Optional[int] = ..., mem_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ...) -> None: ...
+    def __init__(self, access_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., write_addr: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_addr: _Optional[int] = ..., read_size: _Optional[int] = ..., queue_space: _Optional[int] = ...) -> None: ...
 
 class I2cMsg(_message.Message):
-    __slots__ = ("i2c_id", "sequence_number", "config_request", "config_status", "master_request", "master_status", "slave_request", "slave_status")
+    __slots__ = ("i2c_id", "sequence_number", "config_request", "config_status", "master_request", "master_status", "slave_request", "slave_status", "slave_notification")
     I2C_ID_FIELD_NUMBER: _ClassVar[int]
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
     CONFIG_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -161,6 +169,7 @@ class I2cMsg(_message.Message):
     MASTER_STATUS_FIELD_NUMBER: _ClassVar[int]
     SLAVE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     SLAVE_STATUS_FIELD_NUMBER: _ClassVar[int]
+    SLAVE_NOTIFICATION_FIELD_NUMBER: _ClassVar[int]
     i2c_id: I2cId
     sequence_number: int
     config_request: I2cConfigRequest
@@ -169,4 +178,5 @@ class I2cMsg(_message.Message):
     master_status: I2cMasterStatus
     slave_request: I2cSlaveRequest
     slave_status: I2cSlaveStatus
-    def __init__(self, i2c_id: _Optional[_Union[I2cId, str]] = ..., sequence_number: _Optional[int] = ..., config_request: _Optional[_Union[I2cConfigRequest, _Mapping]] = ..., config_status: _Optional[_Union[I2cConfigStatus, _Mapping]] = ..., master_request: _Optional[_Union[I2cMasterRequest, _Mapping]] = ..., master_status: _Optional[_Union[I2cMasterStatus, _Mapping]] = ..., slave_request: _Optional[_Union[I2cSlaveRequest, _Mapping]] = ..., slave_status: _Optional[_Union[I2cSlaveStatus, _Mapping]] = ...) -> None: ...
+    slave_notification: I2cSlaveNotification
+    def __init__(self, i2c_id: _Optional[_Union[I2cId, str]] = ..., sequence_number: _Optional[int] = ..., config_request: _Optional[_Union[I2cConfigRequest, _Mapping]] = ..., config_status: _Optional[_Union[I2cConfigStatus, _Mapping]] = ..., master_request: _Optional[_Union[I2cMasterRequest, _Mapping]] = ..., master_status: _Optional[_Union[I2cMasterStatus, _Mapping]] = ..., slave_request: _Optional[_Union[I2cSlaveRequest, _Mapping]] = ..., slave_status: _Optional[_Union[I2cSlaveStatus, _Mapping]] = ..., slave_notification: _Optional[_Union[I2cSlaveNotification, _Mapping]] = ...) -> None: ...

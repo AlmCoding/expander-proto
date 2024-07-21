@@ -24,6 +24,9 @@ PB_BIND(i2c_proto_I2cSlaveRequest, i2c_proto_I2cSlaveRequest, AUTO)
 PB_BIND(i2c_proto_I2cSlaveStatus, i2c_proto_I2cSlaveStatus, AUTO)
 
 
+PB_BIND(i2c_proto_I2cSlaveNotification, i2c_proto_I2cSlaveNotification, AUTO)
+
+
 PB_BIND(i2c_proto_I2cMsg, i2c_proto_I2cMsg, AUTO)
 
 

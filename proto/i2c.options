@@ -2,5 +2,8 @@
 # Define max size for "bytes"
 i2c_proto.I2cMasterRequest.write_data max_size:128
 i2c_proto.I2cMasterStatus.read_data max_size:128
+
 i2c_proto.I2cSlaveRequest.write_data max_size:128
-i2c_proto.I2cSlaveStatus.mem_data max_size:128
+i2c_proto.I2cSlaveStatus.read_data max_size:128
+
+i2c_proto.I2cSlaveNotification.write_data max_size:128

@@ -78,14 +78,19 @@ message I2cSlaveRequest {
 
 message I2cSlaveStatus {
     uint32 request_id = 1;
-    uint32 access_id = 2;
-    I2cStatusCode status_code = 3;
-    uint32 write_size = 4;
-    uint32 read_size = 5;
-    uint32 write_addr = 6;
-    uint32 read_addr = 7;
-    bytes mem_data = 8;
-    uint32 queue_space = 9;
+    I2cStatusCode status_code = 2;
+    bytes read_data = 3;
+    uint32 queue_space = 4;
+}
+
+message I2cSlaveNotification {
+    uint32 access_id = 1;
+    I2cStatusCode status_code = 2;
+    uint32 write_addr = 3;
+    bytes write_data = 4;
+    uint32 read_addr = 5;
+    uint32 read_size = 6;
+    uint32 queue_space = 7;
 }
 
 message I2cMsg {
@@ -100,5 +105,6 @@ message I2cMsg {
 
         I2cSlaveRequest slave_request = 7;
         I2cSlaveStatus slave_status = 8;
+        I2cSlaveNotification slave_notification = 9;
     }
 }
