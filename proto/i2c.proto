@@ -25,12 +25,14 @@ message I2cConfigRequest {
 }
 
 enum I2cConfigStatusCode {
-    CFG_OK = 0;
-    CFG_INV_CLOCK_FREQ = 1;
-    CFG_INV_SLAVE_ADDR = 2;
-    CFG_INV_SLAVE_ADDR_WIDTH = 3;
-    CFG_INV_MEM_ADDR_WIDTH = 4;
-    CFG_INTERFACE_ERROR = 5;
+    CFG_NOT_INIT = 0;
+    CFG_SUCCESS = 1;
+    CFG_BAD_REQUEST = 2;
+    CFG_INVALID_CLOCK_FREQ = 3;
+    CFG_INVALID_SLAVE_ADDR = 4;
+    CFG_INVALID_SLAVE_ADDR_WIDTH = 5;
+    CFG_INVALID_MEM_ADDR_WIDTH = 6;
+    CFG_INTERFACE_ERROR = 7;
 }
 
 message I2cConfigStatus {
@@ -47,19 +49,19 @@ message I2cMasterRequest {
     uint32 sequence_idx = 6;
 }
 
-enum I2cMasterStatusCode {
-    MST_NOT_INIT = 0;
-    MST_NO_SPACE = 1;
-    MST_PENDING = 2;
-    MST_ONGOING = 3;
-    MST_COMPLETE = 4;
-    MST_SLAVE_BUSY = 5;
-    MST_INTERFACE_ERROR = 6;
+enum I2cStatusCode {
+    STS_NOT_INIT = 0;
+    STS_SUCCESS = 1;
+    STS_BAD_REQUEST = 2;
+    STS_NO_SPACE = 3;
+    STS_SLAVE_NO_ACK = 4;
+    STS_SLAVE_EARLY_NACK = 5;
+    STS_INTERFACE_ERROR = 6;
 }
 
 message I2cMasterStatus {
     uint32 request_id = 1;
-    I2cMasterStatusCode status_code = 2;
+    I2cStatusCode status_code = 2;
     bytes read_data = 3;
     uint32 queue_space = 4;
     uint32 buffer_space1 = 5;
@@ -74,20 +76,10 @@ message I2cSlaveRequest {
     uint32 read_addr = 5;
 }
 
-enum I2cSlaveStatusCode {
-    SLV_NOT_INIT = 0;
-    SLV_NO_SPACE = 1;
-    SLV_PENDING = 2;
-    SLV_COMPLETE = 3;
-    SLV_SLAVE_BUSY = 4;
-    SLV_BAD_REQUEST = 5;
-    SLV_INTERFACE_ERROR = 6;
-}
-
 message I2cSlaveStatus {
     uint32 request_id = 1;
     uint32 access_id = 2;
-    I2cSlaveStatusCode status_code = 3;
+    I2cStatusCode status_code = 3;
     uint32 write_size = 4;
     uint32 read_size = 5;
     uint32 write_addr = 6;

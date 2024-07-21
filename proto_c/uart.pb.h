@@ -20,12 +20,12 @@ typedef struct _uart_proto_UartConfig {
     uint32_t baud_rate;
 } uart_proto_UartConfig;
 
-typedef PB_BYTES_ARRAY_T(256) uart_proto_UartData_tx_data_t;
+typedef PB_BYTES_ARRAY_T(128) uart_proto_UartData_tx_data_t;
 typedef struct _uart_proto_UartData {
     uart_proto_UartData_tx_data_t tx_data;
 } uart_proto_UartData;
 
-typedef PB_BYTES_ARRAY_T(256) uart_proto_UartStatus_rx_data_t;
+typedef PB_BYTES_ARRAY_T(128) uart_proto_UartStatus_rx_data_t;
 typedef struct _uart_proto_UartStatus {
     bool rx_overflow;
     bool tx_overflow;
@@ -133,9 +133,9 @@ extern const pb_msgdesc_t uart_proto_UartMsg_msg;
 
 /* Maximum encoded size of messages (where known) */
 #define uart_proto_UartConfig_size               6
-#define uart_proto_UartData_size                 259
-#define uart_proto_UartMsg_size                  288
-#define uart_proto_UartStatus_size               277
+#define uart_proto_UartData_size                 131
+#define uart_proto_UartMsg_size                  160
+#define uart_proto_UartStatus_size               149
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -23,33 +23,25 @@ typedef enum _i2c_proto_AddressWidth {
 } i2c_proto_AddressWidth;
 
 typedef enum _i2c_proto_I2cConfigStatusCode {
-    i2c_proto_I2cConfigStatusCode_CFG_OK = 0,
-    i2c_proto_I2cConfigStatusCode_CFG_INV_CLOCK_FREQ = 1,
-    i2c_proto_I2cConfigStatusCode_CFG_INV_SLAVE_ADDR = 2,
-    i2c_proto_I2cConfigStatusCode_CFG_INV_SLAVE_ADDR_WIDTH = 3,
-    i2c_proto_I2cConfigStatusCode_CFG_INV_MEM_ADDR_WIDTH = 4,
-    i2c_proto_I2cConfigStatusCode_CFG_INTERFACE_ERROR = 5
+    i2c_proto_I2cConfigStatusCode_CFG_NOT_INIT = 0,
+    i2c_proto_I2cConfigStatusCode_CFG_SUCCESS = 1,
+    i2c_proto_I2cConfigStatusCode_CFG_BAD_REQUEST = 2,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_CLOCK_FREQ = 3,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_SLAVE_ADDR = 4,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_SLAVE_ADDR_WIDTH = 5,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_MEM_ADDR_WIDTH = 6,
+    i2c_proto_I2cConfigStatusCode_CFG_INTERFACE_ERROR = 7
 } i2c_proto_I2cConfigStatusCode;
 
-typedef enum _i2c_proto_I2cMasterStatusCode {
-    i2c_proto_I2cMasterStatusCode_MST_NOT_INIT = 0,
-    i2c_proto_I2cMasterStatusCode_MST_NO_SPACE = 1,
-    i2c_proto_I2cMasterStatusCode_MST_PENDING = 2,
-    i2c_proto_I2cMasterStatusCode_MST_ONGOING = 3,
-    i2c_proto_I2cMasterStatusCode_MST_COMPLETE = 4,
-    i2c_proto_I2cMasterStatusCode_MST_SLAVE_BUSY = 5,
-    i2c_proto_I2cMasterStatusCode_MST_INTERFACE_ERROR = 6
-} i2c_proto_I2cMasterStatusCode;
-
-typedef enum _i2c_proto_I2cSlaveStatusCode {
-    i2c_proto_I2cSlaveStatusCode_SLV_NOT_INIT = 0,
-    i2c_proto_I2cSlaveStatusCode_SLV_NO_SPACE = 1,
-    i2c_proto_I2cSlaveStatusCode_SLV_PENDING = 2,
-    i2c_proto_I2cSlaveStatusCode_SLV_COMPLETE = 3,
-    i2c_proto_I2cSlaveStatusCode_SLV_SLAVE_BUSY = 4,
-    i2c_proto_I2cSlaveStatusCode_SLV_BAD_REQUEST = 5,
-    i2c_proto_I2cSlaveStatusCode_SLV_INTERFACE_ERROR = 6
-} i2c_proto_I2cSlaveStatusCode;
+typedef enum _i2c_proto_I2cStatusCode {
+    i2c_proto_I2cStatusCode_STS_NOT_INIT = 0,
+    i2c_proto_I2cStatusCode_STS_SUCCESS = 1,
+    i2c_proto_I2cStatusCode_STS_BAD_REQUEST = 2,
+    i2c_proto_I2cStatusCode_STS_NO_SPACE = 3,
+    i2c_proto_I2cStatusCode_STS_SLAVE_NO_ACK = 4,
+    i2c_proto_I2cStatusCode_STS_SLAVE_EARLY_NACK = 5,
+    i2c_proto_I2cStatusCode_STS_INTERFACE_ERROR = 6
+} i2c_proto_I2cStatusCode;
 
 /* Struct definitions */
 typedef struct _i2c_proto_I2cConfigRequest {
@@ -66,7 +58,7 @@ typedef struct _i2c_proto_I2cConfigStatus {
     i2c_proto_I2cConfigStatusCode status_code;
 } i2c_proto_I2cConfigStatus;
 
-typedef PB_BYTES_ARRAY_T(256) i2c_proto_I2cMasterRequest_write_data_t;
+typedef PB_BYTES_ARRAY_T(128) i2c_proto_I2cMasterRequest_write_data_t;
 typedef struct _i2c_proto_I2cMasterRequest {
     uint32_t request_id;
     uint32_t slave_addr;
@@ -76,17 +68,17 @@ typedef struct _i2c_proto_I2cMasterRequest {
     uint32_t sequence_idx;
 } i2c_proto_I2cMasterRequest;
 
-typedef PB_BYTES_ARRAY_T(256) i2c_proto_I2cMasterStatus_read_data_t;
+typedef PB_BYTES_ARRAY_T(128) i2c_proto_I2cMasterStatus_read_data_t;
 typedef struct _i2c_proto_I2cMasterStatus {
     uint32_t request_id;
-    i2c_proto_I2cMasterStatusCode status_code;
+    i2c_proto_I2cStatusCode status_code;
     i2c_proto_I2cMasterStatus_read_data_t read_data;
     uint32_t queue_space;
     uint32_t buffer_space1;
     uint32_t buffer_space2;
 } i2c_proto_I2cMasterStatus;
 
-typedef PB_BYTES_ARRAY_T(256) i2c_proto_I2cSlaveRequest_write_data_t;
+typedef PB_BYTES_ARRAY_T(128) i2c_proto_I2cSlaveRequest_write_data_t;
 typedef struct _i2c_proto_I2cSlaveRequest {
     uint32_t request_id;
     i2c_proto_I2cSlaveRequest_write_data_t write_data;
@@ -95,11 +87,11 @@ typedef struct _i2c_proto_I2cSlaveRequest {
     uint32_t read_addr;
 } i2c_proto_I2cSlaveRequest;
 
-typedef PB_BYTES_ARRAY_T(256) i2c_proto_I2cSlaveStatus_mem_data_t;
+typedef PB_BYTES_ARRAY_T(128) i2c_proto_I2cSlaveStatus_mem_data_t;
 typedef struct _i2c_proto_I2cSlaveStatus {
     uint32_t request_id;
     uint32_t access_id;
-    i2c_proto_I2cSlaveStatusCode status_code;
+    i2c_proto_I2cStatusCode status_code;
     uint32_t write_size;
     uint32_t read_size;
     uint32_t write_addr;
@@ -136,17 +128,13 @@ extern "C" {
 #define _i2c_proto_AddressWidth_MAX i2c_proto_AddressWidth_Bits16
 #define _i2c_proto_AddressWidth_ARRAYSIZE ((i2c_proto_AddressWidth)(i2c_proto_AddressWidth_Bits16+1))
 
-#define _i2c_proto_I2cConfigStatusCode_MIN i2c_proto_I2cConfigStatusCode_CFG_OK
+#define _i2c_proto_I2cConfigStatusCode_MIN i2c_proto_I2cConfigStatusCode_CFG_NOT_INIT
 #define _i2c_proto_I2cConfigStatusCode_MAX i2c_proto_I2cConfigStatusCode_CFG_INTERFACE_ERROR
 #define _i2c_proto_I2cConfigStatusCode_ARRAYSIZE ((i2c_proto_I2cConfigStatusCode)(i2c_proto_I2cConfigStatusCode_CFG_INTERFACE_ERROR+1))
 
-#define _i2c_proto_I2cMasterStatusCode_MIN i2c_proto_I2cMasterStatusCode_MST_NOT_INIT
-#define _i2c_proto_I2cMasterStatusCode_MAX i2c_proto_I2cMasterStatusCode_MST_INTERFACE_ERROR
-#define _i2c_proto_I2cMasterStatusCode_ARRAYSIZE ((i2c_proto_I2cMasterStatusCode)(i2c_proto_I2cMasterStatusCode_MST_INTERFACE_ERROR+1))
-
-#define _i2c_proto_I2cSlaveStatusCode_MIN i2c_proto_I2cSlaveStatusCode_SLV_NOT_INIT
-#define _i2c_proto_I2cSlaveStatusCode_MAX i2c_proto_I2cSlaveStatusCode_SLV_INTERFACE_ERROR
-#define _i2c_proto_I2cSlaveStatusCode_ARRAYSIZE ((i2c_proto_I2cSlaveStatusCode)(i2c_proto_I2cSlaveStatusCode_SLV_INTERFACE_ERROR+1))
+#define _i2c_proto_I2cStatusCode_MIN i2c_proto_I2cStatusCode_STS_NOT_INIT
+#define _i2c_proto_I2cStatusCode_MAX i2c_proto_I2cStatusCode_STS_INTERFACE_ERROR
+#define _i2c_proto_I2cStatusCode_ARRAYSIZE ((i2c_proto_I2cStatusCode)(i2c_proto_I2cStatusCode_STS_INTERFACE_ERROR+1))
 
 #define i2c_proto_I2cConfigRequest_slave_addr_width_ENUMTYPE i2c_proto_AddressWidth
 #define i2c_proto_I2cConfigRequest_mem_addr_width_ENUMTYPE i2c_proto_AddressWidth
@@ -154,10 +142,10 @@ extern "C" {
 #define i2c_proto_I2cConfigStatus_status_code_ENUMTYPE i2c_proto_I2cConfigStatusCode
 
 
-#define i2c_proto_I2cMasterStatus_status_code_ENUMTYPE i2c_proto_I2cMasterStatusCode
+#define i2c_proto_I2cMasterStatus_status_code_ENUMTYPE i2c_proto_I2cStatusCode
 
 
-#define i2c_proto_I2cSlaveStatus_status_code_ENUMTYPE i2c_proto_I2cSlaveStatusCode
+#define i2c_proto_I2cSlaveStatus_status_code_ENUMTYPE i2c_proto_I2cStatusCode
 
 #define i2c_proto_I2cMsg_i2c_id_ENUMTYPE i2c_proto_I2cId
 
@@ -166,16 +154,16 @@ extern "C" {
 #define i2c_proto_I2cConfigRequest_init_default  {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN, 0}
 #define i2c_proto_I2cConfigStatus_init_default   {0, _i2c_proto_I2cConfigStatusCode_MIN}
 #define i2c_proto_I2cMasterRequest_init_default  {0, 0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cMasterStatus_init_default   {0, _i2c_proto_I2cMasterStatusCode_MIN, {0, {0}}, 0, 0, 0}
+#define i2c_proto_I2cMasterStatus_init_default   {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cSlaveRequest_init_default   {0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cSlaveStatus_init_default    {0, 0, _i2c_proto_I2cSlaveStatusCode_MIN, 0, 0, 0, 0, {0, {0}}, 0}
+#define i2c_proto_I2cSlaveStatus_init_default    {0, 0, _i2c_proto_I2cStatusCode_MIN, 0, 0, 0, 0, {0, {0}}, 0}
 #define i2c_proto_I2cMsg_init_default            {_i2c_proto_I2cId_MIN, 0, 0, {i2c_proto_I2cConfigRequest_init_default}}
 #define i2c_proto_I2cConfigRequest_init_zero     {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN, 0}
 #define i2c_proto_I2cConfigStatus_init_zero      {0, _i2c_proto_I2cConfigStatusCode_MIN}
 #define i2c_proto_I2cMasterRequest_init_zero     {0, 0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cMasterStatus_init_zero      {0, _i2c_proto_I2cMasterStatusCode_MIN, {0, {0}}, 0, 0, 0}
+#define i2c_proto_I2cMasterStatus_init_zero      {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cSlaveRequest_init_zero      {0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cSlaveStatus_init_zero       {0, 0, _i2c_proto_I2cSlaveStatusCode_MIN, 0, 0, 0, 0, {0, {0}}, 0}
+#define i2c_proto_I2cSlaveStatus_init_zero       {0, 0, _i2c_proto_I2cStatusCode_MIN, 0, 0, 0, 0, {0, {0}}, 0}
 #define i2c_proto_I2cMsg_init_zero               {_i2c_proto_I2cId_MIN, 0, 0, {i2c_proto_I2cConfigRequest_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -319,11 +307,11 @@ extern const pb_msgdesc_t i2c_proto_I2cMsg_msg;
 /* Maximum encoded size of messages (where known) */
 #define i2c_proto_I2cConfigRequest_size          24
 #define i2c_proto_I2cConfigStatus_size           8
-#define i2c_proto_I2cMasterRequest_size          289
-#define i2c_proto_I2cMasterStatus_size           285
-#define i2c_proto_I2cMsg_size                    314
-#define i2c_proto_I2cSlaveRequest_size           283
-#define i2c_proto_I2cSlaveStatus_size            303
+#define i2c_proto_I2cMasterRequest_size          161
+#define i2c_proto_I2cMasterStatus_size           157
+#define i2c_proto_I2cMsg_size                    186
+#define i2c_proto_I2cSlaveRequest_size           155
+#define i2c_proto_I2cSlaveStatus_size            175
 
 #ifdef __cplusplus
 } /* extern "C" */

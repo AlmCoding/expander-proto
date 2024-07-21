@@ -9,13 +9,13 @@
 PB_BIND(uart_proto_UartConfig, uart_proto_UartConfig, AUTO)
 
 
-PB_BIND(uart_proto_UartData, uart_proto_UartData, 2)
+PB_BIND(uart_proto_UartData, uart_proto_UartData, AUTO)
 
 
-PB_BIND(uart_proto_UartStatus, uart_proto_UartStatus, 2)
+PB_BIND(uart_proto_UartStatus, uart_proto_UartStatus, AUTO)
 
 
-PB_BIND(uart_proto_UartMsg, uart_proto_UartMsg, 2)
+PB_BIND(uart_proto_UartMsg, uart_proto_UartMsg, AUTO)
 
 
 
