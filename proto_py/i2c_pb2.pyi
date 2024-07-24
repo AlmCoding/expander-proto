@@ -142,22 +142,20 @@ class I2cSlaveStatus(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., read_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ...) -> None: ...
 
 class I2cSlaveNotification(_message.Message):
-    __slots__ = ("access_id", "status_code", "write_addr", "write_data", "read_addr", "read_size", "queue_space")
+    __slots__ = ("access_id", "status_code", "addr", "write_data", "read_data", "queue_space")
     ACCESS_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
-    WRITE_ADDR_FIELD_NUMBER: _ClassVar[int]
+    ADDR_FIELD_NUMBER: _ClassVar[int]
     WRITE_DATA_FIELD_NUMBER: _ClassVar[int]
-    READ_ADDR_FIELD_NUMBER: _ClassVar[int]
-    READ_SIZE_FIELD_NUMBER: _ClassVar[int]
+    READ_DATA_FIELD_NUMBER: _ClassVar[int]
     QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
     access_id: int
     status_code: I2cStatusCode
-    write_addr: int
+    addr: int
     write_data: bytes
-    read_addr: int
-    read_size: int
+    read_data: bytes
     queue_space: int
-    def __init__(self, access_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., write_addr: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_addr: _Optional[int] = ..., read_size: _Optional[int] = ..., queue_space: _Optional[int] = ...) -> None: ...
+    def __init__(self, access_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., addr: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ...) -> None: ...
 
 class I2cMsg(_message.Message):
     __slots__ = ("i2c_id", "sequence_number", "config_request", "config_status", "master_request", "master_status", "slave_request", "slave_status", "slave_notification")

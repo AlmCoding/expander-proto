@@ -86,11 +86,10 @@ message I2cSlaveStatus {
 message I2cSlaveNotification {
     uint32 access_id = 1;
     I2cStatusCode status_code = 2;
-    uint32 write_addr = 3;
+    uint32 addr = 3;
     bytes write_data = 4;
-    uint32 read_addr = 5;
-    uint32 read_size = 6;
-    uint32 queue_space = 7;
+    bytes read_data = 5;
+    uint32 queue_space = 6;
 }
 
 message I2cMsg {
