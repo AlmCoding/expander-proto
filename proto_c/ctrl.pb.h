@@ -10,9 +10,28 @@
 #endif
 
 /* Struct definitions */
+typedef struct _ctrl_proto_CtrlRequest {
+    bool get_device_info;
+    bool reset_system;
+    bool start_bootloader;
+} ctrl_proto_CtrlRequest;
+
+typedef struct _ctrl_proto_DeviceInfo {
+    uint32_t device_type;
+    uint32_t hardware_version;
+    uint32_t firmware_version_major;
+    uint32_t firmware_version_minor;
+    uint32_t firmware_version_patch;
+    char git_hash[42];
+} ctrl_proto_DeviceInfo;
+
 typedef struct _ctrl_proto_CtrlMsg {
     uint32_t sequence_number;
-    bool system_reset;
+    pb_size_t which_msg;
+    union {
+        ctrl_proto_CtrlRequest ctrl_request;
+        ctrl_proto_DeviceInfo device_info;
+    } msg;
 } ctrl_proto_CtrlMsg;
 
 
@@ -21,27 +40,67 @@ extern "C" {
 #endif
 
 /* Initializer values for message structs */
-#define ctrl_proto_CtrlMsg_init_default          {0, 0}
-#define ctrl_proto_CtrlMsg_init_zero             {0, 0}
+#define ctrl_proto_CtrlRequest_init_default      {0, 0, 0}
+#define ctrl_proto_DeviceInfo_init_default       {0, 0, 0, 0, 0, ""}
+#define ctrl_proto_CtrlMsg_init_default          {0, 0, {ctrl_proto_CtrlRequest_init_default}}
+#define ctrl_proto_CtrlRequest_init_zero         {0, 0, 0}
+#define ctrl_proto_DeviceInfo_init_zero          {0, 0, 0, 0, 0, ""}
+#define ctrl_proto_CtrlMsg_init_zero             {0, 0, {ctrl_proto_CtrlRequest_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
+#define ctrl_proto_CtrlRequest_get_device_info_tag 1
+#define ctrl_proto_CtrlRequest_reset_system_tag  2
+#define ctrl_proto_CtrlRequest_start_bootloader_tag 3
+#define ctrl_proto_DeviceInfo_device_type_tag    1
+#define ctrl_proto_DeviceInfo_hardware_version_tag 2
+#define ctrl_proto_DeviceInfo_firmware_version_major_tag 3
+#define ctrl_proto_DeviceInfo_firmware_version_minor_tag 4
+#define ctrl_proto_DeviceInfo_firmware_version_patch_tag 5
+#define ctrl_proto_DeviceInfo_git_hash_tag       6
 #define ctrl_proto_CtrlMsg_sequence_number_tag   1
-#define ctrl_proto_CtrlMsg_system_reset_tag      2
+#define ctrl_proto_CtrlMsg_ctrl_request_tag      2
+#define ctrl_proto_CtrlMsg_device_info_tag       3
 
 /* Struct field encoding specification for nanopb */
+#define ctrl_proto_CtrlRequest_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, BOOL,     get_device_info,   1) \
+X(a, STATIC,   SINGULAR, BOOL,     reset_system,      2) \
+X(a, STATIC,   SINGULAR, BOOL,     start_bootloader,   3)
+#define ctrl_proto_CtrlRequest_CALLBACK NULL
+#define ctrl_proto_CtrlRequest_DEFAULT NULL
+
+#define ctrl_proto_DeviceInfo_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, UINT32,   device_type,       1) \
+X(a, STATIC,   SINGULAR, UINT32,   hardware_version,   2) \
+X(a, STATIC,   SINGULAR, UINT32,   firmware_version_major,   3) \
+X(a, STATIC,   SINGULAR, UINT32,   firmware_version_minor,   4) \
+X(a, STATIC,   SINGULAR, UINT32,   firmware_version_patch,   5) \
+X(a, STATIC,   SINGULAR, STRING,   git_hash,          6)
+#define ctrl_proto_DeviceInfo_CALLBACK NULL
+#define ctrl_proto_DeviceInfo_DEFAULT NULL
+
 #define ctrl_proto_CtrlMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   1) \
-X(a, STATIC,   SINGULAR, BOOL,     system_reset,      2)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,ctrl_request,msg.ctrl_request),   2) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,device_info,msg.device_info),   3)
 #define ctrl_proto_CtrlMsg_CALLBACK NULL
 #define ctrl_proto_CtrlMsg_DEFAULT NULL
+#define ctrl_proto_CtrlMsg_msg_ctrl_request_MSGTYPE ctrl_proto_CtrlRequest
+#define ctrl_proto_CtrlMsg_msg_device_info_MSGTYPE ctrl_proto_DeviceInfo
 
+extern const pb_msgdesc_t ctrl_proto_CtrlRequest_msg;
+extern const pb_msgdesc_t ctrl_proto_DeviceInfo_msg;
 extern const pb_msgdesc_t ctrl_proto_CtrlMsg_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
+#define ctrl_proto_CtrlRequest_fields &ctrl_proto_CtrlRequest_msg
+#define ctrl_proto_DeviceInfo_fields &ctrl_proto_DeviceInfo_msg
 #define ctrl_proto_CtrlMsg_fields &ctrl_proto_CtrlMsg_msg
 
 /* Maximum encoded size of messages (where known) */
-#define ctrl_proto_CtrlMsg_size                  8
+#define ctrl_proto_CtrlMsg_size                  81
+#define ctrl_proto_CtrlRequest_size              6
+#define ctrl_proto_DeviceInfo_size               73
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -3,7 +3,26 @@ option optimize_for = LITE_RUNTIME;
 
 package ctrl_proto;
 
+message CtrlRequest {
+  bool get_device_info = 1;
+  bool reset_system = 2;
+  bool start_bootloader = 3;
+}
+
+message DeviceInfo {
+  uint32 device_type = 1;
+  uint32 hardware_version = 2;
+
+  uint32 firmware_version_major = 3;
+  uint32 firmware_version_minor = 4;
+  uint32 firmware_version_patch = 5;
+  string git_hash = 6;
+}
+
 message CtrlMsg {
   uint32 sequence_number = 1;
-  bool system_reset = 2;
+  oneof msg {
+    CtrlRequest ctrl_request = 2;
+    DeviceInfo device_info = 3;
+  }
 }

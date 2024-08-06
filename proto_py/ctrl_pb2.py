@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nctrl.proto\x12\nctrl_proto\"8\n\x07\x43trlMsg\x12\x17\n\x0fsequence_number\x18\x01 \x01(\r\x12\x14\n\x0csystem_reset\x18\x02 \x01(\x08\x42\x02H\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nctrl.proto\x12\nctrl_proto\"V\n\x0b\x43trlRequest\x12\x17\n\x0fget_device_info\x18\x01 \x01(\x08\x12\x14\n\x0creset_system\x18\x02 \x01(\x08\x12\x18\n\x10start_bootloader\x18\x03 \x01(\x08\"\xad\x01\n\nDeviceInfo\x12\x13\n\x0b\x64\x65vice_type\x18\x01 \x01(\r\x12\x18\n\x10hardware_version\x18\x02 \x01(\r\x12\x1e\n\x16\x66irmware_version_major\x18\x03 \x01(\r\x12\x1e\n\x16\x66irmware_version_minor\x18\x04 \x01(\r\x12\x1e\n\x16\x66irmware_version_patch\x18\x05 \x01(\r\x12\x10\n\x08git_hash\x18\x06 \x01(\t\"\x89\x01\n\x07\x43trlMsg\x12\x17\n\x0fsequence_number\x18\x01 \x01(\r\x12/\n\x0c\x63trl_request\x18\x02 \x01(\x0b\x32\x17.ctrl_proto.CtrlRequestH\x00\x12-\n\x0b\x64\x65vice_info\x18\x03 \x01(\x0b\x32\x16.ctrl_proto.DeviceInfoH\x00\x42\x05\n\x03msgB\x02H\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,6 +32,10 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'ctrl_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'H\003'
-  _globals['_CTRLMSG']._serialized_start=26
-  _globals['_CTRLMSG']._serialized_end=82
+  _globals['_CTRLREQUEST']._serialized_start=26
+  _globals['_CTRLREQUEST']._serialized_end=112
+  _globals['_DEVICEINFO']._serialized_start=115
+  _globals['_DEVICEINFO']._serialized_end=288
+  _globals['_CTRLMSG']._serialized_start=291
+  _globals['_CTRLMSG']._serialized_end=428
 # @@protoc_insertion_point(module_scope)
