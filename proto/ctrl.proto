@@ -4,25 +4,27 @@ option optimize_for = LITE_RUNTIME;
 package ctrl_proto;
 
 message CtrlRequest {
-  bool get_device_info = 1;
-  bool reset_system = 2;
-  bool start_bootloader = 3;
+    uint32 request_id = 1;
+    bool get_device_info = 2;
+    bool reset_system = 3;
+    bool start_bootloader = 4;
 }
 
 message DeviceInfo {
-  uint32 device_type = 1;
-  uint32 hardware_version = 2;
+    uint32 request_id = 1;
+    uint32 device_type = 2;
+    uint32 hardware_version = 3;
 
-  uint32 firmware_version_major = 3;
-  uint32 firmware_version_minor = 4;
-  uint32 firmware_version_patch = 5;
-  string git_hash = 6;
+    uint32 firmware_version_major = 4;
+    uint32 firmware_version_minor = 5;
+    uint32 firmware_version_patch = 6;
+    string git_hash = 7;
 }
 
 message CtrlMsg {
-  uint32 sequence_number = 1;
-  oneof msg {
-    CtrlRequest ctrl_request = 2;
-    DeviceInfo device_info = 3;
-  }
+    uint32 sequence_number = 1;
+    oneof msg {
+        CtrlRequest ctrl_request = 2;
+        DeviceInfo device_info = 3;
+    }
 }

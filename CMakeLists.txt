@@ -12,6 +12,7 @@ set(${PROJECT_NAME}_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/proto_c/gpio.pb.c
     ${CMAKE_CURRENT_LIST_DIR}/proto_c/uart.pb.c
     ${CMAKE_CURRENT_LIST_DIR}/proto_c/i2c.pb.c
+    ${CMAKE_CURRENT_LIST_DIR}/proto_c/ctrl.pb.c
 )
 
 # Create the static library target
