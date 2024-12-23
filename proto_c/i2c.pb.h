@@ -73,6 +73,7 @@ typedef struct _i2c_proto_I2cMasterStatus {
     uint32_t request_id;
     i2c_proto_I2cStatusCode status_code;
     i2c_proto_I2cMasterStatus_read_data_t read_data;
+    uint32_t nack_idx;
     uint32_t queue_space;
     uint32_t buffer_space1;
     uint32_t buffer_space2;
@@ -162,7 +163,7 @@ extern "C" {
 #define i2c_proto_I2cConfigRequest_init_default  {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN, 0}
 #define i2c_proto_I2cConfigStatus_init_default   {0, _i2c_proto_I2cConfigStatusCode_MIN}
 #define i2c_proto_I2cMasterRequest_init_default  {0, 0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cMasterStatus_init_default   {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0}
+#define i2c_proto_I2cMasterStatus_init_default   {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0, 0}
 #define i2c_proto_I2cSlaveRequest_init_default   {0, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cSlaveStatus_init_default    {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0}
 #define i2c_proto_I2cSlaveNotification_init_default {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, {0, {0}}, 0}
@@ -170,7 +171,7 @@ extern "C" {
 #define i2c_proto_I2cConfigRequest_init_zero     {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN, 0}
 #define i2c_proto_I2cConfigStatus_init_zero      {0, _i2c_proto_I2cConfigStatusCode_MIN}
 #define i2c_proto_I2cMasterRequest_init_zero     {0, 0, {0, {0}}, 0, 0, 0}
-#define i2c_proto_I2cMasterStatus_init_zero      {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0}
+#define i2c_proto_I2cMasterStatus_init_zero      {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0, 0}
 #define i2c_proto_I2cSlaveRequest_init_zero      {0, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cSlaveStatus_init_zero       {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0}
 #define i2c_proto_I2cSlaveNotification_init_zero {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, {0, {0}}, 0}
@@ -194,9 +195,10 @@ extern "C" {
 #define i2c_proto_I2cMasterStatus_request_id_tag 1
 #define i2c_proto_I2cMasterStatus_status_code_tag 2
 #define i2c_proto_I2cMasterStatus_read_data_tag  3
-#define i2c_proto_I2cMasterStatus_queue_space_tag 4
-#define i2c_proto_I2cMasterStatus_buffer_space1_tag 5
-#define i2c_proto_I2cMasterStatus_buffer_space2_tag 6
+#define i2c_proto_I2cMasterStatus_nack_idx_tag   4
+#define i2c_proto_I2cMasterStatus_queue_space_tag 5
+#define i2c_proto_I2cMasterStatus_buffer_space1_tag 6
+#define i2c_proto_I2cMasterStatus_buffer_space2_tag 7
 #define i2c_proto_I2cSlaveRequest_request_id_tag 1
 #define i2c_proto_I2cSlaveRequest_write_data_tag 2
 #define i2c_proto_I2cSlaveRequest_read_size_tag  3
@@ -252,9 +254,10 @@ X(a, STATIC,   SINGULAR, UINT32,   sequence_idx,      6)
 X(a, STATIC,   SINGULAR, UINT32,   request_id,        1) \
 X(a, STATIC,   SINGULAR, UENUM,    status_code,       2) \
 X(a, STATIC,   SINGULAR, BYTES,    read_data,         3) \
-X(a, STATIC,   SINGULAR, UINT32,   queue_space,       4) \
-X(a, STATIC,   SINGULAR, UINT32,   buffer_space1,     5) \
-X(a, STATIC,   SINGULAR, UINT32,   buffer_space2,     6)
+X(a, STATIC,   SINGULAR, UINT32,   nack_idx,          4) \
+X(a, STATIC,   SINGULAR, UINT32,   queue_space,       5) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space1,     6) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space2,     7)
 #define i2c_proto_I2cMasterStatus_CALLBACK NULL
 #define i2c_proto_I2cMasterStatus_DEFAULT NULL
 
@@ -327,7 +330,7 @@ extern const pb_msgdesc_t i2c_proto_I2cMsg_msg;
 #define i2c_proto_I2cConfigRequest_size          24
 #define i2c_proto_I2cConfigStatus_size           8
 #define i2c_proto_I2cMasterRequest_size          161
-#define i2c_proto_I2cMasterStatus_size           157
+#define i2c_proto_I2cMasterStatus_size           163
 #define i2c_proto_I2cMsg_size                    287
 #define i2c_proto_I2cSlaveNotification_size      276
 #define i2c_proto_I2cSlaveRequest_size           155

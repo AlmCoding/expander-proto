@@ -100,20 +100,22 @@ class I2cMasterRequest(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., slave_addr: _Optional[int] = ..., write_data: _Optional[bytes] = ..., read_size: _Optional[int] = ..., sequence_id: _Optional[int] = ..., sequence_idx: _Optional[int] = ...) -> None: ...
 
 class I2cMasterStatus(_message.Message):
-    __slots__ = ("request_id", "status_code", "read_data", "queue_space", "buffer_space1", "buffer_space2")
+    __slots__ = ("request_id", "status_code", "read_data", "nack_idx", "queue_space", "buffer_space1", "buffer_space2")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
     READ_DATA_FIELD_NUMBER: _ClassVar[int]
+    NACK_IDX_FIELD_NUMBER: _ClassVar[int]
     QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
     BUFFER_SPACE1_FIELD_NUMBER: _ClassVar[int]
     BUFFER_SPACE2_FIELD_NUMBER: _ClassVar[int]
     request_id: int
     status_code: I2cStatusCode
     read_data: bytes
+    nack_idx: int
     queue_space: int
     buffer_space1: int
     buffer_space2: int
-    def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., read_data: _Optional[bytes] = ..., queue_space: _Optional[int] = ..., buffer_space1: _Optional[int] = ..., buffer_space2: _Optional[int] = ...) -> None: ...
+    def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[I2cStatusCode, str]] = ..., read_data: _Optional[bytes] = ..., nack_idx: _Optional[int] = ..., queue_space: _Optional[int] = ..., buffer_space1: _Optional[int] = ..., buffer_space2: _Optional[int] = ...) -> None: ...
 
 class I2cSlaveRequest(_message.Message):
     __slots__ = ("request_id", "write_data", "read_size", "write_addr", "read_addr")
