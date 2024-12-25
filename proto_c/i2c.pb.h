@@ -38,8 +38,8 @@ typedef enum _i2c_proto_I2cStatusCode {
     i2c_proto_I2cStatusCode_STS_SUCCESS = 1,
     i2c_proto_I2cStatusCode_STS_BAD_REQUEST = 2,
     i2c_proto_I2cStatusCode_STS_NO_SPACE = 3,
-    i2c_proto_I2cStatusCode_STS_SLAVE_NO_ACK = 4,
-    i2c_proto_I2cStatusCode_STS_SLAVE_EARLY_NACK = 5,
+    i2c_proto_I2cStatusCode_STS_SLAVE_BUSY = 4,
+    i2c_proto_I2cStatusCode_STS_SLAVE_NACK = 5,
     i2c_proto_I2cStatusCode_STS_INTERFACE_ERROR = 6
 } i2c_proto_I2cStatusCode;
 

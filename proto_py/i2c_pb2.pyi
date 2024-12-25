@@ -34,8 +34,8 @@ class I2cStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     STS_SUCCESS: _ClassVar[I2cStatusCode]
     STS_BAD_REQUEST: _ClassVar[I2cStatusCode]
     STS_NO_SPACE: _ClassVar[I2cStatusCode]
-    STS_SLAVE_NO_ACK: _ClassVar[I2cStatusCode]
-    STS_SLAVE_EARLY_NACK: _ClassVar[I2cStatusCode]
+    STS_SLAVE_BUSY: _ClassVar[I2cStatusCode]
+    STS_SLAVE_NACK: _ClassVar[I2cStatusCode]
     STS_INTERFACE_ERROR: _ClassVar[I2cStatusCode]
 I2C0: I2cId
 I2C1: I2cId
@@ -55,8 +55,8 @@ STS_NOT_INIT: I2cStatusCode
 STS_SUCCESS: I2cStatusCode
 STS_BAD_REQUEST: I2cStatusCode
 STS_NO_SPACE: I2cStatusCode
-STS_SLAVE_NO_ACK: I2cStatusCode
-STS_SLAVE_EARLY_NACK: I2cStatusCode
+STS_SLAVE_BUSY: I2cStatusCode
+STS_SLAVE_NACK: I2cStatusCode
 STS_INTERFACE_ERROR: I2cStatusCode
 
 class I2cConfigRequest(_message.Message):
