@@ -1,0 +1,63 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package dac_proto;
+
+enum DacMode {
+  DAC_MODE_STATIC = 0;
+  DAC_MODE_PERIODIC = 1;
+  DAC_MODE_STREAMING = 2;
+}
+
+message DacConfigRequest {
+  uint32 request_id = 1;
+  DacMode mode = 2;
+  uint32 sampling_rate = 3;
+  uint32 periodic_samples = 4;
+}
+
+enum DacConfigStatusCode {
+  CFG_NOT_INIT = 0;
+  CFG_SUCCESS = 1;
+  CFG_BAD_REQUEST = 2;
+  CFG_INVALID_MODE = 3;
+  CFG_INVALID_SAMPLING_RATE = 4;
+  CFG_INVALID_PERIODIC_SAMPLES = 5;
+}
+
+message DacConfigStatus {
+  uint32 request_id = 1;
+  DacConfigStatusCode status_code = 2;
+}
+
+message DacDataRequest {
+  uint32 request_id = 1;
+  bool run = 2;
+  bytes data_ch1 = 3;
+  bytes data_ch2 = 4;
+}
+
+enum DacDataStatusCode {
+  DATA_NOT_INIT = 0;
+  DATA_SUCCESS = 1;
+  DATA_BAD_REQUEST = 2;
+  DATA_BUFFER_OVERFLOW = 3;
+}
+
+message DacDataStatus {
+  uint32 request_id = 1;
+  DacDataStatusCode status_code = 2;
+  uint32 buffer_space_ch1 = 3;
+  uint32 buffer_space_ch2 = 4;
+}
+
+message DacMsg {
+  uint32 sequence_number = 1;
+  oneof msg {
+    DacConfigRequest config_request = 2;
+    DacConfigStatus config_status = 3;
+
+    DacDataRequest data_request = 4;
+    DacDataStatus data_status = 5;
+  }
+}
