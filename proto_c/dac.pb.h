@@ -65,10 +65,10 @@ typedef struct _dac_proto_DacMsg {
     uint32_t sequence_number;
     pb_size_t which_msg;
     union {
-        dac_proto_DacConfigRequest dac_config_request;
-        dac_proto_DacConfigStatus dac_config_status;
-        dac_proto_DacDataRequest dac_data_request;
-        dac_proto_DacDataStatus dac_data_status;
+        dac_proto_DacConfigRequest config_request;
+        dac_proto_DacConfigStatus config_status;
+        dac_proto_DacDataRequest data_request;
+        dac_proto_DacDataStatus data_status;
     } msg;
 } dac_proto_DacMsg;
 
@@ -127,10 +127,10 @@ extern "C" {
 #define dac_proto_DacDataStatus_buffer_space_ch1_tag 3
 #define dac_proto_DacDataStatus_buffer_space_ch2_tag 4
 #define dac_proto_DacMsg_sequence_number_tag     1
-#define dac_proto_DacMsg_dac_config_request_tag  2
-#define dac_proto_DacMsg_dac_config_status_tag   3
-#define dac_proto_DacMsg_dac_data_request_tag    4
-#define dac_proto_DacMsg_dac_data_status_tag     5
+#define dac_proto_DacMsg_config_request_tag      2
+#define dac_proto_DacMsg_config_status_tag       3
+#define dac_proto_DacMsg_data_request_tag        4
+#define dac_proto_DacMsg_data_status_tag         5
 
 /* Struct field encoding specification for nanopb */
 #define dac_proto_DacConfigRequest_FIELDLIST(X, a) \
@@ -165,16 +165,16 @@ X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch2,   4)
 
 #define dac_proto_DacMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   1) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,dac_config_request,msg.dac_config_request),   2) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,dac_config_status,msg.dac_config_status),   3) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,dac_data_request,msg.dac_data_request),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,dac_data_status,msg.dac_data_status),   5)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,config_request,msg.config_request),   2) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,config_status,msg.config_status),   3) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_request,msg.data_request),   4) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_status,msg.data_status),   5)
 #define dac_proto_DacMsg_CALLBACK NULL
 #define dac_proto_DacMsg_DEFAULT NULL
-#define dac_proto_DacMsg_msg_dac_config_request_MSGTYPE dac_proto_DacConfigRequest
-#define dac_proto_DacMsg_msg_dac_config_status_MSGTYPE dac_proto_DacConfigStatus
-#define dac_proto_DacMsg_msg_dac_data_request_MSGTYPE dac_proto_DacDataRequest
-#define dac_proto_DacMsg_msg_dac_data_status_MSGTYPE dac_proto_DacDataStatus
+#define dac_proto_DacMsg_msg_config_request_MSGTYPE dac_proto_DacConfigRequest
+#define dac_proto_DacMsg_msg_config_status_MSGTYPE dac_proto_DacConfigStatus
+#define dac_proto_DacMsg_msg_data_request_MSGTYPE dac_proto_DacDataRequest
+#define dac_proto_DacMsg_msg_data_status_MSGTYPE dac_proto_DacDataStatus
 
 extern const pb_msgdesc_t dac_proto_DacConfigRequest_msg;
 extern const pb_msgdesc_t dac_proto_DacConfigStatus_msg;

@@ -85,15 +85,15 @@ class DacDataStatus(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[DacDataStatusCode, str]] = ..., buffer_space_ch1: _Optional[int] = ..., buffer_space_ch2: _Optional[int] = ...) -> None: ...
 
 class DacMsg(_message.Message):
-    __slots__ = ("sequence_number", "dac_config_request", "dac_config_status", "dac_data_request", "dac_data_status")
+    __slots__ = ("sequence_number", "config_request", "config_status", "data_request", "data_status")
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
-    DAC_CONFIG_REQUEST_FIELD_NUMBER: _ClassVar[int]
-    DAC_CONFIG_STATUS_FIELD_NUMBER: _ClassVar[int]
-    DAC_DATA_REQUEST_FIELD_NUMBER: _ClassVar[int]
-    DAC_DATA_STATUS_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_STATUS_FIELD_NUMBER: _ClassVar[int]
+    DATA_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    DATA_STATUS_FIELD_NUMBER: _ClassVar[int]
     sequence_number: int
-    dac_config_request: DacConfigRequest
-    dac_config_status: DacConfigStatus
-    dac_data_request: DacDataRequest
-    dac_data_status: DacDataStatus
-    def __init__(self, sequence_number: _Optional[int] = ..., dac_config_request: _Optional[_Union[DacConfigRequest, _Mapping]] = ..., dac_config_status: _Optional[_Union[DacConfigStatus, _Mapping]] = ..., dac_data_request: _Optional[_Union[DacDataRequest, _Mapping]] = ..., dac_data_status: _Optional[_Union[DacDataStatus, _Mapping]] = ...) -> None: ...
+    config_request: DacConfigRequest
+    config_status: DacConfigStatus
+    data_request: DacDataRequest
+    data_status: DacDataStatus
+    def __init__(self, sequence_number: _Optional[int] = ..., config_request: _Optional[_Union[DacConfigRequest, _Mapping]] = ..., config_status: _Optional[_Union[DacConfigStatus, _Mapping]] = ..., data_request: _Optional[_Union[DacDataRequest, _Mapping]] = ..., data_status: _Optional[_Union[DacDataStatus, _Mapping]] = ...) -> None: ...
