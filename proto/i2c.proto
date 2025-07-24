@@ -21,18 +21,16 @@ message I2cConfigRequest {
   uint32 slave_addr = 3;
   AddressWidth slave_addr_width = 4;
   AddressWidth mem_addr_width = 5;
-  bool pullups_enabled = 6;
 }
 
 enum I2cConfigStatusCode {
   CFG_NOT_INIT = 0;
   CFG_SUCCESS = 1;
-  CFG_BAD_REQUEST = 2;
-  CFG_INVALID_CLOCK_FREQ = 3;
-  CFG_INVALID_SLAVE_ADDR = 4;
-  CFG_INVALID_SLAVE_ADDR_WIDTH = 5;
-  CFG_INVALID_MEM_ADDR_WIDTH = 6;
-  CFG_INTERFACE_ERROR = 7;
+  CFG_INVALID_CLOCK_FREQ = 2;
+  CFG_INVALID_SLAVE_ADDR = 3;
+  CFG_INVALID_SLAVE_ADDR_WIDTH = 4;
+  CFG_INVALID_MEM_ADDR_WIDTH = 5;
+  CFG_INTERFACE_ERROR = 6;
 }
 
 message I2cConfigStatus {

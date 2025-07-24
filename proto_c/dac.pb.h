@@ -19,17 +19,18 @@ typedef enum _dac_proto_DacMode {
 typedef enum _dac_proto_DacConfigStatusCode {
     dac_proto_DacConfigStatusCode_CFG_NOT_INIT = 0,
     dac_proto_DacConfigStatusCode_CFG_SUCCESS = 1,
-    dac_proto_DacConfigStatusCode_CFG_BAD_REQUEST = 2,
-    dac_proto_DacConfigStatusCode_CFG_INVALID_MODE = 3,
-    dac_proto_DacConfigStatusCode_CFG_INVALID_SAMPLING_RATE = 4,
-    dac_proto_DacConfigStatusCode_CFG_INVALID_PERIODIC_SAMPLES = 5
+    dac_proto_DacConfigStatusCode_CFG_INVALID_MODE = 2,
+    dac_proto_DacConfigStatusCode_CFG_INVALID_SAMPLING_RATE = 3,
+    dac_proto_DacConfigStatusCode_CFG_INVALID_PERIODIC_SAMPLES = 4,
+    dac_proto_DacConfigStatusCode_CFG_INTERFACE_ERROR = 5
 } dac_proto_DacConfigStatusCode;
 
 typedef enum _dac_proto_DacDataStatusCode {
     dac_proto_DacDataStatusCode_DATA_NOT_INIT = 0,
     dac_proto_DacDataStatusCode_DATA_SUCCESS = 1,
     dac_proto_DacDataStatusCode_DATA_BAD_REQUEST = 2,
-    dac_proto_DacDataStatusCode_DATA_BUFFER_OVERFLOW = 3
+    dac_proto_DacDataStatusCode_DATA_BUFFER_OVERFLOW = 3,
+    dac_proto_DacDataStatusCode_DATA_INTERFACE_ERROR = 4
 } dac_proto_DacDataStatusCode;
 
 /* Struct definitions */
@@ -57,6 +58,7 @@ typedef struct _dac_proto_DacDataRequest {
 typedef struct _dac_proto_DacDataStatus {
     uint32_t request_id;
     dac_proto_DacDataStatusCode status_code;
+    uint32_t queue_space;
     uint32_t buffer_space_ch1;
     uint32_t buffer_space_ch2;
 } dac_proto_DacDataStatus;
@@ -83,12 +85,12 @@ extern "C" {
 #define _dac_proto_DacMode_ARRAYSIZE ((dac_proto_DacMode)(dac_proto_DacMode_DAC_MODE_STREAMING+1))
 
 #define _dac_proto_DacConfigStatusCode_MIN dac_proto_DacConfigStatusCode_CFG_NOT_INIT
-#define _dac_proto_DacConfigStatusCode_MAX dac_proto_DacConfigStatusCode_CFG_INVALID_PERIODIC_SAMPLES
-#define _dac_proto_DacConfigStatusCode_ARRAYSIZE ((dac_proto_DacConfigStatusCode)(dac_proto_DacConfigStatusCode_CFG_INVALID_PERIODIC_SAMPLES+1))
+#define _dac_proto_DacConfigStatusCode_MAX dac_proto_DacConfigStatusCode_CFG_INTERFACE_ERROR
+#define _dac_proto_DacConfigStatusCode_ARRAYSIZE ((dac_proto_DacConfigStatusCode)(dac_proto_DacConfigStatusCode_CFG_INTERFACE_ERROR+1))
 
 #define _dac_proto_DacDataStatusCode_MIN dac_proto_DacDataStatusCode_DATA_NOT_INIT
-#define _dac_proto_DacDataStatusCode_MAX dac_proto_DacDataStatusCode_DATA_BUFFER_OVERFLOW
-#define _dac_proto_DacDataStatusCode_ARRAYSIZE ((dac_proto_DacDataStatusCode)(dac_proto_DacDataStatusCode_DATA_BUFFER_OVERFLOW+1))
+#define _dac_proto_DacDataStatusCode_MAX dac_proto_DacDataStatusCode_DATA_INTERFACE_ERROR
+#define _dac_proto_DacDataStatusCode_ARRAYSIZE ((dac_proto_DacDataStatusCode)(dac_proto_DacDataStatusCode_DATA_INTERFACE_ERROR+1))
 
 #define dac_proto_DacConfigRequest_mode_ENUMTYPE dac_proto_DacMode
 
@@ -103,12 +105,12 @@ extern "C" {
 #define dac_proto_DacConfigRequest_init_default  {0, _dac_proto_DacMode_MIN, 0, 0}
 #define dac_proto_DacConfigStatus_init_default   {0, _dac_proto_DacConfigStatusCode_MIN}
 #define dac_proto_DacDataRequest_init_default    {0, 0, {0, {0}}, {0, {0}}}
-#define dac_proto_DacDataStatus_init_default     {0, _dac_proto_DacDataStatusCode_MIN, 0, 0}
+#define dac_proto_DacDataStatus_init_default     {0, _dac_proto_DacDataStatusCode_MIN, 0, 0, 0}
 #define dac_proto_DacMsg_init_default            {0, 0, {dac_proto_DacConfigRequest_init_default}}
 #define dac_proto_DacConfigRequest_init_zero     {0, _dac_proto_DacMode_MIN, 0, 0}
 #define dac_proto_DacConfigStatus_init_zero      {0, _dac_proto_DacConfigStatusCode_MIN}
 #define dac_proto_DacDataRequest_init_zero       {0, 0, {0, {0}}, {0, {0}}}
-#define dac_proto_DacDataStatus_init_zero        {0, _dac_proto_DacDataStatusCode_MIN, 0, 0}
+#define dac_proto_DacDataStatus_init_zero        {0, _dac_proto_DacDataStatusCode_MIN, 0, 0, 0}
 #define dac_proto_DacMsg_init_zero               {0, 0, {dac_proto_DacConfigRequest_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -124,8 +126,9 @@ extern "C" {
 #define dac_proto_DacDataRequest_data_ch2_tag    4
 #define dac_proto_DacDataStatus_request_id_tag   1
 #define dac_proto_DacDataStatus_status_code_tag  2
-#define dac_proto_DacDataStatus_buffer_space_ch1_tag 3
-#define dac_proto_DacDataStatus_buffer_space_ch2_tag 4
+#define dac_proto_DacDataStatus_queue_space_tag  3
+#define dac_proto_DacDataStatus_buffer_space_ch1_tag 4
+#define dac_proto_DacDataStatus_buffer_space_ch2_tag 5
 #define dac_proto_DacMsg_sequence_number_tag     1
 #define dac_proto_DacMsg_config_request_tag      2
 #define dac_proto_DacMsg_config_status_tag       3
@@ -158,8 +161,9 @@ X(a, STATIC,   SINGULAR, BYTES,    data_ch2,          4)
 #define dac_proto_DacDataStatus_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   request_id,        1) \
 X(a, STATIC,   SINGULAR, UENUM,    status_code,       2) \
-X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch1,   3) \
-X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch2,   4)
+X(a, STATIC,   SINGULAR, UINT32,   queue_space,       3) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch1,   4) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch2,   5)
 #define dac_proto_DacDataStatus_CALLBACK NULL
 #define dac_proto_DacDataStatus_DEFAULT NULL
 
@@ -193,7 +197,7 @@ extern const pb_msgdesc_t dac_proto_DacMsg_msg;
 #define dac_proto_DacConfigRequest_size          20
 #define dac_proto_DacConfigStatus_size           8
 #define dac_proto_DacDataRequest_size            270
-#define dac_proto_DacDataStatus_size             20
+#define dac_proto_DacDataStatus_size             26
 #define dac_proto_DacMsg_size                    279
 
 #ifdef __cplusplus

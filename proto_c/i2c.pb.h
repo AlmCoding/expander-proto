@@ -25,12 +25,11 @@ typedef enum _i2c_proto_AddressWidth {
 typedef enum _i2c_proto_I2cConfigStatusCode {
     i2c_proto_I2cConfigStatusCode_CFG_NOT_INIT = 0,
     i2c_proto_I2cConfigStatusCode_CFG_SUCCESS = 1,
-    i2c_proto_I2cConfigStatusCode_CFG_BAD_REQUEST = 2,
-    i2c_proto_I2cConfigStatusCode_CFG_INVALID_CLOCK_FREQ = 3,
-    i2c_proto_I2cConfigStatusCode_CFG_INVALID_SLAVE_ADDR = 4,
-    i2c_proto_I2cConfigStatusCode_CFG_INVALID_SLAVE_ADDR_WIDTH = 5,
-    i2c_proto_I2cConfigStatusCode_CFG_INVALID_MEM_ADDR_WIDTH = 6,
-    i2c_proto_I2cConfigStatusCode_CFG_INTERFACE_ERROR = 7
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_CLOCK_FREQ = 2,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_SLAVE_ADDR = 3,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_SLAVE_ADDR_WIDTH = 4,
+    i2c_proto_I2cConfigStatusCode_CFG_INVALID_MEM_ADDR_WIDTH = 5,
+    i2c_proto_I2cConfigStatusCode_CFG_INTERFACE_ERROR = 6
 } i2c_proto_I2cConfigStatusCode;
 
 typedef enum _i2c_proto_I2cStatusCode {
@@ -50,7 +49,6 @@ typedef struct _i2c_proto_I2cConfigRequest {
     uint32_t slave_addr;
     i2c_proto_AddressWidth slave_addr_width;
     i2c_proto_AddressWidth mem_addr_width;
-    bool pullups_enabled;
 } i2c_proto_I2cConfigRequest;
 
 typedef struct _i2c_proto_I2cConfigStatus {
@@ -160,7 +158,7 @@ extern "C" {
 
 
 /* Initializer values for message structs */
-#define i2c_proto_I2cConfigRequest_init_default  {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN, 0}
+#define i2c_proto_I2cConfigRequest_init_default  {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN}
 #define i2c_proto_I2cConfigStatus_init_default   {0, _i2c_proto_I2cConfigStatusCode_MIN}
 #define i2c_proto_I2cMasterRequest_init_default  {0, 0, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cMasterStatus_init_default   {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0, 0}
@@ -168,7 +166,7 @@ extern "C" {
 #define i2c_proto_I2cSlaveStatus_init_default    {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0}
 #define i2c_proto_I2cSlaveNotification_init_default {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, {0, {0}}, 0}
 #define i2c_proto_I2cMsg_init_default            {_i2c_proto_I2cId_MIN, 0, 0, {i2c_proto_I2cConfigRequest_init_default}}
-#define i2c_proto_I2cConfigRequest_init_zero     {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN, 0}
+#define i2c_proto_I2cConfigRequest_init_zero     {0, 0, 0, _i2c_proto_AddressWidth_MIN, _i2c_proto_AddressWidth_MIN}
 #define i2c_proto_I2cConfigStatus_init_zero      {0, _i2c_proto_I2cConfigStatusCode_MIN}
 #define i2c_proto_I2cMasterRequest_init_zero     {0, 0, {0, {0}}, 0, 0, 0}
 #define i2c_proto_I2cMasterStatus_init_zero      {0, _i2c_proto_I2cStatusCode_MIN, {0, {0}}, 0, 0, 0, 0}
@@ -183,7 +181,6 @@ extern "C" {
 #define i2c_proto_I2cConfigRequest_slave_addr_tag 3
 #define i2c_proto_I2cConfigRequest_slave_addr_width_tag 4
 #define i2c_proto_I2cConfigRequest_mem_addr_width_tag 5
-#define i2c_proto_I2cConfigRequest_pullups_enabled_tag 6
 #define i2c_proto_I2cConfigStatus_request_id_tag 1
 #define i2c_proto_I2cConfigStatus_status_code_tag 2
 #define i2c_proto_I2cMasterRequest_request_id_tag 1
@@ -229,8 +226,7 @@ X(a, STATIC,   SINGULAR, UINT32,   request_id,        1) \
 X(a, STATIC,   SINGULAR, UINT32,   clock_freq,        2) \
 X(a, STATIC,   SINGULAR, UINT32,   slave_addr,        3) \
 X(a, STATIC,   SINGULAR, UENUM,    slave_addr_width,   4) \
-X(a, STATIC,   SINGULAR, UENUM,    mem_addr_width,    5) \
-X(a, STATIC,   SINGULAR, BOOL,     pullups_enabled,   6)
+X(a, STATIC,   SINGULAR, UENUM,    mem_addr_width,    5)
 #define i2c_proto_I2cConfigRequest_CALLBACK NULL
 #define i2c_proto_I2cConfigRequest_DEFAULT NULL
 
@@ -327,7 +323,7 @@ extern const pb_msgdesc_t i2c_proto_I2cMsg_msg;
 #define i2c_proto_I2cMsg_fields &i2c_proto_I2cMsg_msg
 
 /* Maximum encoded size of messages (where known) */
-#define i2c_proto_I2cConfigRequest_size          24
+#define i2c_proto_I2cConfigRequest_size          22
 #define i2c_proto_I2cConfigStatus_size           8
 #define i2c_proto_I2cMasterRequest_size          161
 #define i2c_proto_I2cMasterStatus_size           163

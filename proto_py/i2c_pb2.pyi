@@ -21,7 +21,6 @@ class I2cConfigStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CFG_NOT_INIT: _ClassVar[I2cConfigStatusCode]
     CFG_SUCCESS: _ClassVar[I2cConfigStatusCode]
-    CFG_BAD_REQUEST: _ClassVar[I2cConfigStatusCode]
     CFG_INVALID_CLOCK_FREQ: _ClassVar[I2cConfigStatusCode]
     CFG_INVALID_SLAVE_ADDR: _ClassVar[I2cConfigStatusCode]
     CFG_INVALID_SLAVE_ADDR_WIDTH: _ClassVar[I2cConfigStatusCode]
@@ -45,7 +44,6 @@ Bits10: AddressWidth
 Bits16: AddressWidth
 CFG_NOT_INIT: I2cConfigStatusCode
 CFG_SUCCESS: I2cConfigStatusCode
-CFG_BAD_REQUEST: I2cConfigStatusCode
 CFG_INVALID_CLOCK_FREQ: I2cConfigStatusCode
 CFG_INVALID_SLAVE_ADDR: I2cConfigStatusCode
 CFG_INVALID_SLAVE_ADDR_WIDTH: I2cConfigStatusCode
@@ -60,20 +58,18 @@ STS_SLAVE_NACK: I2cStatusCode
 STS_INTERFACE_ERROR: I2cStatusCode
 
 class I2cConfigRequest(_message.Message):
-    __slots__ = ("request_id", "clock_freq", "slave_addr", "slave_addr_width", "mem_addr_width", "pullups_enabled")
+    __slots__ = ("request_id", "clock_freq", "slave_addr", "slave_addr_width", "mem_addr_width")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
     CLOCK_FREQ_FIELD_NUMBER: _ClassVar[int]
     SLAVE_ADDR_FIELD_NUMBER: _ClassVar[int]
     SLAVE_ADDR_WIDTH_FIELD_NUMBER: _ClassVar[int]
     MEM_ADDR_WIDTH_FIELD_NUMBER: _ClassVar[int]
-    PULLUPS_ENABLED_FIELD_NUMBER: _ClassVar[int]
     request_id: int
     clock_freq: int
     slave_addr: int
     slave_addr_width: AddressWidth
     mem_addr_width: AddressWidth
-    pullups_enabled: bool
-    def __init__(self, request_id: _Optional[int] = ..., clock_freq: _Optional[int] = ..., slave_addr: _Optional[int] = ..., slave_addr_width: _Optional[_Union[AddressWidth, str]] = ..., mem_addr_width: _Optional[_Union[AddressWidth, str]] = ..., pullups_enabled: bool = ...) -> None: ...
+    def __init__(self, request_id: _Optional[int] = ..., clock_freq: _Optional[int] = ..., slave_addr: _Optional[int] = ..., slave_addr_width: _Optional[_Union[AddressWidth, str]] = ..., mem_addr_width: _Optional[_Union[AddressWidth, str]] = ...) -> None: ...
 
 class I2cConfigStatus(_message.Message):
     __slots__ = ("request_id", "status_code")

@@ -15,10 +15,10 @@ class DacConfigStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CFG_NOT_INIT: _ClassVar[DacConfigStatusCode]
     CFG_SUCCESS: _ClassVar[DacConfigStatusCode]
-    CFG_BAD_REQUEST: _ClassVar[DacConfigStatusCode]
     CFG_INVALID_MODE: _ClassVar[DacConfigStatusCode]
     CFG_INVALID_SAMPLING_RATE: _ClassVar[DacConfigStatusCode]
     CFG_INVALID_PERIODIC_SAMPLES: _ClassVar[DacConfigStatusCode]
+    CFG_INTERFACE_ERROR: _ClassVar[DacConfigStatusCode]
 
 class DacDataStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -26,19 +26,21 @@ class DacDataStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     DATA_SUCCESS: _ClassVar[DacDataStatusCode]
     DATA_BAD_REQUEST: _ClassVar[DacDataStatusCode]
     DATA_BUFFER_OVERFLOW: _ClassVar[DacDataStatusCode]
+    DATA_INTERFACE_ERROR: _ClassVar[DacDataStatusCode]
 DAC_MODE_STATIC: DacMode
 DAC_MODE_PERIODIC: DacMode
 DAC_MODE_STREAMING: DacMode
 CFG_NOT_INIT: DacConfigStatusCode
 CFG_SUCCESS: DacConfigStatusCode
-CFG_BAD_REQUEST: DacConfigStatusCode
 CFG_INVALID_MODE: DacConfigStatusCode
 CFG_INVALID_SAMPLING_RATE: DacConfigStatusCode
 CFG_INVALID_PERIODIC_SAMPLES: DacConfigStatusCode
+CFG_INTERFACE_ERROR: DacConfigStatusCode
 DATA_NOT_INIT: DacDataStatusCode
 DATA_SUCCESS: DacDataStatusCode
 DATA_BAD_REQUEST: DacDataStatusCode
 DATA_BUFFER_OVERFLOW: DacDataStatusCode
+DATA_INTERFACE_ERROR: DacDataStatusCode
 
 class DacConfigRequest(_message.Message):
     __slots__ = ("request_id", "mode", "sampling_rate", "periodic_samples")
@@ -73,16 +75,18 @@ class DacDataRequest(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., run: bool = ..., data_ch1: _Optional[bytes] = ..., data_ch2: _Optional[bytes] = ...) -> None: ...
 
 class DacDataStatus(_message.Message):
-    __slots__ = ("request_id", "status_code", "buffer_space_ch1", "buffer_space_ch2")
+    __slots__ = ("request_id", "status_code", "queue_space", "buffer_space_ch1", "buffer_space_ch2")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
     STATUS_CODE_FIELD_NUMBER: _ClassVar[int]
+    QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
     BUFFER_SPACE_CH1_FIELD_NUMBER: _ClassVar[int]
     BUFFER_SPACE_CH2_FIELD_NUMBER: _ClassVar[int]
     request_id: int
     status_code: DacDataStatusCode
+    queue_space: int
     buffer_space_ch1: int
     buffer_space_ch2: int
-    def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[DacDataStatusCode, str]] = ..., buffer_space_ch1: _Optional[int] = ..., buffer_space_ch2: _Optional[int] = ...) -> None: ...
+    def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[DacDataStatusCode, str]] = ..., queue_space: _Optional[int] = ..., buffer_space_ch1: _Optional[int] = ..., buffer_space_ch2: _Optional[int] = ...) -> None: ...
 
 class DacMsg(_message.Message):
     __slots__ = ("sequence_number", "config_request", "config_status", "data_request", "data_status")
