@@ -15,6 +15,7 @@ class DacConfigStatusCode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CFG_NOT_INIT: _ClassVar[DacConfigStatusCode]
     CFG_SUCCESS: _ClassVar[DacConfigStatusCode]
+    CFG_INVLAID_CONFIG_FLAGS: _ClassVar[DacConfigStatusCode]
     CFG_INVALID_MODE: _ClassVar[DacConfigStatusCode]
     CFG_INVALID_SAMPLING_RATE: _ClassVar[DacConfigStatusCode]
     CFG_INVALID_PERIODIC_SAMPLES: _ClassVar[DacConfigStatusCode]
@@ -32,6 +33,7 @@ DAC_MODE_PERIODIC: DacMode
 DAC_MODE_STREAMING: DacMode
 CFG_NOT_INIT: DacConfigStatusCode
 CFG_SUCCESS: DacConfigStatusCode
+CFG_INVLAID_CONFIG_FLAGS: DacConfigStatusCode
 CFG_INVALID_MODE: DacConfigStatusCode
 CFG_INVALID_SAMPLING_RATE: DacConfigStatusCode
 CFG_INVALID_PERIODIC_SAMPLES: DacConfigStatusCode

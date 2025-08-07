@@ -19,10 +19,11 @@ typedef enum _dac_proto_DacMode {
 typedef enum _dac_proto_DacConfigStatusCode {
     dac_proto_DacConfigStatusCode_CFG_NOT_INIT = 0,
     dac_proto_DacConfigStatusCode_CFG_SUCCESS = 1,
-    dac_proto_DacConfigStatusCode_CFG_INVALID_MODE = 2,
-    dac_proto_DacConfigStatusCode_CFG_INVALID_SAMPLING_RATE = 3,
-    dac_proto_DacConfigStatusCode_CFG_INVALID_PERIODIC_SAMPLES = 4,
-    dac_proto_DacConfigStatusCode_CFG_INTERFACE_ERROR = 5
+    dac_proto_DacConfigStatusCode_CFG_INVLAID_CONFIG_FLAGS = 2,
+    dac_proto_DacConfigStatusCode_CFG_INVALID_MODE = 3,
+    dac_proto_DacConfigStatusCode_CFG_INVALID_SAMPLING_RATE = 4,
+    dac_proto_DacConfigStatusCode_CFG_INVALID_PERIODIC_SAMPLES = 5,
+    dac_proto_DacConfigStatusCode_CFG_INTERFACE_ERROR = 6
 } dac_proto_DacConfigStatusCode;
 
 typedef enum _dac_proto_DacDataStatusCode {
