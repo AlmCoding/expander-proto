@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tdac.proto\x12\tdac_proto\"y\n\x10\x44\x61\x63\x43onfigRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12 \n\x04mode\x18\x02 \x01(\x0e\x32\x12.dac_proto.DacMode\x12\x15\n\rsampling_rate\x18\x03 \x01(\r\x12\x18\n\x10periodic_samples\x18\x04 \x01(\r\"Z\n\x0f\x44\x61\x63\x43onfigStatus\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x33\n\x0bstatus_code\x18\x02 \x01(\x0e\x32\x1e.dac_proto.DacConfigStatusCode\"U\n\x0e\x44\x61\x63\x44\x61taRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x0b\n\x03run\x18\x02 \x01(\x08\x12\x10\n\x08\x64\x61ta_ch1\x18\x03 \x01(\x0c\x12\x10\n\x08\x64\x61ta_ch2\x18\x04 \x01(\x0c\"\x9f\x01\n\rDacDataStatus\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x31\n\x0bstatus_code\x18\x02 \x01(\x0e\x32\x1c.dac_proto.DacDataStatusCode\x12\x13\n\x0bqueue_space\x18\x03 \x01(\r\x12\x18\n\x10\x62uffer_space_ch1\x18\x04 \x01(\r\x12\x18\n\x10\x62uffer_space_ch2\x18\x05 \x01(\r\"\xf8\x01\n\x06\x44\x61\x63Msg\x12\x17\n\x0fsequence_number\x18\x01 \x01(\r\x12\x35\n\x0e\x63onfig_request\x18\x02 \x01(\x0b\x32\x1b.dac_proto.DacConfigRequestH\x00\x12\x33\n\rconfig_status\x18\x03 \x01(\x0b\x32\x1a.dac_proto.DacConfigStatusH\x00\x12\x31\n\x0c\x64\x61ta_request\x18\x04 \x01(\x0b\x32\x19.dac_proto.DacDataRequestH\x00\x12/\n\x0b\x64\x61ta_status\x18\x05 \x01(\x0b\x32\x18.dac_proto.DacDataStatusH\x00\x42\x05\n\x03msg*M\n\x07\x44\x61\x63Mode\x12\x13\n\x0f\x44\x41\x43_MODE_STATIC\x10\x00\x12\x15\n\x11\x44\x41\x43_MODE_PERIODIC\x10\x01\x12\x16\n\x12\x44\x41\x43_MODE_STREAMING\x10\x02*\xa8\x01\n\x13\x44\x61\x63\x43onfigStatusCode\x12\x10\n\x0c\x43\x46G_NOT_INIT\x10\x00\x12\x0f\n\x0b\x43\x46G_SUCCESS\x10\x01\x12\x14\n\x10\x43\x46G_INVALID_MODE\x10\x02\x12\x1d\n\x19\x43\x46G_INVALID_SAMPLING_RATE\x10\x03\x12 \n\x1c\x43\x46G_INVALID_PERIODIC_SAMPLES\x10\x04\x12\x17\n\x13\x43\x46G_INTERFACE_ERROR\x10\x05*\x82\x01\n\x11\x44\x61\x63\x44\x61taStatusCode\x12\x11\n\rDATA_NOT_INIT\x10\x00\x12\x10\n\x0c\x44\x41TA_SUCCESS\x10\x01\x12\x14\n\x10\x44\x41TA_BAD_REQUEST\x10\x02\x12\x18\n\x14\x44\x41TA_BUFFER_OVERFLOW\x10\x03\x12\x18\n\x14\x44\x41TA_INTERFACE_ERROR\x10\x04\x42\x02H\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tdac.proto\x12\tdac_proto\"\x8c\x02\n\x10\x44\x61\x63\x43onfigRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x12\n\nconfig_ch1\x18\x02 \x01(\x08\x12\x12\n\nconfig_ch2\x18\x03 \x01(\x08\x12$\n\x08mode_ch1\x18\x04 \x01(\x0e\x32\x12.dac_proto.DacMode\x12$\n\x08mode_ch2\x18\x05 \x01(\x0e\x32\x12.dac_proto.DacMode\x12\x19\n\x11sampling_rate_ch1\x18\x06 \x01(\r\x12\x19\n\x11sampling_rate_ch2\x18\x07 \x01(\r\x12\x1c\n\x14periodic_samples_ch1\x18\x08 \x01(\r\x12\x1c\n\x14periodic_samples_ch2\x18\t \x01(\r\"Z\n\x0f\x44\x61\x63\x43onfigStatus\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x33\n\x0bstatus_code\x18\x02 \x01(\x0e\x32\x1e.dac_proto.DacConfigStatusCode\"j\n\x0e\x44\x61\x63\x44\x61taRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x0f\n\x07run_ch1\x18\x02 \x01(\x08\x12\x0f\n\x07run_ch2\x18\x03 \x01(\x08\x12\x10\n\x08\x64\x61ta_ch1\x18\x04 \x01(\x0c\x12\x10\n\x08\x64\x61ta_ch2\x18\x05 \x01(\x0c\"\x9f\x01\n\rDacDataStatus\x12\x12\n\nrequest_id\x18\x01 \x01(\r\x12\x31\n\x0bstatus_code\x18\x02 \x01(\x0e\x32\x1c.dac_proto.DacDataStatusCode\x12\x13\n\x0bqueue_space\x18\x03 \x01(\r\x12\x18\n\x10\x62uffer_space_ch1\x18\x04 \x01(\r\x12\x18\n\x10\x62uffer_space_ch2\x18\x05 \x01(\r\"\xf8\x01\n\x06\x44\x61\x63Msg\x12\x17\n\x0fsequence_number\x18\x01 \x01(\r\x12\x35\n\x0e\x63onfig_request\x18\x02 \x01(\x0b\x32\x1b.dac_proto.DacConfigRequestH\x00\x12\x33\n\rconfig_status\x18\x03 \x01(\x0b\x32\x1a.dac_proto.DacConfigStatusH\x00\x12\x31\n\x0c\x64\x61ta_request\x18\x04 \x01(\x0b\x32\x19.dac_proto.DacDataRequestH\x00\x12/\n\x0b\x64\x61ta_status\x18\x05 \x01(\x0b\x32\x18.dac_proto.DacDataStatusH\x00\x42\x05\n\x03msg*M\n\x07\x44\x61\x63Mode\x12\x13\n\x0f\x44\x41\x43_MODE_STATIC\x10\x00\x12\x15\n\x11\x44\x41\x43_MODE_PERIODIC\x10\x01\x12\x16\n\x12\x44\x41\x43_MODE_STREAMING\x10\x02*\xa8\x01\n\x13\x44\x61\x63\x43onfigStatusCode\x12\x10\n\x0c\x43\x46G_NOT_INIT\x10\x00\x12\x0f\n\x0b\x43\x46G_SUCCESS\x10\x01\x12\x14\n\x10\x43\x46G_INVALID_MODE\x10\x02\x12\x1d\n\x19\x43\x46G_INVALID_SAMPLING_RATE\x10\x03\x12 \n\x1c\x43\x46G_INVALID_PERIODIC_SAMPLES\x10\x04\x12\x17\n\x13\x43\x46G_INTERFACE_ERROR\x10\x05*\x82\x01\n\x11\x44\x61\x63\x44\x61taStatusCode\x12\x11\n\rDATA_NOT_INIT\x10\x00\x12\x10\n\x0c\x44\x41TA_SUCCESS\x10\x01\x12\x14\n\x10\x44\x41TA_BAD_REQUEST\x10\x02\x12\x18\n\x14\x44\x41TA_BUFFER_OVERFLOW\x10\x03\x12\x18\n\x14\x44\x41TA_INTERFACE_ERROR\x10\x04\x42\x02H\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,20 +32,20 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'dac_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'H\003'
-  _globals['_DACMODE']._serialized_start=739
-  _globals['_DACMODE']._serialized_end=816
-  _globals['_DACCONFIGSTATUSCODE']._serialized_start=819
-  _globals['_DACCONFIGSTATUSCODE']._serialized_end=987
-  _globals['_DACDATASTATUSCODE']._serialized_start=990
-  _globals['_DACDATASTATUSCODE']._serialized_end=1120
-  _globals['_DACCONFIGREQUEST']._serialized_start=24
-  _globals['_DACCONFIGREQUEST']._serialized_end=145
-  _globals['_DACCONFIGSTATUS']._serialized_start=147
-  _globals['_DACCONFIGSTATUS']._serialized_end=237
-  _globals['_DACDATAREQUEST']._serialized_start=239
-  _globals['_DACDATAREQUEST']._serialized_end=324
-  _globals['_DACDATASTATUS']._serialized_start=327
-  _globals['_DACDATASTATUS']._serialized_end=486
-  _globals['_DACMSG']._serialized_start=489
-  _globals['_DACMSG']._serialized_end=737
+  _globals['_DACMODE']._serialized_start=908
+  _globals['_DACMODE']._serialized_end=985
+  _globals['_DACCONFIGSTATUSCODE']._serialized_start=988
+  _globals['_DACCONFIGSTATUSCODE']._serialized_end=1156
+  _globals['_DACDATASTATUSCODE']._serialized_start=1159
+  _globals['_DACDATASTATUSCODE']._serialized_end=1289
+  _globals['_DACCONFIGREQUEST']._serialized_start=25
+  _globals['_DACCONFIGREQUEST']._serialized_end=293
+  _globals['_DACCONFIGSTATUS']._serialized_start=295
+  _globals['_DACCONFIGSTATUS']._serialized_end=385
+  _globals['_DACDATAREQUEST']._serialized_start=387
+  _globals['_DACDATAREQUEST']._serialized_end=493
+  _globals['_DACDATASTATUS']._serialized_start=496
+  _globals['_DACDATASTATUS']._serialized_end=655
+  _globals['_DACMSG']._serialized_start=658
+  _globals['_DACMSG']._serialized_end=906
 # @@protoc_insertion_point(module_scope)

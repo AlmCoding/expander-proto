@@ -43,16 +43,26 @@ DATA_BUFFER_OVERFLOW: DacDataStatusCode
 DATA_INTERFACE_ERROR: DacDataStatusCode
 
 class DacConfigRequest(_message.Message):
-    __slots__ = ("request_id", "mode", "sampling_rate", "periodic_samples")
+    __slots__ = ("request_id", "config_ch1", "config_ch2", "mode_ch1", "mode_ch2", "sampling_rate_ch1", "sampling_rate_ch2", "periodic_samples_ch1", "periodic_samples_ch2")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
-    MODE_FIELD_NUMBER: _ClassVar[int]
-    SAMPLING_RATE_FIELD_NUMBER: _ClassVar[int]
-    PERIODIC_SAMPLES_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_CH1_FIELD_NUMBER: _ClassVar[int]
+    CONFIG_CH2_FIELD_NUMBER: _ClassVar[int]
+    MODE_CH1_FIELD_NUMBER: _ClassVar[int]
+    MODE_CH2_FIELD_NUMBER: _ClassVar[int]
+    SAMPLING_RATE_CH1_FIELD_NUMBER: _ClassVar[int]
+    SAMPLING_RATE_CH2_FIELD_NUMBER: _ClassVar[int]
+    PERIODIC_SAMPLES_CH1_FIELD_NUMBER: _ClassVar[int]
+    PERIODIC_SAMPLES_CH2_FIELD_NUMBER: _ClassVar[int]
     request_id: int
-    mode: DacMode
-    sampling_rate: int
-    periodic_samples: int
-    def __init__(self, request_id: _Optional[int] = ..., mode: _Optional[_Union[DacMode, str]] = ..., sampling_rate: _Optional[int] = ..., periodic_samples: _Optional[int] = ...) -> None: ...
+    config_ch1: bool
+    config_ch2: bool
+    mode_ch1: DacMode
+    mode_ch2: DacMode
+    sampling_rate_ch1: int
+    sampling_rate_ch2: int
+    periodic_samples_ch1: int
+    periodic_samples_ch2: int
+    def __init__(self, request_id: _Optional[int] = ..., config_ch1: bool = ..., config_ch2: bool = ..., mode_ch1: _Optional[_Union[DacMode, str]] = ..., mode_ch2: _Optional[_Union[DacMode, str]] = ..., sampling_rate_ch1: _Optional[int] = ..., sampling_rate_ch2: _Optional[int] = ..., periodic_samples_ch1: _Optional[int] = ..., periodic_samples_ch2: _Optional[int] = ...) -> None: ...
 
 class DacConfigStatus(_message.Message):
     __slots__ = ("request_id", "status_code")
@@ -63,16 +73,18 @@ class DacConfigStatus(_message.Message):
     def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[DacConfigStatusCode, str]] = ...) -> None: ...
 
 class DacDataRequest(_message.Message):
-    __slots__ = ("request_id", "run", "data_ch1", "data_ch2")
+    __slots__ = ("request_id", "run_ch1", "run_ch2", "data_ch1", "data_ch2")
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
-    RUN_FIELD_NUMBER: _ClassVar[int]
+    RUN_CH1_FIELD_NUMBER: _ClassVar[int]
+    RUN_CH2_FIELD_NUMBER: _ClassVar[int]
     DATA_CH1_FIELD_NUMBER: _ClassVar[int]
     DATA_CH2_FIELD_NUMBER: _ClassVar[int]
     request_id: int
-    run: bool
+    run_ch1: bool
+    run_ch2: bool
     data_ch1: bytes
     data_ch2: bytes
-    def __init__(self, request_id: _Optional[int] = ..., run: bool = ..., data_ch1: _Optional[bytes] = ..., data_ch2: _Optional[bytes] = ...) -> None: ...
+    def __init__(self, request_id: _Optional[int] = ..., run_ch1: bool = ..., run_ch2: bool = ..., data_ch1: _Optional[bytes] = ..., data_ch2: _Optional[bytes] = ...) -> None: ...
 
 class DacDataStatus(_message.Message):
     __slots__ = ("request_id", "status_code", "queue_space", "buffer_space_ch1", "buffer_space_ch2")
