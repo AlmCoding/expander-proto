@@ -11,14 +11,14 @@ enum DacMode {
 
 message DacConfigRequest {
   uint32 request_id = 1;
-  bool config_ch1 = 2;
-  bool config_ch2 = 3;
-  DacMode mode_ch1 = 4;
-  DacMode mode_ch2 = 5;
-  uint32 sampling_rate_ch1 = 6;
-  uint32 sampling_rate_ch2 = 7;
-  uint32 periodic_samples_ch1 = 8;
-  uint32 periodic_samples_ch2 = 9;
+  bool config_ch0 = 2;
+  bool config_ch1 = 3;
+  DacMode mode_ch0 = 4;
+  DacMode mode_ch1 = 5;
+  uint32 sampling_rate_ch0 = 6;
+  uint32 sampling_rate_ch1 = 7;
+  uint32 periodic_samples_ch0 = 8;
+  uint32 periodic_samples_ch1 = 9;
 }
 
 enum DacConfigStatusCode {
@@ -38,10 +38,10 @@ message DacConfigStatus {
 
 message DacDataRequest {
   uint32 request_id = 1;
-  bool run_ch1 = 2;
-  bool run_ch2 = 3;
-  bytes data_ch1 = 4;
-  bytes data_ch2 = 5;
+  bool run_ch0 = 2;
+  bool run_ch1 = 3;
+  bytes data_ch0 = 4;
+  bytes data_ch1 = 5;
 }
 
 enum DacDataStatusCode {
@@ -56,8 +56,8 @@ message DacDataStatus {
   uint32 request_id = 1;
   DacDataStatusCode status_code = 2;
   uint32 queue_space = 3;
-  uint32 buffer_space_ch1 = 4;
-  uint32 buffer_space_ch2 = 5;
+  uint32 buffer_space_ch0 = 4;
+  uint32 buffer_space_ch1 = 5;
 }
 
 message DacMsg {
