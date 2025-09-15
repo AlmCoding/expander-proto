@@ -70,6 +70,14 @@ typedef struct _dac_proto_DacDataStatus {
     uint32_t buffer_space_ch1;
 } dac_proto_DacDataStatus;
 
+typedef struct _dac_proto_DacNotification {
+    bool buffer_underrun_ch0;
+    bool buffer_underrun_ch1;
+    uint32_t queue_space;
+    uint32_t buffer_space_ch0;
+    uint32_t buffer_space_ch1;
+} dac_proto_DacNotification;
+
 typedef struct _dac_proto_DacMsg {
     uint32_t sequence_number;
     pb_size_t which_msg;
@@ -78,6 +86,7 @@ typedef struct _dac_proto_DacMsg {
         dac_proto_DacConfigStatus config_status;
         dac_proto_DacDataRequest data_request;
         dac_proto_DacDataStatus data_status;
+        dac_proto_DacNotification notification;
     } msg;
 } dac_proto_DacMsg;
 
@@ -109,16 +118,19 @@ extern "C" {
 
 
 
+
 /* Initializer values for message structs */
 #define dac_proto_DacConfigRequest_init_default  {0, 0, 0, _dac_proto_DacMode_MIN, _dac_proto_DacMode_MIN, 0, 0, 0, 0}
 #define dac_proto_DacConfigStatus_init_default   {0, _dac_proto_DacConfigStatusCode_MIN}
 #define dac_proto_DacDataRequest_init_default    {0, 0, 0, {0, {0}}, {0, {0}}}
 #define dac_proto_DacDataStatus_init_default     {0, _dac_proto_DacDataStatusCode_MIN, 0, 0, 0}
+#define dac_proto_DacNotification_init_default   {0, 0, 0, 0, 0}
 #define dac_proto_DacMsg_init_default            {0, 0, {dac_proto_DacConfigRequest_init_default}}
 #define dac_proto_DacConfigRequest_init_zero     {0, 0, 0, _dac_proto_DacMode_MIN, _dac_proto_DacMode_MIN, 0, 0, 0, 0}
 #define dac_proto_DacConfigStatus_init_zero      {0, _dac_proto_DacConfigStatusCode_MIN}
 #define dac_proto_DacDataRequest_init_zero       {0, 0, 0, {0, {0}}, {0, {0}}}
 #define dac_proto_DacDataStatus_init_zero        {0, _dac_proto_DacDataStatusCode_MIN, 0, 0, 0}
+#define dac_proto_DacNotification_init_zero      {0, 0, 0, 0, 0}
 #define dac_proto_DacMsg_init_zero               {0, 0, {dac_proto_DacConfigRequest_init_zero}}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -143,11 +155,17 @@ extern "C" {
 #define dac_proto_DacDataStatus_queue_space_tag  3
 #define dac_proto_DacDataStatus_buffer_space_ch0_tag 4
 #define dac_proto_DacDataStatus_buffer_space_ch1_tag 5
+#define dac_proto_DacNotification_buffer_underrun_ch0_tag 1
+#define dac_proto_DacNotification_buffer_underrun_ch1_tag 2
+#define dac_proto_DacNotification_queue_space_tag 3
+#define dac_proto_DacNotification_buffer_space_ch0_tag 4
+#define dac_proto_DacNotification_buffer_space_ch1_tag 5
 #define dac_proto_DacMsg_sequence_number_tag     1
 #define dac_proto_DacMsg_config_request_tag      2
 #define dac_proto_DacMsg_config_status_tag       3
 #define dac_proto_DacMsg_data_request_tag        4
 #define dac_proto_DacMsg_data_status_tag         5
+#define dac_proto_DacMsg_notification_tag        6
 
 /* Struct field encoding specification for nanopb */
 #define dac_proto_DacConfigRequest_FIELDLIST(X, a) \
@@ -187,23 +205,35 @@ X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch1,   5)
 #define dac_proto_DacDataStatus_CALLBACK NULL
 #define dac_proto_DacDataStatus_DEFAULT NULL
 
+#define dac_proto_DacNotification_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, BOOL,     buffer_underrun_ch0,   1) \
+X(a, STATIC,   SINGULAR, BOOL,     buffer_underrun_ch1,   2) \
+X(a, STATIC,   SINGULAR, UINT32,   queue_space,       3) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch0,   4) \
+X(a, STATIC,   SINGULAR, UINT32,   buffer_space_ch1,   5)
+#define dac_proto_DacNotification_CALLBACK NULL
+#define dac_proto_DacNotification_DEFAULT NULL
+
 #define dac_proto_DacMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   sequence_number,   1) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (msg,config_request,msg.config_request),   2) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (msg,config_status,msg.config_status),   3) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_request,msg.data_request),   4) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_status,msg.data_status),   5)
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,data_status,msg.data_status),   5) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (msg,notification,msg.notification),   6)
 #define dac_proto_DacMsg_CALLBACK NULL
 #define dac_proto_DacMsg_DEFAULT NULL
 #define dac_proto_DacMsg_msg_config_request_MSGTYPE dac_proto_DacConfigRequest
 #define dac_proto_DacMsg_msg_config_status_MSGTYPE dac_proto_DacConfigStatus
 #define dac_proto_DacMsg_msg_data_request_MSGTYPE dac_proto_DacDataRequest
 #define dac_proto_DacMsg_msg_data_status_MSGTYPE dac_proto_DacDataStatus
+#define dac_proto_DacMsg_msg_notification_MSGTYPE dac_proto_DacNotification
 
 extern const pb_msgdesc_t dac_proto_DacConfigRequest_msg;
 extern const pb_msgdesc_t dac_proto_DacConfigStatus_msg;
 extern const pb_msgdesc_t dac_proto_DacDataRequest_msg;
 extern const pb_msgdesc_t dac_proto_DacDataStatus_msg;
+extern const pb_msgdesc_t dac_proto_DacNotification_msg;
 extern const pb_msgdesc_t dac_proto_DacMsg_msg;
 
 /* Defines for backwards compatibility with code written before nanopb-0.4.0 */
@@ -211,6 +241,7 @@ extern const pb_msgdesc_t dac_proto_DacMsg_msg;
 #define dac_proto_DacConfigStatus_fields &dac_proto_DacConfigStatus_msg
 #define dac_proto_DacDataRequest_fields &dac_proto_DacDataRequest_msg
 #define dac_proto_DacDataStatus_fields &dac_proto_DacDataStatus_msg
+#define dac_proto_DacNotification_fields &dac_proto_DacNotification_msg
 #define dac_proto_DacMsg_fields &dac_proto_DacMsg_msg
 
 /* Maximum encoded size of messages (where known) */
@@ -219,6 +250,7 @@ extern const pb_msgdesc_t dac_proto_DacMsg_msg;
 #define dac_proto_DacDataRequest_size            272
 #define dac_proto_DacDataStatus_size             26
 #define dac_proto_DacMsg_size                    281
+#define dac_proto_DacNotification_size           22
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -102,16 +102,32 @@ class DacDataStatus(_message.Message):
     buffer_space_ch1: int
     def __init__(self, request_id: _Optional[int] = ..., status_code: _Optional[_Union[DacDataStatusCode, str]] = ..., queue_space: _Optional[int] = ..., buffer_space_ch0: _Optional[int] = ..., buffer_space_ch1: _Optional[int] = ...) -> None: ...
 
+class DacNotification(_message.Message):
+    __slots__ = ("buffer_underrun_ch0", "buffer_underrun_ch1", "queue_space", "buffer_space_ch0", "buffer_space_ch1")
+    BUFFER_UNDERRUN_CH0_FIELD_NUMBER: _ClassVar[int]
+    BUFFER_UNDERRUN_CH1_FIELD_NUMBER: _ClassVar[int]
+    QUEUE_SPACE_FIELD_NUMBER: _ClassVar[int]
+    BUFFER_SPACE_CH0_FIELD_NUMBER: _ClassVar[int]
+    BUFFER_SPACE_CH1_FIELD_NUMBER: _ClassVar[int]
+    buffer_underrun_ch0: bool
+    buffer_underrun_ch1: bool
+    queue_space: int
+    buffer_space_ch0: int
+    buffer_space_ch1: int
+    def __init__(self, buffer_underrun_ch0: bool = ..., buffer_underrun_ch1: bool = ..., queue_space: _Optional[int] = ..., buffer_space_ch0: _Optional[int] = ..., buffer_space_ch1: _Optional[int] = ...) -> None: ...
+
 class DacMsg(_message.Message):
-    __slots__ = ("sequence_number", "config_request", "config_status", "data_request", "data_status")
+    __slots__ = ("sequence_number", "config_request", "config_status", "data_request", "data_status", "notification")
     SEQUENCE_NUMBER_FIELD_NUMBER: _ClassVar[int]
     CONFIG_REQUEST_FIELD_NUMBER: _ClassVar[int]
     CONFIG_STATUS_FIELD_NUMBER: _ClassVar[int]
     DATA_REQUEST_FIELD_NUMBER: _ClassVar[int]
     DATA_STATUS_FIELD_NUMBER: _ClassVar[int]
+    NOTIFICATION_FIELD_NUMBER: _ClassVar[int]
     sequence_number: int
     config_request: DacConfigRequest
     config_status: DacConfigStatus
     data_request: DacDataRequest
     data_status: DacDataStatus
-    def __init__(self, sequence_number: _Optional[int] = ..., config_request: _Optional[_Union[DacConfigRequest, _Mapping]] = ..., config_status: _Optional[_Union[DacConfigStatus, _Mapping]] = ..., data_request: _Optional[_Union[DacDataRequest, _Mapping]] = ..., data_status: _Optional[_Union[DacDataStatus, _Mapping]] = ...) -> None: ...
+    notification: DacNotification
+    def __init__(self, sequence_number: _Optional[int] = ..., config_request: _Optional[_Union[DacConfigRequest, _Mapping]] = ..., config_status: _Optional[_Union[DacConfigStatus, _Mapping]] = ..., data_request: _Optional[_Union[DacDataRequest, _Mapping]] = ..., data_status: _Optional[_Union[DacDataStatus, _Mapping]] = ..., notification: _Optional[_Union[DacNotification, _Mapping]] = ...) -> None: ...

@@ -60,6 +60,14 @@ message DacDataStatus {
   uint32 buffer_space_ch1 = 5;
 }
 
+message DacNotification {
+  bool buffer_underrun_ch0 = 1;
+  bool buffer_underrun_ch1 = 2;
+  uint32 queue_space = 3;
+  uint32 buffer_space_ch0 = 4;
+  uint32 buffer_space_ch1 = 5;
+}
+
 message DacMsg {
   uint32 sequence_number = 1;
   oneof msg {
@@ -68,5 +76,6 @@ message DacMsg {
 
     DacDataRequest data_request = 4;
     DacDataStatus data_status = 5;
+    DacNotification notification = 6;
   }
 }

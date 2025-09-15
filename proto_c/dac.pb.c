@@ -18,6 +18,9 @@ PB_BIND(dac_proto_DacDataRequest, dac_proto_DacDataRequest, 2)
 PB_BIND(dac_proto_DacDataStatus, dac_proto_DacDataStatus, AUTO)
 
 
+PB_BIND(dac_proto_DacNotification, dac_proto_DacNotification, AUTO)
+
+
 PB_BIND(dac_proto_DacMsg, dac_proto_DacMsg, 2)
 
 
